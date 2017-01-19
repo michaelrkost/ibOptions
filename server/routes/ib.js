@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET api listing. */
+/* GET ib listing. */
 router.get('/', (req, res) => {
-  res.send('routers/api works');
+  res.send('router/ib works =)');
 });
 
 module.exports = router;

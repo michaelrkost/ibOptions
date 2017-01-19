@@ -10,17 +10,43 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { StockDetailComponent } from './stock-detail/stock-detail.component';
+import { IbNodeComponent } from './ib-node/ib-node.component';
+
+// Nodejs Router setup
+import { RouterModule } from '@angular/router';
+
+// Define the routes
+const ROUTES = [
+  {
+    path: '',
+    redirectTo: 'posts',
+    pathMatch: 'full'
+  },
+  {
+    path: 'ibNode',
+    component: IbNodeComponent
+  },
+  {
+    path: 'node',
+    component: IbNodeComponent
+  }
+];
+
+//services
+import { IbNodeService } from  './services/ib-node.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StockDetailComponent
+    StockDetailComponent,
+    IbNodeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
   providers: [],
   bootstrap: [AppComponent]
