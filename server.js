@@ -9,6 +9,12 @@ const api = require('./server/routes/api');
 const ib  = require('./server/routes/ib');
 
 const app = express();
+// CORS enablement
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Parsers for POST data
 app.use(bodyParser.json());

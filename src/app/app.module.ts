@@ -48,7 +48,7 @@ import { IbNodeService } from  './services/ib-node.service';
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [],
+  providers: [IbNodeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
