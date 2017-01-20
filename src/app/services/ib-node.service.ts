@@ -11,7 +11,7 @@ export class IbNodeService {
   // Resolve HTTP using the constructor
   constructor (private http: Http) {}
   // private instance variable to hold base url
-  private ibNodeUrl = 'http://localhost:3000';
+  private ibNodeUrl = 'http://localhost:3000/api';
 
   getAllPosts() {
     return this.http.get(this.ibNodeUrl)
@@ -19,12 +19,12 @@ export class IbNodeService {
   }
 
   // Fetch all existing comments
-    //  getibNode() : Observable<string> {
-    //      // ...using get request
-    //      return this.http.get(this.ibNodeUrl)
-    //           // ...and calling .json() on the response to return data
-    //           .map((res:Response) => res.toString())     //.json())
-    //           //...errors if any
-    //           .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-    //  }
+     getibNode() : Observable<string> {
+         // ...using get request
+         return this.http.get(this.ibNodeUrl)
+              // ...and calling .json() on the response to return data
+              .map((res:Response) => res.toString())     //.json())
+              //...errors if any
+              .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+     }
 }
