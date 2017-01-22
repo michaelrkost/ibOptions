@@ -6,6 +6,9 @@ var util = require('util');
 var _ = require('lodash');
 var chalk = require('chalk');
 
+var tikPrice = 'x';
+var tikID = 'x';
+
 
 var ib = new (require('ib'))({
   clientId: 0,
@@ -61,7 +64,9 @@ var ib = new (require('ib'))({
     chalk.cyan(util.format('[%s]', ib.util.tickTypeToString(tickType))),
     'tickerId=', tickerId,
     'price=', price,
-    'canAutoExecute=', canAutoExecute
+    'canAutoExecute=', canAutoExecute,
+    tikID = tickerId,
+    tikPriceID = price
   );
 }).on('tickSize', function (tickerId, sizeTickType, size) {
   console.log(
@@ -88,9 +93,13 @@ ib.reqMktData(12, ib.contract.stock('AMZN'), '', false);
 ib.reqMktData(13, ib.contract.stock('GOOG'), '', false);
 ib.reqMktData(14, ib.contract.stock('FB'), '', false);
 
-/* GET ib listing. */
-router.get('/node', (req, res) => {
-  res.put('router/ib works');
+
+router.get('/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.send("in server3000: router/ibLive "+  "  tikID is " + tikID +  "  tikPriceID is " + tikPriceID );
+  console.log("Request Host Name: "+ req.hostname + ' Path: ' + req.path
+  + ' Route: ' + req.route + ' Body: '+ req.body);
 });
 
 module.exports = router;

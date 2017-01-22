@@ -3,17 +3,13 @@ var router = express.Router();
 
 var app = express();
 
-// CORS enablement -- can we put this in server.js?????
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
 
-
-/* GET ib listing. */
 router.get('/', (req, res) => {
-  res.send('router/ib works =)');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.send("in server3000: router/ib");
+  console.log("Request Host Name: "+ req.hostname + ' Path: ' + req.path
+  + ' Route: ' + req.route + ' Body: '+ req.body);
 });
 
 module.exports = router;

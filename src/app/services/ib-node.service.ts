@@ -11,7 +11,7 @@ export class IbNodeService {
   // Http Dependency Injection w/in the Constructor
   constructor(private http: Http) { }
   // private instance variable to hold base url
-  private ibNodeUrl = 'http://localhost:3000/api';
+  private ibNodeUrl = 'http://localhost:3000/ibLive';
 
   getAPIRoute() {
     return this.http.get(this.ibNodeUrl)
@@ -29,6 +29,6 @@ export class IbNodeService {
       // ...and calling .json() on the response to return data
       .map((res: Response) => res.text())     //.json())
       //...errors if any
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error on http://localhost:3000/api'));
   }
 }

@@ -5,10 +5,11 @@ const http = require('http');
 const bodyParser = require('body-parser');
 
 // Get our API routes
-const api = require('./routes/api');
-const ib  = require('./routes/ib');
+var api = require('./routes/api');
+var ib  = require('./routes/ib');
+var ibLive  = require('./routes/ibLive');
 
-const app = express();
+var app = express();
 
 // Parsers for POST data
 app.use(bodyParser.json());
@@ -28,6 +29,7 @@ app.use(function(req, res, next) {
 // Set our api routes
 app.use('/api', api);
 app.use('/ib', ib);
+app.use('/ibLive', ibLive);
 app.use('/', ib);
 
 // Catch all other routes and return the index file
