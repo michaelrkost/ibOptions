@@ -7,14 +7,15 @@ import { IbNodeService } from '../services/ib-node.service'
   styleUrls: ['./ib-node.component.css']
 })
 export class IbNodeComponent implements OnInit {
-   xpost: string = 'cat';
+  xpost: string = 'cat';
 
-
+// inject IbNodeService Service
   constructor(private anibNodeService: IbNodeService) { }
 
   ngOnInit() {
-    this.anibNodeService.getAllPosts().subscribe(post => {
-      this.xpost = post;
-    })
- }
- }
+    this.anibNodeService.getibNode()
+      .subscribe((data) =>  {this.xpost = data})
+      // console.error,
+      // () => console.log('Completed!'));
+  }
+}

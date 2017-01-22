@@ -5,8 +5,8 @@ const http = require('http');
 const bodyParser = require('body-parser');
 
 // Get our API routes
-const api = require('./server/routes/api');
-const ib  = require('./server/routes/ib');
+const api = require('./routes/api');
+const ib  = require('./routes/ib');
 
 const app = express();
 
@@ -17,12 +17,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// CORS enablement
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  //res.setHeader("Access-Control-Allow-Methods", "POST, GET, PATCH, DELETE, OPTIONS, PUT");
+  next();
+});
+
 // Set our api routes
 app.use('/api', api);
 app.use('/ib', ib);
+app.use('/', ib);
 
 // Catch all other routes and return the index file
-// app.get('api', (req, res) => {
+// app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'dist/index.html'));
 // });
 

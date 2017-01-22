@@ -29,6 +29,10 @@ const ROUTES = [
   {
     path: 'node',
     component: IbNodeComponent
+  },
+  {
+    path: 'api',
+    component: IbNodeComponent
   }
 ];
 
