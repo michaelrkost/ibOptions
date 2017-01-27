@@ -1,6 +1,3 @@
-const express = require('express');
-const router = express.Router();
-
 // For the console
 var util = require('util');
 var _ = require('lodash');
@@ -9,7 +6,7 @@ var chalk = require('chalk');
 var tikPrice = 'x';
 var tikID = 'x';
 
-console.log(">>>>> in ./server/routes/node-ib <<<<<<")
+console.log(">>>>> in ./server/node-ib <<<<<<")
 
 var ib = new (require('ib'))({
   clientId: 0,
@@ -93,14 +90,3 @@ ib.reqMktData(11, ib.contract.stock('AAPL'), '', false);
 ib.reqMktData(12, ib.contract.stock('AMZN'), '', false);
 ib.reqMktData(13, ib.contract.stock('GOOG'), '', false);
 ib.reqMktData(14, ib.contract.stock('FB'), '', false);
-
-
-router.get('/', (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.send("in server3000: router/ibLive "+  "  tikID is " + tikID +  "  tikPriceID is " + tikPriceID );
-  console.log("Request Host Name: "+ req.hostname + ' Path: ' + req.path
-  + ' Route: ' + req.route + ' Body: '+ req.body);
-});
-
-module.exports = router;

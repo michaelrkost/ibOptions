@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // Here we are, the Angular 2 version of the Angular UI Bootstrap library.
@@ -49,6 +49,7 @@ import { IbNodeService } from  './services/ib-node.service';
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
