@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+// classes
+import { Underlying } from "./classes/underlying";
+
 // Here we are, the Angular 2 version of the Angular UI Bootstrap library.
 // This library is being built from scratch in Typescript using the Bootstrap 4 CSS framework.
 // v1.0.0-alpha.18
@@ -38,12 +41,14 @@ const ROUTES = [
 
 //services
 import { IbNodeService } from  './services/ib-node.service';
+import { StockDetailFormComponent } from './stock-detail-form/stock-detail-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StockDetailComponent,
-    IbNodeComponent
+    IbNodeComponent,
+    StockDetailFormComponent
   ],
   imports: [
     BrowserModule,

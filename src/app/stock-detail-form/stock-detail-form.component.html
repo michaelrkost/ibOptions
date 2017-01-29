@@ -1,0 +1,35 @@
+<p>
+  stock-detail-form works!
+</p>
+<div class="container-fluid">
+  <form [formGroup]="stockDetailForm" (ngSubmit)="onSubmit(stockDetailForm.value)" class="ui form">
+    <div class="field">
+      <label for="exchange" class="formLable">Symbol:</label>
+      <input type="text" id="symbolInput" placeholder="symbol" [formControl]="stockDetailForm.controls['symbol']" class="formFonts" />
+    </div>
+
+    <div class="field">
+      <label for="securityType" class="formLable">Security Type:</label>
+      <!-- <select [formControl]="stockDetailForm.controls['securityType']"> -->
+      <select formControlName="securityType" class="formFonts" >
+<option *ngFor="let aSecurityType of theSecurityTypes"
+[ngValue]="aSecurityType">{{aSecurityType.secType}}</option>
+      </select>
+      <!-- <div *ngIf="!stockDetailForm.controls['securityType'].valid">
+        Please add Security Type
+      </div> -->
+    </div>
+
+    <div class="field">
+      <label for="exchange" class="formLable">Exchange:</label>
+      <input type="text" id="exchange" placeholder="exchange" [formControl]="stockDetailForm.controls['exchange']" class="formFonts" />
+    </div>
+
+    <button type="submit" class="ui button" [disabled]="!stockDetailForm.valid">Submit</button>
+  </form>
+  <div class="col-md-4">
+    <pre>Symbol: {{ anUnderlying.symbol }}</pre>
+    <pre>SecurityType: {{ anUnderlying.secType | json }}</pre>
+    <pre>Exchange: {{ anUnderlying.exchange }}</pre>
+  </div>
+</div>

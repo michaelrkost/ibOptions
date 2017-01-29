@@ -8,12 +8,12 @@ export class Underlying {
     secType: string;        // This is the security type. Valid values are: STK,OPT,FUT,IND,FOP,CASH,BAG,NEWS
     symbol: string;         // This is the symbol of the underlying asset.
 
-    constructor(theSymbol: string) {
+    constructor() {
         this.currency = 'USD';
         this.exchange = 'CBOE';
-        this.localSymbol =  theSymbol;
+        this.localSymbol =  'SPX';
         this.primaryExch = 'CBOE' ;
         this.secType = 'IND' ;
-        this.symbol = theSymbol ;
+        this.symbol = 'SPX' ;
     }
 }

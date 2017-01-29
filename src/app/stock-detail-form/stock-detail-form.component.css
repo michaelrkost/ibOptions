@@ -1,0 +1,50 @@
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+  width: 2rem;
+}
+
+.custom-day:hover {
+  background-color: #e6e6e6;
+}
+
+.weekend {
+  background-color: #f0ad4e;
+  border-radius: 1rem;
+  color: white;
+}
+
+.isThursday {
+  background-color: #f0ad4e;
+  border-radius: 1rem;
+  color: white;
+}
+
+.isDisabled {
+  background-color: #f7f7f9;
+  border-radius: 1rem;
+  color: rosybrown;
+}
+
+.hidden {
+  display: none;
+}
+.formLable {
+  text-align: left;
+  font-family: Arial;
+  color: ivory;
+  font-size: 12px;
+  width: 85px;
+  background-color: grey;
+  background-size: cover;
+  border-style:groove;
+}
+.formFonts {
+  text-align: left;
+  font-family: Arial;
+  color: black;
+  font-size: 12px;
+  width: 75px;
+}
