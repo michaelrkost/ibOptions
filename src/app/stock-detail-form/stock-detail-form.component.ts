@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Underlying } from "../classes/underlying";
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ib-stock-detail-form',
@@ -10,31 +11,42 @@ import { Underlying } from "../classes/underlying";
 export class StockDetailFormComponent {
   stockDetailForm: FormGroup;
   anUnderlying: Underlying;
-  public theSecurityTypes: any[] = [{ "secType": "STK" },
-    { "secType": "IND" }, { "secType": "OPT" }, { "secType": "FUT" },
-    { "secType": "FOP" }, { "secType": "CASH" }, { "secType": "BAG" },
-    { "secType": "NEWS" }];
+  // ng-bootstrap - Calendar
+  model: NgbDateStruct;
+  // Form Dropdown Data
+  theSecurityTypes: any[] = ["STK", "IND", "OPT", "FUT", "FOP", "CASH", "BAG", "NEWS"];
+  theExchangeTypes: any[] = ["SMART", "CBOE", "AMEX", "IDEAL", "ISLAND", "NYSE", "PHLX"];
 
-constructor() {
-  this.stockDetailForm = new FormGroup({
-    'symbol': new FormControl('SPX', Validators.required),
-    'securityType': new FormControl(''),
-    'exchange': new FormControl('CBOE', Validators.required),
-    'currency': new FormControl('USD', Validators.required)
-  });
-  this.anUnderlying = new Underlying();
-  // (<FormGroup>this.stockDetailForm)
-  //             .setValue(this.theSecurityTypes, {onlySelf: true});
-}
+  constructor() {
+    this.stockDetailForm = new FormGroup({
+      'symbol': new FormControl('SPX', Validators.required),
+      'securityType': new FormControl('IND'),
+      'exchange': new FormControl('CBOE'),
+      'currency': new FormControl('USD', Validators.required),
+      'expiryDate': new FormControl('')
+    });
+    this.anUnderlying = new Underlying();
+  }
 
-onSubmit(value: string): void {
-  console.log('you submitted: ', value);
-  this.anUnderlying.symbol = value['symbol'];
-  this.anUnderlying.secType = value["securityType"].secType;
-  this.anUnderlying.exchange = value['exchange'];
-}
+  onSubmit(value: string): void {
+    console.log('you submitted: ', value);
+    this.anUnderlying.symbol = value['symbol'];
+    this.anUnderlying.secType = value['securityType'];
+    this.anUnderlying.exchange = value['exchange'];
+  }
+  // ng-bootstrap - Calendar ---------------------
+  isWeekend(date: NgbDateStruct) {
+    const d = new Date(date.year, date.month - 1, date.day);
+    return d.getDay() === 0 || d.getDay() === 6;
+  }
 
-// (<FormGroup>this.myForm)
-//             .setValue(this.CountryResponse, {onlySelf: true});
+  isThurs(date: NgbDateStruct) {
+    const d = new Date(date.year, date.month - 1, date.day);
+    return d.getDay() === 4;
+  }
 
+  isDisabled(date: NgbDateStruct, current: { month: number }) {
+    return date.month !== current.month;
+  }
+  // --------------------   ng-bootstrap - Calendar
 }

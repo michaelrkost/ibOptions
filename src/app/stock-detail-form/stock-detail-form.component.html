@@ -10,26 +10,46 @@
 
     <div class="field">
       <label for="securityType" class="formLable">Security Type:</label>
-      <!-- <select [formControl]="stockDetailForm.controls['securityType']"> -->
-      <select formControlName="securityType" class="formFonts" >
-<option *ngFor="let aSecurityType of theSecurityTypes"
-[ngValue]="aSecurityType">{{aSecurityType.secType}}</option>
+      <select formControlName="securityType" class="formFonts">
+         <option *ngFor="let aSecurityType of theSecurityTypes"
+             [ngValue]="aSecurityType">{{aSecurityType}}</option>
       </select>
-      <!-- <div *ngIf="!stockDetailForm.controls['securityType'].valid">
-        Please add Security Type
-      </div> -->
     </div>
 
     <div class="field">
       <label for="exchange" class="formLable">Exchange:</label>
-      <input type="text" id="exchange" placeholder="exchange" [formControl]="stockDetailForm.controls['exchange']" class="formFonts" />
+      <select formControlName="exchange" class="formFonts">
+         <option *ngFor="let anExchange of theExchangeTypes"
+             [ngValue]="anExchange">{{anExchange}}</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="expiryDate" class="formLable">Option Expiry:</label>
+      <input class="formFonts" placeholder="yyyy-mm-dd"
+             formControlName="expiryDate" [(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay"
+               [markDisabled]="isWeekend" #d="ngbDatepicker">
+      <button class="formFonts" style="width:30px" (click)="d.toggle()">
+        <img src="./app/images/calendar_simple-black.png" style="width: 1rem;
+                   height: 1rem; cursor: pointer;" />
+      </button>
+      <template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
+          <span class="custom-day" [class.isThursday]="isThurs(date)"
+            [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
+              {{ date.day }}
+          </span>
+        </template>
     </div>
 
     <button type="submit" class="ui button" [disabled]="!stockDetailForm.valid">Submit</button>
+
   </form>
+
   <div class="col-md-4">
     <pre>Symbol: {{ anUnderlying.symbol }}</pre>
-    <pre>SecurityType: {{ anUnderlying.secType | json }}</pre>
+    <pre>SecurityType: {{ anUnderlying.secType }}</pre>
     <pre>Exchange: {{ anUnderlying.exchange }}</pre>
+    <pre>ExpiryDate: {{ model | json }}</pre>
+
   </div>
 </div>
