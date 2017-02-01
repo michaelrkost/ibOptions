@@ -12,10 +12,11 @@ export class StockDetailFormComponent {
   stockDetailForm: FormGroup;
   anUnderlying: Underlying;
   // ng-bootstrap - Calendar
-  model: NgbDateStruct;
+  aDate: NgbDateStruct;
   // Form Dropdown Data
   theSecurityTypes: any[] = ["STK", "IND", "OPT", "FUT", "FOP", "CASH", "BAG", "NEWS"];
   theExchangeTypes: any[] = ["SMART", "CBOE", "AMEX", "IDEAL", "ISLAND", "NYSE", "PHLX"];
+  expiry: string = '';
 
   constructor() {
     this.stockDetailForm = new FormGroup({
@@ -33,6 +34,13 @@ export class StockDetailFormComponent {
     this.anUnderlying.symbol = value['symbol'];
     this.anUnderlying.secType = value['securityType'];
     this.anUnderlying.exchange = value['exchange'];
+    // The expiration date. Use the format YYYYMM.
+    if (this.aDate.month <= 9)
+      this.expiry =  this.aDate.year + '0' + this.aDate.month ;
+    else
+      this.expiry = this.aDate.year.toString()
+        + this.aDate.month.toString();
+
   }
   // ng-bootstrap - Calendar ---------------------
   isWeekend(date: NgbDateStruct) {

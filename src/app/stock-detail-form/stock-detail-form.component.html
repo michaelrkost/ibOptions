@@ -27,9 +27,9 @@
     <div class="field">
       <label for="expiryDate" class="formLable">Option Expiry:</label>
       <input class="formFonts" placeholder="yyyy-mm-dd"
-             formControlName="expiryDate" [(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay"
+             formControlName="expiryDate" [(ngModel)]="aDate" ngbDatepicker [dayTemplate]="customDay"
                [markDisabled]="isWeekend" #d="ngbDatepicker">
-      <button class="formFonts" style="width:30px" (click)="d.toggle()">
+      <button type="button" class="btn btn-info" style="width: 3rem" (click)="d.toggle()">
         <img src="./app/images/calendar_simple-black.png" style="width: 1rem;
                    height: 1rem; cursor: pointer;" />
       </button>
@@ -45,11 +45,11 @@
 
   </form>
 
-  <div class="col-md-4">
-    <pre>Symbol: {{ anUnderlying.symbol }}</pre>
-    <pre>SecurityType: {{ anUnderlying.secType }}</pre>
-    <pre>Exchange: {{ anUnderlying.exchange }}</pre>
-    <pre>ExpiryDate: {{ model | json }}</pre>
-
-  </div>
+<div class="col-md-4">
+  <pre>Symbol: {{ anUnderlying.symbol }}</pre>
+  <pre>SecurityType: {{ anUnderlying.secType }}</pre>
+  <pre>Exchange: {{ anUnderlying.exchange }}</pre>
+  <pre>ExpiryDate: {{ aDate | json }}</pre>
+  <pre>expiry: {{ expiry }}</pre>
+</div>
 </div>
