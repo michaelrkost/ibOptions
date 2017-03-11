@@ -6,10 +6,10 @@ var chalk = require('chalk');
 var tikPrice = 'x';
 var tikID = 'x';
 
-console.log(">>>>> in ./server/node-ib <<<<<<")
+console.log(chalk.bgGreen(">>>>> in ./server/node-ib <<<<<<"));
 
 var ib = new (require('ib'))({
-  clientId: 0,
+  clientId: 4,
   host: '127.0.0.1',
   port: 7495
 }).on('error', function (err) {

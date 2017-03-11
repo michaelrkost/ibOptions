@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var http = require('http');
 var bodyParser = require('body-parser');
+var ibNode1 = require('./nodeIB');
 
 // Get our API routes
-var api = require('./routes/api');
+var reqMktData = require('./routes/reqMktData');
 var ib  = require('./routes/ib');
 // var ibLive  = require('./routes/ibLive');
 
@@ -27,9 +28,9 @@ app.use(function(req, res, next) {
 });
 
 // Set our api routes
-app.use('/api', api);
-app.use('/ib', ib);
-//app.use('/ibLive', ibLive);
+// app.use('/api', api);
+app.use('/reqMktData', reqMktData);
+// app.use('/ibLive', ibLive);
 app.use('/', ib);
 
 // Catch all other routes and return the index file

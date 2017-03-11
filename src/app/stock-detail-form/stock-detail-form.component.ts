@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Underlying } from "../classes/underlying";
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {MomentModule} from 'angular2-moment';
 
 @Component({
   selector: 'ib-stock-detail-form',
@@ -11,6 +12,8 @@ import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 export class StockDetailFormComponent {
   stockDetailForm: FormGroup;
   anUnderlying: Underlying;
+  todayIs: Date;
+  daysTillExpiryMoment: MomentModule;
   // ng-bootstrap - Calendar
   aDate: NgbDateStruct;
   // Form Dropdown Data
@@ -27,6 +30,8 @@ export class StockDetailFormComponent {
       'expiryDate': new FormControl('')
     });
     this.anUnderlying = new Underlying();
+    this.todayIs = new Date();
+    this.daysTillExpiryMoment = new MomentModule();
   }
 
   onSubmit(value: string): void {
@@ -36,10 +41,14 @@ export class StockDetailFormComponent {
     this.anUnderlying.exchange = value['exchange'];
     // The expiration date. Use the format YYYYMM.
     if (this.aDate.month <= 9)
-      this.expiry =  this.aDate.year + '0' + this.aDate.month ;
+      this.expiry = this.aDate.year + '0' + this.aDate.month;
     else
       this.expiry = this.aDate.year.toString()
         + this.aDate.month.toString();
+
+ 
+
+    this.daysTillExpiryMoment.set({'year': 2013, 'month': 3});
 
   }
   // ng-bootstrap - Calendar ---------------------

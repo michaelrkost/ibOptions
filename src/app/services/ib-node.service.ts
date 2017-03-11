@@ -12,6 +12,7 @@ export class IbNodeService {
   constructor(private http: Http) { }
   // private instance variable to hold base url
   private ibNodeUrl = 'http://localhost:3000/ibLive';
+  private ibNodereqMktData = 'http://localhost:3000/reqMktData'
 
   getAPIRoute() {
     return this.http.get(this.ibNodeUrl)

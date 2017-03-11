@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+// Import MomentModule ==> Moment.js
+import {MomentModule} from 'angular2-moment';
+
 // classes
 import { Underlying } from "./classes/underlying";
 
@@ -34,11 +37,10 @@ const ROUTES = [
     component: IbNodeComponent
   },
   {
-    path: 'api',
+    path: 'reqMktData',
     component: IbNodeComponent
   }
-];
-
+]
 //services
 import { IbNodeService } from  './services/ib-node.service';
 import { StockDetailFormComponent } from './stock-detail-form/stock-detail-form.component';
@@ -55,6 +57,7 @@ import { StockDetailFormComponent } from './stock-detail-form/stock-detail-form.
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
+    MomentModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
