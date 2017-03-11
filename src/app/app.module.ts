@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // Import MomentModule ==> Moment.js
-import {MomentModule} from 'angular2-moment';
+import { MomentModule } from 'angular2-moment';
+import { Moment } from 'moment';
 
 // classes
 import { Underlying } from "./classes/underlying";
