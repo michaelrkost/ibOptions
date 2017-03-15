@@ -82,11 +82,12 @@ var ib = new (require('ib'))({
   );
 });
 
+
+
 ib.connect()
 
 
-// Stock
-ib.reqMktData(11, ib.contract.stock('AAPL'), '', false);
-ib.reqMktData(12, ib.contract.stock('AMZN'), '', false);
-ib.reqMktData(13, ib.contract.stock('GOOG'), '', false);
-ib.reqMktData(14, ib.contract.stock('FB'), '', false);
+console.log('======>', module.exports);
+
+module.exports = ib;
+//console.log(module.exports);
