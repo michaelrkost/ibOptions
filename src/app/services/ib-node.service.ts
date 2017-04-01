@@ -12,24 +12,26 @@ export class IbNodeService {
   constructor(private http: Http) { }
   // private instance variable to hold base url
   private ibNodeUrl = 'http://localhost:3000/ibLive';
-  private ibNodereqMktData = 'http://localhost:3000/reqMktData'
+  private ibNodereqMktData = 'http://localhost:3000/ticker/1/symbol/BAC';
+  private ibTicket = "http://localhost:3000/ticker/11/symbol/FB";
 
   getAPIRoute() {
-    return this.http.get(this.ibNodeUrl)
+    return this.http.get(this.ibTicket)
       // The arrow function's parameter res is actually a ResponseData object,
       // and can be parsed as binary (blob()), string (text()) or JavaScript via JSON (json())
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw('IbNodeService Server error'));
 
   }
 
   // Fetch all existing comments
-  getibNode(): Observable<string> {
+  getIBNodereqMktData(): Observable<string> {
     // ...using get request
-    return this.http.get(this.ibNodeUrl)
+    return this.http.get(this.ibNodereqMktData)
       // ...and calling .json() on the response to return data
       .map((res: Response) => res.text())     //.json())
       //...errors if any
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error on http://localhost:3000/api'));
-  }
+     // .catch(error => Observable.throw("ccccc"));
+      
+ }
 }

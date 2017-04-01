@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Underlying } from "../classes/underlying";
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { Moment } from 'moment';
+
+import { IbNodeService } from '../services/ib-node.service';
 
 @Component({
   selector: 'ib-stock-detail-form',
@@ -15,8 +16,7 @@ export class StockDetailFormComponent {
   todayIs: Date;
   expiryDate: Date;
   daysTillExpiry: Number;
-  todayMoment: Moment;
-  expiryMoment: Moment;
+
   // ng-bootstrap - Calendar
   aDate: NgbDateStruct;
   // Form Dropdown Data
@@ -24,7 +24,7 @@ export class StockDetailFormComponent {
   theExchangeTypes: any[] = ["SMART", "CBOE", "AMEX", "IDEAL", "ISLAND", "NYSE", "PHLX"];
   expiry: string = '';
 
-  constructor() {
+  constructor(private anIbNodeService: IbNodeService) {
     this.stockDetailForm = new FormGroup({
       'symbol': new FormControl('SPX', Validators.required),
       'securityType': new FormControl('IND'),
@@ -59,7 +59,13 @@ this.daysTillExpiry = Math.ceil((this.expiryDate.getTime() - this.todayIs.getTim
 // console.log('Today is: ' + this.expiryDate + moment(this.todayIs);
 console.log('Today is: ' + (this.todayIs.getTime() + '  Expiry is: ' + this.expiryDate.getTime()));
 console.log('Operation took ' +Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime())/(1000 * 60 * 60 * 24)) );
+console.log(this.anIbNodeService.getIBNodereqMktData());
 
+this.anIbNodeService.getIBNodereqMktData()
+.subscribe(
+  data => console.log(data),
+  error => console.log(error)
+)
 
 
     // this.expiryDate.setTime(Date.parse(this.aDate.year.toString() + '-'+

@@ -11,7 +11,8 @@ console.log(chalk.bgGreen(">>>>> in ./server/node-ib <<<<<<"));
 var ib = new (require('ib'))({
   clientId: 4,
   host: '127.0.0.1',
-  port: 7495
+  port: 4002
+  //port: 7495
 }).on('error', function (err) {
   console.error(chalk.red(err.message));
 }).on('result', function (event, args) {
