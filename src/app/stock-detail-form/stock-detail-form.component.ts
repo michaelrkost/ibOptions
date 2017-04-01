@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Underlying } from "../classes/underlying";
+import { Contract } from "../classes/contract";
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 import { IbNodeService } from '../services/ib-node.service';
@@ -12,10 +12,11 @@ import { IbNodeService } from '../services/ib-node.service';
 })
 export class StockDetailFormComponent {
   stockDetailForm: FormGroup;
-  anUnderlying: Underlying;
+  aContract: Contract;
   todayIs: Date;
   expiryDate: Date;
   daysTillExpiry: Number;
+  theContractCount: number = 1;
 
   // ng-bootstrap - Calendar
   aDate: NgbDateStruct;
@@ -26,24 +27,27 @@ export class StockDetailFormComponent {
 
   constructor(private anIbNodeService: IbNodeService) {
     this.stockDetailForm = new FormGroup({
+      'contract': new FormControl(this.theContractCount),
       'symbol': new FormControl('SPX', Validators.required),
       'securityType': new FormControl('IND'),
       'exchange': new FormControl('CBOE'),
       'currency': new FormControl('USD', Validators.required),
       'expiryDate': new FormControl('')
     });
-    this.anUnderlying = new Underlying();
+    this.aContract = new Contract(this.theContractCount);
     this.todayIs = new Date();
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
+
    
   }
 
   onSubmit(value: string): void {
     console.log('you submitted: ', value);
-    this.anUnderlying.symbol = value['symbol'];
-    this.anUnderlying.secType = value['securityType'];
-    this.anUnderlying.exchange = value['exchange'];
+    this.aContract.contractID = this.theContractCount++;
+    this.aContract.symbol = value['symbol'];
+    this.aContract.secType = value['securityType'];
+    this.aContract.exchange = value['exchange'];
     // The expiration date. Use the format YYYYMM.
     if (this.aDate.month <= 9)
       this.expiry = this.aDate.year + '0' + this.aDate.month;
@@ -64,7 +68,7 @@ console.log(this.anIbNodeService.getIBNodereqMktData());
 this.anIbNodeService.getIBNodereqMktData()
 .subscribe(
   data => console.log(data),
-  error => console.log(error)
+  error => console.log('error:' + error)
 )
 
 

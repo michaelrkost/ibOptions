@@ -16,21 +16,22 @@ export class Contract {
 
 
 
-    constructor(theOptionRight: string) {
-        this.contractID = Math.random() * (100 - 10) + 10;
-        this.currency = 'USD';
-        this.exchange = 'SMART';
-        this.expiry = '201702'
-        this.includeExpired = false ;
-        this.localSymbol =  'SPX';
-        this.multiplier = '' ;
-        this.primaryExch = 'CBOE' ;
-        this.right = theOptionRight;
-        this.secIdType = '' ;
-        this.secType = 'IND' ;
-        this.strike = 2250 ;
-        this.symbol = 'SPX' ;
-        this.tradingClass = '' ;
+    constructor(aContractID: number) {
+        this.contractID = aContractID;
+        // this.contractID = Math.random() * (100 - 10) + 10;
+        // this.currency = 'USD';
+        // this.exchange = 'SMART';
+        // this.expiry = '201702'
+        // this.includeExpired = false ;
+        // this.localSymbol =  'SPX';
+        // this.multiplier = '' ;
+        // this.primaryExch = 'CBOE' ;
+        // this.right = theOptionRight;
+        // this.secIdType = '' ;
+        // this.secType = 'IND' ;
+        // this.strike = 2250 ;
+        // this.symbol = 'SPX' ;
+        // this.tradingClass = '' ;
     }
     // get date
     getExpriyDate(dateExpiry: string) {

@@ -49,17 +49,16 @@
     <div class="col-md-4">
 
       <p>
-        Today is: <b>{{ todayIs | date }}</b><br>
-        ExpiryDate:  <b>{{ expiryDate | date }}</b><br>
-        Days Till Experiation: <b>{{ daysTillExpiry }}</b><br>
+        Today is: <b>{{ todayIs | date }}</b><br> ExpiryDate: <b>{{ expiryDate | date }}</b><br> Days Till Experiation: <b>{{ daysTillExpiry }}</b><br>
       </p>
     </div>
 
 
     <div class="col-md-4">
-      <pre>Symbol: {{ anUnderlying.symbol }}</pre>
-      <pre>SecurityType: {{ anUnderlying.secType }}</pre>
-      <pre>Exchange: {{ anUnderlying.exchange }}</pre>
+      <pre>ContractID: {{aContract.contractID}}</pre>
+      <pre>Symbol: {{ aContract.symbol }}</pre>
+      <pre>SecurityType: {{ aContract.secType }}</pre>
+      <pre>Exchange: {{ aContract.exchange }}</pre>
       <pre>ExpiryDate: {{ aDate | json }}</pre>
       <pre>expiry: {{ expiry }}</pre>
     </div>
