@@ -12,7 +12,8 @@ export class IbNodeService {
   constructor(private http: Http) { }
   // private instance variable to hold base url
   private ibNodeUrl = 'http://localhost:3000/ibLive';
-  private ibNodereqMktData = 'http://localhost:3000/ticker/1/symbol/BAC';
+ // private ibNodereqMktData = 'http://localhost:3000/ticker/1/symbol/BAC';
+  private ibNodereqMktData = 'http://localhost:3000/reqMktData';
   private ibTicket = "http://localhost:3000/ticker/11/symbol/FB";
 
   getAPIRoute() {
@@ -25,9 +26,12 @@ export class IbNodeService {
   }
 
   // Fetch all existing comments
-  getIBNodereqMktData(): Observable<string> {
+  getIBNodereqMktData(ticker: number, symbol: string, exchange: string): Observable<string> {
     // ...using get request
-    return this.http.get(this.ibNodereqMktData)
+    return this.http.get(this.ibNodereqMktData 
+                   + '/ticker/' + ticker
+                   + '/symbol/' + symbol
+                   + '/exchange/'+ exchange)
       // ...and calling .json() on the response to return data
       .map((res: Response) => res.text())     //.json())
       //...errors if any

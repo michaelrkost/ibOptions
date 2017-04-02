@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
 
 // Set our api routes
 // app.use('/api', api);
-app.use('/ticker', reqMktData);
+app.use('/reqMktData/ticker', reqMktData);
 // app.use('/ibLive', ibLive);
 app.use('/ib', ib);
 

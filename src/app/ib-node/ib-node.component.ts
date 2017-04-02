@@ -13,8 +13,8 @@ export class IbNodeComponent implements OnInit {
   constructor(private anibNodeService: IbNodeService) { }
 
   ngOnInit() {
-    this.anibNodeService.getIBNodereqMktData()
-      .subscribe((data) =>  {this.xpost = data})
+  //  this.anIBNodeService.getIBNodereqMktData()
+  //     .subscribe((data) =>  {this.xpost = data})
       // console.error,
       // () => console.log('Completed!'));
   }

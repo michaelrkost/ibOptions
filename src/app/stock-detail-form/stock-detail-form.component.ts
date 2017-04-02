@@ -63,9 +63,9 @@ this.daysTillExpiry = Math.ceil((this.expiryDate.getTime() - this.todayIs.getTim
 // console.log('Today is: ' + this.expiryDate + moment(this.todayIs);
 console.log('Today is: ' + (this.todayIs.getTime() + '  Expiry is: ' + this.expiryDate.getTime()));
 console.log('Operation took ' +Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime())/(1000 * 60 * 60 * 24)) );
-console.log(this.anIbNodeService.getIBNodereqMktData());
+console.log(this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange ));
 
-this.anIbNodeService.getIBNodereqMktData()
+this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange )
 .subscribe(
   data => console.log(data),
   error => console.log('error:' + error)
