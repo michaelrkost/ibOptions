@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contract } from "../classes/contract";
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-
+// Services
 import { IbNodeService } from '../services/ib-node.service';
+import { IbNodeSocketService } from '../services/ib-nodeSocket.service';
+
 
 @Component({
   selector: 'ib-stock-detail-form',
@@ -18,6 +20,7 @@ export class StockDetailFormComponent {
   daysTillExpiry: Number;
   theContractCount: number = 1;
   theSocket: string;
+
 
   // ng-bootstrap - Calendar
   aDate: NgbDateStruct;
@@ -40,9 +43,7 @@ export class StockDetailFormComponent {
     this.todayIs = new Date();
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
-    this.theSocket = 'Not Connected';
-
-   
+    this.theSocket = 'Not Connected';   
   }
 
   onSubmit(value: string): void {
@@ -61,20 +62,25 @@ export class StockDetailFormComponent {
        this.expiryDate = new Date(this.aDate.year
       + '-'  +  this.aDate.month + '-' + this.aDate.day); 
 
-this.daysTillExpiry = Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime())/(1000 * 60 * 60 * 24))
+this.daysTillExpiry = Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime())/(1000 * 60 * 60 * 24));
 
 // console.log('Today is: ' + this.expiryDate + moment(this.todayIs);
 console.log('Today is: ' + (this.todayIs.getTime() + '  Expiry is: ' + this.expiryDate.getTime()));
 console.log('Operation took ' +Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime())/(1000 * 60 * 60 * 24)) );
-//console.log(this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange ));
+console.log('anIbNodeService:  ' 
+  + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange ));
 
 this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange )
 .subscribe(
   data =>  this.theSocket = data,
   error => console.log('error:  ' + error)
-)
+);
 
+// var socket = io('http://localhost/');
+//   socket.on('news', function () {
+//     socket.send('hi');
 
+  }  //==============   onSubmit  =================================
     // this.expiryDate.setTime(Date.parse(this.aDate.year.toString() + '-'+
     //                                    this.aDate.month.toString() + '-'+
     //                                    this.aDate.day.toString()));
@@ -108,14 +114,13 @@ this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContra
     //      s    = one or more digits representing a decimal fraction of a second
     //      TZD  = time zone designator (Z or +hh:mm or -hh:mm)
 
-  }  //==============   onSubmit  =================================
-
   // --------- ng-bootstrap - Calendar ---------------
 
   // NgbDateStruct{ year: number;  // The year, for example 2016
   //                month: number; // The month, with default calendar we use ISO 8601: 1=Jan ... 12=Dec
   //                day: number;}  // The day of month, starting at 1
-  //================================================================
+  //===============================================================
+
   isWeekend(date: NgbDateStruct) {
     const d = new Date(date.year, date.month - 1, date.day);
     return d.getDay() === 0 || d.getDay() === 6;

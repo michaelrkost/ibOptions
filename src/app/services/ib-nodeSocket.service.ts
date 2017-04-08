@@ -6,9 +6,11 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+// Socket.io // npm install socket.io-client --save 
+//import * as io from "socket.io-client";
 
 @Injectable()
-export class IbNodeService {
+export class IbNodeSocketService {
   // Http Dependency Injection w/in the Constructor
   constructor(private http: Http) { }
   // private instance variable to hold base url
@@ -17,8 +19,10 @@ export class IbNodeService {
   private ibNodereqMktData = 'http://localhost:3000/reqMktData';
   private ibTicket = "http://localhost:3000/ticker/11/symbol/FB";
 
+      // Socket.io
+ // socket: SocketIOClient.Socket;
+  //  socketr = io('http://localhost');
 
-// Clean this up....
   getAPIRoute() {
     return this.http.get(this.ibTicket)
       // The arrow function's parameter res is actually a ResponseData object,
