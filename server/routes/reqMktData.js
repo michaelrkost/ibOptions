@@ -33,35 +33,21 @@ var app = express();
 router.get('/:tickerID/symbol/:symbolID/exchange/:exchangeID', (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.send("in server3000 res.send : router/reqMktData - Request Host Name: " + req.hostname  +'\n'
-    + 'Path: ' + req.path + '\n'
-    + 'Route: ' + req.route + ' Body: ' + req.body + ' ReqParams: ' + req.params.tickerID
-    + ' ReqParamsSymbol: ' + req.params.symbolID + ' ReqExchange: ' + req.params.exchangeID);
 
   console.log("reqNktData = Request Host Name: " + req.hostname + ' Path: ' + req.path
     + ' Route: ' + req.route + ' Body: ' + req.body + ' ReqParamtickerID: ' + req.params.tickerID
     + ' ReqParamsSymbol: ' + req.params.symbolID + ' ReqParamExchange: ' + req.params.exchangeID);
 
-    nodeIBServer.reqMktData(parseInt(req.params.tickerID), 
+   nodeIBServer.reqMktData(parseInt(req.params.tickerID),
     nodeIBServer.contract.index(req.params.symbolID, ''), '', false);
+    
+    // .on('tickPrice',
+    // function (tickerId, tickType, price, canAutoExecute) {
+    //     return nodeIBServer.util.tickTypeToString(tickType);
 
-    // nodeIBServer.reqMktData(parseInt(req.params.tickerID), 
-    // nodeIBServer.contract.stock(req.params.symbolID,req.params.exchangeID, 'USD'), '', false);
+ res.send("Connected! ID# " + req.params.tickerID );
 
- /* nodeIBServer.on('tickPrice', function (tickerId, tickType, price, canAutoExecute) {
-    res.send(nodeIBServer.util.tickTypeToString(tickType),
-            'tickerIdxxx=', tickerId,
-        'pricexxx=', price,
-        'canAutoExecutexxx=', canAutoExecute,
-        tikID = tickerId,
-        tikPriceID = price)});
-*/
-//res.send("in server3000: router/reqNktData -- tickerID: " + req.params.tickerID);
-  
-});
 
-router.get('/:tickerID/symbol/:symbolID/exchange/:exchangeID', (req, res) =>{
-  res.send("in server3000 --> router/reqNktData <-- tickerID: " + req.params.tickerID);
-});
+    });
 
 module.exports = router;

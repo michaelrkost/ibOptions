@@ -17,6 +17,7 @@ export class StockDetailFormComponent {
   expiryDate: Date;
   daysTillExpiry: Number;
   theContractCount: number = 1;
+  theSocket: string;
 
   // ng-bootstrap - Calendar
   aDate: NgbDateStruct;
@@ -32,12 +33,14 @@ export class StockDetailFormComponent {
       'securityType': new FormControl('IND'),
       'exchange': new FormControl('CBOE'),
       'currency': new FormControl('USD', Validators.required),
+      // '' needed for IND
       'expiryDate': new FormControl('')
     });
     this.aContract = new Contract(this.theContractCount);
     this.todayIs = new Date();
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
+    this.theSocket = 'Not Connected';
 
    
   }
@@ -63,12 +66,12 @@ this.daysTillExpiry = Math.ceil((this.expiryDate.getTime() - this.todayIs.getTim
 // console.log('Today is: ' + this.expiryDate + moment(this.todayIs);
 console.log('Today is: ' + (this.todayIs.getTime() + '  Expiry is: ' + this.expiryDate.getTime()));
 console.log('Operation took ' +Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime())/(1000 * 60 * 60 * 24)) );
-console.log(this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange ));
+//console.log(this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange ));
 
 this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange )
 .subscribe(
-  data => console.log(data),
-  error => console.log('error:' + error)
+  data =>  this.theSocket = data,
+  error => console.log('error:  ' + error)
 )
 
 
