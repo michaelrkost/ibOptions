@@ -18,6 +18,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { StockDetailComponent } from './stock-detail/stock-detail.component';
 import { IbNodeComponent } from './ib-node/ib-node.component';
+import { IBNodeSocketComponent } from './ibnode-socket/ibnode-socket.component';;
 
 // Nodejs Router setup
 import { RouterModule } from '@angular/router';
@@ -29,29 +30,36 @@ const ROUTES = [
     redirectTo: 'posts',
     pathMatch: 'full'
   },
-  {
-    path: 'ibNode',
-    component: IbNodeComponent
+  // {
+  //   path: 'ibNode',
+  //   component: IbNodeComponent
+  // },
+  // {
+  //   path: 'node',
+  //   component: IbNodeComponent
+  // },
+    {
+    path: 'aIBNodeSocket',
+    component: IBNodeSocketComponent
   },
   {
-    path: 'node',
-    component: IbNodeComponent
-  },
-  {
-    path: 'reqMktData',
+    path: 'aReqMktData',
     component: IbNodeComponent
   }
 ]
 //services
 import { IbNodeService } from  './services/ib-node.service';
 import { StockDetailFormComponent } from './stock-detail-form/stock-detail-form.component';
+import { IbNodeSocketService } from './services/ib-nodeSocket.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     StockDetailComponent,
     IbNodeComponent,
-    StockDetailFormComponent
+    StockDetailFormComponent,
+    IBNodeSocketComponent
   ],
   imports: [
     BrowserModule,
