@@ -4,6 +4,14 @@ var path = require('path');
 var http = require('http');
 var bodyParser = require('body-parser');
 var ibNode1 = require('./nodeIB');
+//var socketServer = require('./socketServer');
+
+// For the console
+var util = require('util');
+var _ = require('lodash');
+var chalk = require('chalk');
+
+console.log('\n' + chalk.bgGreen(">>>>> in ./server/server <<<<<<"));
 
 // Get our API routes
 var reqMktData = require('./routes/reqMktData');

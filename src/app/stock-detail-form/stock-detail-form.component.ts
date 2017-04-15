@@ -4,7 +4,7 @@ import { Contract } from "../classes/contract";
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 // Services
 import { IbNodeService } from '../services/ib-node.service';
-import { IbNodeSocketService } from '../services/ib-nodeSocket.service';
+//import { IbNodeSocketService } from '../services/ib-nodeSocket.service';
 
 
 @Component({
@@ -20,6 +20,7 @@ export class StockDetailFormComponent {
   daysTillExpiry: Number;
   theContractCount: number = 1;
   theSocket: string;
+  //aSocketService: IbNodeSocketService;
 
 
   // ng-bootstrap - Calendar
@@ -44,6 +45,7 @@ export class StockDetailFormComponent {
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
     this.theSocket = 'Not Connected';   
+   // this.aSocketService = new IbNodeSocketService;
   }
 
   onSubmit(value: string): void {

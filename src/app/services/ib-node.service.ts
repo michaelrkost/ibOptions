@@ -12,23 +12,9 @@ export class IbNodeService {
   // Http Dependency Injection w/in the Constructor
   constructor(private http: Http) { }
   // private instance variable to hold base url
-  private ibNodeUrl = 'http://localhost:3000/ibLive';
- // private ibNodereqMktData = 'http://localhost:3000/ticker/1/symbol/BAC';
   private ibNodereqMktData = 'http://localhost:3000/reqMktData';
-  private ibTicket = "http://localhost:3000/ticker/11/symbol/FB";
 
-
-// Clean this up....
-  getAPIRoute() {
-    return this.http.get(this.ibTicket)
-      // The arrow function's parameter res is actually a ResponseData object,
-      // and can be parsed as binary (blob()), string (text()) or JavaScript via JSON (json())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw('IbNodeService Server error'));
-
-  }
-
-  // Fetch all existing comments
+  // Request Market Data from node ib module
   getIBNodereqMktData(ticker: number, symbol: string, exchange: string): Observable<string> {
     // ...using get request
     return this.http.get(this.ibNodereqMktData 
@@ -38,7 +24,7 @@ export class IbNodeService {
       // ...and calling .json() on the response to return data
       .map((res: Response) => res.text())     //.json())
       //...errors if any
-     // .catch(error => Observable.throw("ccccc"));
+      .catch(error => Observable.throw("IbNodeService Server error in ib-node.ts"));
       
  }
 }

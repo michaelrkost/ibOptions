@@ -11,15 +11,6 @@ var chalk = require('chalk');
 // node ib server
 var nodeIBServer = require('../nodeIB');
 
-// ==== socket.io Server setup  ===================================
-var server = require('http');
-app.set('port', process.env.PORT || 7777);
-server.createServer(app).listen(app.get('port'));
-var io = require('socket.io')(server);
-console.log('Express HTTP server for Socket.io listening on port:' + app.get('port'));
-// ================================================================
-
-
 // ======= Request Market Data =======================================
 // ib = node ib server
 // ib.reqMktData(tickerId, contract, genericTickList, snapshot)
@@ -49,15 +40,6 @@ router.get('/:tickerID/symbol/:symbolID/exchange/:exchangeID', (req, res, next) 
 
   nodeIBServer.reqMktData(parseInt(req.params.tickerID),
     nodeIBServer.contract.index(req.params.symbolID, ''), '', false);
-
-// ==== socket.io  ===================================
-  // io.on('connection', function (socket) {
-  //   socket.emit('news', { hello: 'world' });
-  //   socket.on('my other event', function (data) {
-  //     console.log(data);
-  //   });
-  // });
-// ==== socket.io  ===================================
 
   res.send("Connected! ID# " + req.params.tickerID);
 

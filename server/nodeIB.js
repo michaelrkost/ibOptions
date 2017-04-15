@@ -6,7 +6,7 @@ var chalk = require('chalk');
 var tikPrice = 'x';
 var tikID = 'x';
 
-console.log(chalk.bgGreen(">>>>> in ./server/node-ib <<<<<<"));
+console.log('\n' + chalk.bgGreen(">>>>> in ./server/node-ib <<<<<<"));
 
 var ib = new (require('ib'))({
   clientId: 4,
@@ -83,12 +83,7 @@ var ib = new (require('ib'))({
   );
 });
 
-
-
 ib.connect()
 
-
-console.log('======>', module.exports);
-
 module.exports = ib;
-//console.log(module.exports);
+
