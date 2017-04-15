@@ -15,8 +15,6 @@ console.log('\n' + chalk.bgGreen(">>>>> in ./server/server <<<<<<"));
 
 // Get our API routes
 var reqMktData = require('./routes/reqMktData');
-var ib  = require('./routes/ib');
-// var ibLive  = require('./routes/ibLive');
 
 var app = express();
 
@@ -38,8 +36,7 @@ app.use(function(req, res, next) {
 // Set our api routes
 // app.use('/api', api);
 app.use('/reqMktData/ticker', reqMktData);
-// app.use('/ibLive', ibLive);
-app.use('/ib', ib);
+
 
 // Catch all other routes and return the index file
 // app.get('/', (req, res) => {

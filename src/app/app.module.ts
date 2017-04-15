@@ -16,7 +16,6 @@ import { Underlying } from "./classes/underlying";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { StockDetailComponent } from './stock-detail/stock-detail.component';
 import { IbNodeComponent } from './ib-node/ib-node.component';
 import { IBNodeSocketComponent } from './ibnode-socket/ibnode-socket.component';;
 
@@ -56,7 +55,6 @@ import { IbNodeSocketService } from './services/ib-nodeSocket.service';
 @NgModule({
   declarations: [
     AppComponent,
-    StockDetailComponent,
     IbNodeComponent,
     StockDetailFormComponent,
     IBNodeSocketComponent
