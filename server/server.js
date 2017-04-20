@@ -4,7 +4,7 @@ var path = require('path');
 var http = require('http');
 var bodyParser = require('body-parser');
 var ibNode1 = require('./nodeIB');
-//var socketServer = require('./socketServer');
+
 
 // For the console
 var util = require('util');
@@ -33,15 +33,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-// Set our api routes
-// app.use('/api', api);
+// Set our routes
 app.use('/reqMktData/ticker', reqMktData);
-
-
-// Catch all other routes and return the index file
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist/index.html'));
-// });
 
 /**
  * Get port from environment and store in Express.
