@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { Moment } from 'moment';
 
-// classes
+// classes for IB APIs
 import { Underlying } from "./classes/underlying";
 
 // Here we are, the Angular 2 version of the Angular UI Bootstrap library.
@@ -17,7 +17,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { IbNodeComponent } from './ib-node/ib-node.component';
-//import { IBNodeSocketComponent } from './ibnode-socket/ibnode-socket.component';;
 
 // Nodejs Router setup
 import { RouterModule } from '@angular/router';
@@ -29,18 +28,6 @@ const ROUTES = [
     redirectTo: 'posts',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'ibNode',
-  //   component: IbNodeComponent
-  // },
-  // {
-  //   path: 'node',
-  //   component: IbNodeComponent
-  // },
-  // {
-  //   path: 'aIBNodeSocket',
-  //   component: IBNodeSocketComponent
-  // },
   {
     path: 'aReqMktData',
     component: IbNodeComponent
@@ -58,7 +45,6 @@ import { StockDisplayComponent } from './stock-display/stock-display.component';
     AppComponent,
     IbNodeComponent,
     StockDetailFormComponent,
-    // IBNodeSocketComponent,
     StockDisplayComponent
   ],
   imports: [
@@ -70,6 +56,8 @@ import { StockDisplayComponent } from './stock-display/stock-display.component';
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
+  // Make sure all the Services are here otherwise will get the error:
+  // "Cannot set property stack of [object Object] which has only a getter"
   providers: [IbNodeService, IbNodeSocketService],
   bootstrap: [AppComponent]
 })
