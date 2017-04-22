@@ -16,7 +16,7 @@ import { Underlying } from "./classes/underlying";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { IbNodeComponent } from './ib-node/ib-node.component';
+//import { IbNodeComponent } from './ib-node/ib-node.component';
 
 // Nodejs Router setup
 import { RouterModule } from '@angular/router';
@@ -28,10 +28,10 @@ const ROUTES = [
     redirectTo: 'posts',
     pathMatch: 'full'
   },
-  {
-    path: 'aReqMktData',
-    component: IbNodeComponent
-  }
+  // {
+  //   path: 'aReqMktData',
+  //   component: IbNodeComponent
+  // }
 ]
 //services
 import { IbNodeService } from './services/ib-node.service';
@@ -43,7 +43,7 @@ import { StockDisplayComponent } from './stock-display/stock-display.component';
 @NgModule({
   declarations: [
     AppComponent,
-    IbNodeComponent,
+  //  IbNodeComponent,
     StockDetailFormComponent,
     StockDisplayComponent
   ],

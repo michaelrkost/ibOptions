@@ -17,6 +17,8 @@ export class IbNodeService {
   // Request Market Data from node ib module
   getIBNodereqMktData(ticker: number, symbol: string, exchange: string): Observable<string> {
     // ...using get request
+    // example http://localhost:3000/reqMktData/ticker/9/symbol/SPX/exchange/CBOE
+    // console.log(ticker + '/' +symbol + '/' +exchange);
     return this.http.get(this.ibNodereqMktData
       + '/ticker/' + ticker
       + '/symbol/' + symbol

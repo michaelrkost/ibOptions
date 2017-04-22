@@ -49,25 +49,9 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => console.log(`Express app Server listening on port:${port}`));
+server.listen(port, () => console.log(`SocketServer /==/ Express app Server listening on port:${port}`));
 
-// ==== socket.io Server setup  ===================================
-// var socketServer = require('http');
-// app.set('port', process.env.PORT || 7777);
-// socketServer.createServer(app).listen(app.get('port'));
-// var io = require('socket.io')(socketServer);
-// console.log('Express HTTP server for Socket.io listening on port:' + app.get('port'));
-// ================================================================
+console.log('app.mountpath: ' + app.mountpath);
+console.log('__dirname  ' + __dirname);
+console.log("app.path():  " + app.path()); // ''
 
-
-// ==== socket.io  ===================================
-// io.on('connection', function (socket) {
-//     socket.on('Socket message', function (msg) {
-//         console.log('socketServer.js Connect message: ' + msg + ' on Port: ' + app.get('port'));
-//         socket.emit('barf', 'world')
-//     });
-//     socket.on('disconnect', function () {
-//         console.log('user disconnected');
-//     });
-// });
-// ==== socket.io  ===================================

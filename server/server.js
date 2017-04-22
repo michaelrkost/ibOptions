@@ -4,6 +4,7 @@ var path = require('path');
 var http = require('http');
 var bodyParser = require('body-parser');
 var ibNode1 = require('./nodeIB');
+var reqSocket = require('./socketServer')
 
 
 // For the console
@@ -50,4 +51,4 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => console.log(`Express app Server listening on port:${port}`));
+server.listen(port, () => console.log(`Server       /==/ Express app Server listening on port:${port}`));
