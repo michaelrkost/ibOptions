@@ -7,23 +7,23 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class IbNodeSocketService {
+export class IbNodeObservableService {
   // private instance variable to hold base url
-  private ibNodeSocketData = 'http://localhost:7777/reqSocketData';
+  private ibNodeObservableData = 'http://localhost:7777/reqObservableData';
 
   private clock: Observable<Date>;
   timer = Observable.timer(0, 1000);
 
   constructor(private http: Http) {
-    console.log('IbNodeSocketService constructor');
+    console.log('IbNodeObservableService constructor');
     this.clock = Observable.interval(1000).map(tick => new Date()).share();
   }
-  getIbNodeSocketService(): Observable<Date> {
+  getIbNodeTimeService(): Observable<Date> {
     // ...using get request
     return this.timer
       .map((v) => Date.now())
       //...errors if any
-      .catch(error => Observable.throw("IbNodeSocketService Server error in ib-nodeSocket.service.ts"));
+      .catch(error => Observable.throw("IbNodeObservableService Server error in ib-IbNodeObservableService.service.ts"));
   }
 }
 

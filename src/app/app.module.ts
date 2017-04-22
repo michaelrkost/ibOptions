@@ -36,7 +36,7 @@ const ROUTES = [
 //services
 import { IbNodeService } from './services/ib-node.service';
 import { StockDetailFormComponent } from './stock-detail-form/stock-detail-form.component';
-import { IbNodeSocketService } from './services/ib-nodeSocket.service';
+import { IbNodeObservableService } from './services/ib-nodeObservable.service';
 import { StockDisplayComponent } from './stock-display/stock-display.component';
 
 
@@ -58,7 +58,7 @@ import { StockDisplayComponent } from './stock-display/stock-display.component';
   ],
   // Make sure all the Services are here otherwise will get the error:
   // "Cannot set property stack of [object Object] which has only a getter"
-  providers: [IbNodeService, IbNodeSocketService],
+  providers: [IbNodeService, IbNodeObservableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
