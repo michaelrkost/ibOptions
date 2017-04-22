@@ -17,6 +17,7 @@ export class StockDisplayComponent implements OnInit  {
       .subscribe(
       data => this.theSocket = data,
       error => console.log('error:  ' + error));
+      //nnn
  }
   
 }
