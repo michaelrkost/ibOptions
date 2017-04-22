@@ -58,7 +58,7 @@ import { StockDisplayComponent } from './stock-display/stock-display.component';
     AppComponent,
     IbNodeComponent,
     StockDetailFormComponent,
-  //  IBNodeSocketComponent,
+    // IBNodeSocketComponent,
     StockDisplayComponent
   ],
   imports: [
@@ -70,7 +70,7 @@ import { StockDisplayComponent } from './stock-display/stock-display.component';
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [IbNodeService],
+  providers: [IbNodeService, IbNodeSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
