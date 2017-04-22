@@ -4,7 +4,7 @@ import { Contract } from "../classes/contract";
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 // Services
 import { IbNodeService } from '../services/ib-node.service';
-//import { IbNodeSocketService } from '../services/ib-nodeSocket.service';
+
 
 
 @Component({
@@ -20,7 +20,7 @@ export class StockDetailFormComponent {
   daysTillExpiry: Number;
   theContractCount: number = 1;
   theSocket: string;
-  //aSocketService: IbNodeSocketService;
+
 
 
   // ng-bootstrap - Calendar
@@ -44,8 +44,8 @@ export class StockDetailFormComponent {
     this.todayIs = new Date();
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
-    this.theSocket = 'Not Connected';   
-   // this.aSocketService = new IbNodeSocketService;
+    this.theSocket = 'Not Connected';
+
   }
 
   onSubmit(value: string): void {
@@ -61,60 +61,57 @@ export class StockDetailFormComponent {
       this.expiry = this.aDate.year.toString()
         + this.aDate.month.toString();
 
-       this.expiryDate = new Date(this.aDate.year
-      + '-'  +  this.aDate.month + '-' + this.aDate.day); 
+    this.expiryDate = new Date(this.aDate.year
+      + '-' + this.aDate.month + '-' + this.aDate.day);
 
-this.daysTillExpiry = Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime())/(1000 * 60 * 60 * 24));
+    this.daysTillExpiry = Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime()) / (1000 * 60 * 60 * 24));
 
-// console.log('Today is: ' + this.expiryDate + moment(this.todayIs);
-console.log('Today is: ' + (this.todayIs.getTime() + '  Expiry is: ' + this.expiryDate.getTime()));
-console.log('Operation took ' +Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime())/(1000 * 60 * 60 * 24)) );
-console.log('anIbNodeService:  ' 
-  + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange ));
+    // console.log('Today is: ' + this.expiryDate + moment(this.todayIs);
+    console.log('Today is: ' + (this.todayIs.getTime() + '  Expiry is: ' + this.expiryDate.getTime()));
+    console.log('Operation took ' + Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime()) / (1000 * 60 * 60 * 24)));
+    console.log('anIbNodeService:  '
+      + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange));
 
-this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange )
-.subscribe(
-  data =>  this.theSocket = data,
-  error => console.log('error:  ' + error)
-);
+    this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange)
+      .subscribe(
+      data => this.theSocket = data,
+      error => console.log('error:  ' + error)
+      );
 
-// var socket = io('http://localhost/');
-//   socket.on('news', function () {
-//     socket.send('hi');
 
   }  //==============   onSubmit  =================================
-    // this.expiryDate.setTime(Date.parse(this.aDate.year.toString() + '-'+
-    //                                    this.aDate.month.toString() + '-'+
-    //                                    this.aDate.day.toString()));
+  // this.expiryDate.setTime(Date.parse(this.aDate.year.toString() + '-'+
+  //                                    this.aDate.month.toString() + '-'+
+  //                                    this.aDate.day.toString()));
 
-    //  date time string set in ISO 8601 format. 
-    //  For example, "2011-10-10" (just date) or "2011-10-10T14:48:00" (date and time) 
-    //  can be passed and parsed. Where the string is ISO 8601 date only, 
-    //  the UTC time zone is used to interpret arguments.
-    //   If the string is date and time in ISO 8601 format, it will be treated as local.
-    //   Year:
-    //       YYYY (eg 1997)
-    //    Year and month:
-    //       YYYY-MM (eg 1997-07)
-    //    Complete date:
-    //       YYYY-MM-DD (eg 1997-07-16)
-    //    Complete date plus hours and minutes:
-    //       YYYY-MM-DDThh:mmTZD (eg 1997-07-16T19:20+01:00)
-    //    Complete date plus hours, minutes and seconds:
-    //       YYYY-MM-DDThh:mm:ssTZD (eg 1997-07-16T19:20:30+01:00)
-    //    Complete date plus hours, minutes, seconds and a decimal fraction of a
-    // second
-    //       YYYY-MM-DDThh:mm:ss.sTZD (eg 1997-07-16T19:20:30.45+01:00)
-    // where:
+  //  date time string set in ISO 8601 format. 
+  //  For example, "2011-10-10" (just date) or "2011-10-10T14:48:00" (date and time) 
+  //  can be passed and parsed. Where the string is ISO 8601 date only, 
+  //  the UTC time zone is used to interpret arguments.
+  //   If the string is date and time in ISO 8601 format, it will be treated as local.
+  //   Year:
+  //       YYYY (eg 1997)
+  //    Year and month:
+  //       YYYY-MM (eg 1997-07)
+  //    Complete date:
+  //       YYYY-MM-DD (eg 1997-07-16)
+  //    Complete date plus hours and minutes:
+  //       YYYY-MM-DDThh:mmTZD (eg 1997-07-16T19:20+01:00)
+  //    Complete date plus hours, minutes and seconds:
+  //       YYYY-MM-DDThh:mm:ssTZD (eg 1997-07-16T19:20:30+01:00)
+  //    Complete date plus hours, minutes, seconds and a decimal fraction of a
+  // second
+  //       YYYY-MM-DDThh:mm:ss.sTZD (eg 1997-07-16T19:20:30.45+01:00)
+  // where:
 
-    //      YYYY = four-digit year
-    //      MM   = two-digit month (01=January, etc.)
-    //      DD   = two-digit day of month (01 through 31)
-    //      hh   = two digits of hour (00 through 23) (am/pm NOT allowed)
-    //      mm   = two digits of minute (00 through 59)
-    //      ss   = two digits of second (00 through 59)
-    //      s    = one or more digits representing a decimal fraction of a second
-    //      TZD  = time zone designator (Z or +hh:mm or -hh:mm)
+  //      YYYY = four-digit year
+  //      MM   = two-digit month (01=January, etc.)
+  //      DD   = two-digit day of month (01 through 31)
+  //      hh   = two digits of hour (00 through 23) (am/pm NOT allowed)
+  //      mm   = two digits of minute (00 through 59)
+  //      ss   = two digits of second (00 through 59)
+  //      s    = one or more digits representing a decimal fraction of a second
+  //      TZD  = time zone designator (Z or +hh:mm or -hh:mm)
 
   // --------- ng-bootstrap - Calendar ---------------
 

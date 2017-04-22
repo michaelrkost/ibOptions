@@ -3,8 +3,8 @@ export class Underlying {
     currency: string;       // Specifies the currency.
     exchange: string;       // The order destination, such as Smart, CBOE etc.
     lastPrice: number;      // the last price of the underlying
-    localSymbol: string; 		// This is the local exchange symbol of the underlying asset.
-    primaryExch: string; 		// Identifies the listing exchange for the contract (do not list SMART).
+    localSymbol: string; 	// This is the local exchange symbol of the underlying asset.
+    primaryExch: string; 	// Identifies the listing exchange for the contract (do not list SMART).
     secType: string;        // This is the security type. Valid values are: STK,OPT,FUT,IND,FOP,CASH,BAG,NEWS
     symbol: string;         // This is the symbol of the underlying asset.
 
