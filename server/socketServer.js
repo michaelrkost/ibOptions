@@ -4,6 +4,8 @@ var path = require('path');
 var http = require('http');
 var bodyParser = require('body-parser');
 
+// node ib server
+var nodeIBServer = require('./nodeIB');
 
 // For the console
 var util = require('util');

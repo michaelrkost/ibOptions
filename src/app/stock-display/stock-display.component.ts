@@ -9,7 +9,7 @@ import { IbNodeObservableService } from '../services/ib-nodeObservable.service';
 })
 export class StockDisplayComponent implements OnInit {
   theSocket: Date;
-  theData: String;
+  theData: JSON;
   constructor(private anIbNodeObservableService: IbNodeObservableService) {
   }
 
@@ -23,7 +23,7 @@ export class StockDisplayComponent implements OnInit {
       this.anIbNodeObservableService.getIBNodeObservableData()
       .subscribe(
       data => this.theData = data,
-      error => console.log('error:  ' + error));
+      error => console.log('StockDisplayComponent - IbNodeObservableService // error:  ' + error));
   }
 
 }

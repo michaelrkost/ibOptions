@@ -26,13 +26,13 @@ export class IbNodeObservableService {
       .catch(error => Observable.throw("IbNodeObservableService Server error in ib-IbNodeObservableService.service.ts"));
   }
 
-   getIBNodeObservableData(): Observable<string> {
+   getIBNodeObservableData(): Observable<JSON> {
     // ...using get request
     return this.http.get(this.ibNodeObservableData)
       // ...and calling .json() on the response to return data
-      .map((res: Response) => res.text())     //.json())
+      .map((res: Response) => res.json())     //.json())
       //...errors if any
-      .catch(error => Observable.throw("getIBNodeObservableData error in ib-IbNodeObservableService.service.ts"));
+      .catch(error => Observable.throw("getIBNodeObservableData error in ib-IbNodeObservableService.service.ts" + error));
 }
 }
 
