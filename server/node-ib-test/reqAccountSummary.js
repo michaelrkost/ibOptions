@@ -9,7 +9,7 @@ var ib = new (require('ib'))({
   console.error(chalk.red(err.message));
 }).on('result', function (event, args) {
   if (!_.includes(['accountSummary', 'accountSummaryEnd'], event)) {
-    console.log('%s %s', chalk.yellow(event + ':'), JSON.stringify(args));
+    console.log('%s %s', chalk.green(event + ':'), JSON.stringify(args));
   }
 }).on('accountSummary', function (reqId, account, tag, value, currency) {
   console.log(

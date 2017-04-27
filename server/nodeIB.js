@@ -18,7 +18,7 @@ var ib = new (require('ib'))({
 }).on('result', function (event, args) {
   if (!_.includes(['tickEFP', 'tickGeneric', 'tickOptionComputation', 'tickPrice',
                    'tickSize', 'tickString'], event)) {
-    console.log('%s %s', chalk.yellow(event + ':'), JSON.stringify(args));
+    console.log('%s %s', chalk.red(event + ':'), JSON.stringify(args));
   }
 }).on('tickEFP', function (tickerId, tickType, basisPoints, formattedBasisPoints,
                            impliedFuturesPrice, holdDays, futureExpiry, dividendImpact,

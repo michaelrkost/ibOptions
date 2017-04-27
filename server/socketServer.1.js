@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // CORS enablement
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   //res.setHeader("Access-Control-Allow-Methods", "POST, GET, PATCH, DELETE, OPTIONS, PUT");
@@ -56,35 +56,4 @@ server.listen(port, () => console.log(`SocketServer /==/ Express app Server list
 console.log('app.mountpath: ' + app.mountpath);
 console.log('__dirname  ' + __dirname);
 console.log("app.path():  " + app.path()); // ''
-
-// Socket.io
-var io = require('socket.io')(server);
-var aString = '';
-
-io.on('connection', function (socket) {
-  // socket.emit('news', { hello: aString });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-
-
-  nodeIBServer.on('tickPrice', function (tickerId, tickType,
-    price, canAutoExecute) {
-    socket.emit('news', {
-      tickerId: tickerId,
-      tickType: nodeIBServer.util.tickTypeToString(tickType),
-      price: price,
-      canAutoExecute: canAutoExecute
-    });
-    console.log(
-      '%s %s%d %s%d %s%s',
-      chalk.yellow(util.format('[%s]', nodeIBServer.util.tickTypeToString(tickType))),
-      chalk.bold('tickerId='), tickerId,
-      chalk.bold('price='), price,
-      chalk.bold('canAutoExecute='), canAutoExecute
-    );
-  });
-
-
-});
 
