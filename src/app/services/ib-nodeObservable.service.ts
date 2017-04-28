@@ -8,8 +8,6 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class IbNodeObservableService {
-  // private instance variable to hold base url
-  private ibNodeObservableData = 'http://localhost:7777/reqSocketData';
 
   private clock: Observable<Date>;
   timer = Observable.timer(0, 1000);
@@ -26,13 +24,5 @@ export class IbNodeObservableService {
       .catch(error => Observable.throw("IbNodeObservableService Server error in ib-IbNodeObservableService.service.ts"));
   }
 
-  getIBNodeObservableData(): Observable<JSON> {
-    // ...using get request
-    return this.http.get(this.ibNodeObservableData)
-      // ...and calling .json() on the response to return data
-      .map((res: Response) => res.json())     //.json())
-      //...errors if any
-      .catch(error => Observable.throw("getIBNodeObservableData error in ib-IbNodeObservableService.service.ts" + error));
-  }
 }
 

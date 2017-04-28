@@ -22,12 +22,6 @@ export class StockDisplayComponent implements OnInit {
       data => this.theSocket = data,
       error => console.log('error:  ' + error));
 
-    this.anIbNodeObservableService.getIBNodeObservableData()
-      .subscribe(
-      data => this.theData = data,
-      error => console.log('StockDisplayComponent - IbNodeObservableService // error:  ' + error));
-
-
     this.socket.on('news', function (data) {
       console.log(data);
      //this.socket.emit('my other event', { my: 'data' });
