@@ -38,12 +38,12 @@ import { IbNodeService } from './services/ib-node.service';
 import { StockDetailFormComponent } from './stock-detail-form/stock-detail-form.component';
 import { IbNodeObservableService } from './services/ib-nodeObservable.service';
 import { StockDisplayComponent } from './stock-display/stock-display.component';
+import { IbNodeSocketService } from './services/ib-nodeSocket.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-  //  IbNodeComponent,
     StockDetailFormComponent,
     StockDisplayComponent
   ],
@@ -58,7 +58,7 @@ import { StockDisplayComponent } from './stock-display/stock-display.component';
   ],
   // Make sure all the Services are here otherwise will get the error:
   // "Cannot set property stack of [object Object] which has only a getter"
-  providers: [IbNodeService, IbNodeObservableService],
+  providers: [IbNodeService, IbNodeObservableService, IbNodeSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

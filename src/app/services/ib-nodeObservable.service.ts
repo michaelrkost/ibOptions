@@ -9,17 +9,17 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class IbNodeObservableService {
 
-  private clock: Observable<Date>;
+//  private clock: Observable<Date>;
   timer = Observable.timer(0, 1000);
 
   constructor(private http: Http) {
     console.log('IbNodeObservableService constructor');
-    this.clock = Observable.interval(1000).map(tick => new Date()).share();
+ //   this.clock = Observable.interval(1000).map(tick => new Date()).share();
   }
   getIbNodeTimeService(): Observable<Date> {
     // ...using get request
     return this.timer
-      .map((v) => Date.now())
+      .map(() => Date.now())
       //...errors if any
       .catch(error => Observable.throw("IbNodeObservableService Server error in ib-IbNodeObservableService.service.ts"));
   }
