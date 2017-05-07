@@ -62,7 +62,7 @@ io.on('connection', function (socket) {
       price: price,
       canAutoExecute: canAutoExecute
     });
-    console.log(
+    console.log(chalk.bgBlue('ibData:  ') +
       '%s %s%d %s%d %s%s',
       chalk.yellow(util.format('[%s]', nodeIBServer.util.tickTypeToString(tickType))),
       chalk.bold('tickerId='), tickerId,
