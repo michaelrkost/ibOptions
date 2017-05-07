@@ -3,6 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+// Socket.io module for Angular 2 // ng2-socket-io
+// npm: https://www.npmjs.com/package/ng2-socket-io
+// git: https://github.com/bougarfaoui/ng2-socket-io
+import { SocketIoModule, SocketIoConfig } from 'ng2-socket-io';
+// io(url[, options])
+const config: SocketIoConfig = { url: 'http://localhost:7777', options: {} };
+
 // Import MomentModule ==> Moment.js
 import { MomentModule } from 'angular2-moment';
 import { Moment } from 'moment';
@@ -54,7 +61,8 @@ import { IbNodeSocketService } from './services/ib-nodeSocket.service';
     ReactiveFormsModule,
     MomentModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(ROUTES) // Add routes to the app
+    RouterModule.forRoot(ROUTES),   // Add routes to the app
+    SocketIoModule.forRoot(config)  // Config ng2-socket-io
   ],
   // Make sure all the Services are here otherwise will get the error:
   // "Cannot set property stack of [object Object] which has only a getter"

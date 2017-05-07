@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import * as io from 'socket.io-client';
+
+// Socket.IO module for Angular 2
+// Socket.io module for Angular 2 // ng2-socket-io
+// npm: https://www.npmjs.com/package/ng2-socket-io
+// git: https://github.com/bougarfaoui/ng2-socket-io
+import { Socket } from 'ng2-socket-io';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -8,22 +13,31 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class IbNodeSocketService {
-  socket = io('http://localhost:7777');
-  private IBNode: Observable<JSON>;
-  aE = this.socket.on('news', function (data) {
-      console.log(data);
-    });
 
-  constructor() { }
- 
-     
+//     return this.socket.fromEvent("message")
+//
+// Takes an event name and returns an Observable that you can subscribe to.
+//
+// You should keep a reference to the Observable subscription and unsubscribe
+// when you're done with it. This prevents memory leaks as the event listener 
+// attached will be removed (using socket.removeListener) ONLY and when/if you unsubscribe.
+//
 
-getIbNodeTimeService(): Observable<JSON> {
-    // ...using get request
-    return this.aE
-      .map(() => Date.now())
-      //...errors if any
-      .catch(error => Observable.throw("IbNodeObservableService Server error in ib-IbNodeObservableService.service.ts"));
+  constructor(private socket: Socket) { }
+
+  sendMessage(msg: string) {
+    this.socket.emit("message", msg);
+  }
+
+  getMessage() {
+    console.log('in getMessage');
+    return this.socket
+      .fromEvent<string>("ibData")
+      .map(function(data)  {console.log('getMessage() data: ' + data); return data});
+  }
+
+  close() {
+    this.socket.disconnect()
   }
 }
 

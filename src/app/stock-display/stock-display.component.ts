@@ -11,17 +11,19 @@ import * as io from 'socket.io-client';
 })
 export class StockDisplayComponent { //implements OnInit {
   theSocket: Date;
-  theData: JSON;
+  theData:string = 'theData Init setting';
   // socket = io('http://localhost:7777');
   constructor(private anIbNodeSocketService: IbNodeSocketService) {
   }
 
-  // ngOnInit() {
-  //   console.log('IbNodeObservableService in  StockDisplayComponent ');
-  //   this.anIbNodeSocketService.getIbNodeTimeService()
-  //     .subscribe(
-  //     data => this.theSocket = data,
-  //     error => console.log('error:  ' + error));
+  ngOnInit() {
+    console.log('IbNodeObservableService in  StockDisplayComponent ');
+   this.anIbNodeSocketService.sendMessage('my other event');
+
+    this.anIbNodeSocketService.getMessage()
+      .subscribe(
+      data => this.theData = data,
+      error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
 
     // this.socket.on('news', function (data) {
     //   console.log(data);
@@ -30,5 +32,5 @@ export class StockDisplayComponent { //implements OnInit {
 
   }
 
-//}
+}
 

@@ -56,7 +56,7 @@ io.on('connection', function (socket) {
 
   nodeIBServer.on('tickPrice', function (tickerId, tickType,
     price, canAutoExecute) {
-    socket.emit('news', {
+    socket.emit('ibData', {
       tickerId: tickerId,
       tickType: nodeIBServer.util.tickTypeToString(tickType),
       price: price,

@@ -67,16 +67,18 @@ export class StockDetailFormComponent {
     this.daysTillExpiry = Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime()) / (1000 * 60 * 60 * 24));
 
     // console.log('Today is: ' + this.expiryDate + moment(this.todayIs);
-    console.log('Today is: ' + (this.todayIs.getTime() + '  Expiry is: ' + this.expiryDate.getTime()));
-    console.log('Operation took ' + Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime()) / (1000 * 60 * 60 * 24)));
-    console.log('anIbNodeService:  '
-      + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange));
+    // console.log('Today is: ' + (this.todayIs.getTime() + '  Expiry is: ' + this.expiryDate.getTime()));
+    // console.log('Operation took ' + Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime()) / (1000 * 60 * 60 * 24)));
+    // console.log(' onSubmit // anIbNodeService:  '
+    //   + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol,
+    //    this.aContract.exchange));
 
-    this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange)
+     this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange)
       .subscribe(
       data => this.theSocket = data,
-      error => console.log('error:  ' + error)
-      );
+      error => console.log('anIbNodeService.getIBNodereqMktData  error:  ' + error)
+      );   
+
 
 
   }  //==============   onSubmit  =================================
