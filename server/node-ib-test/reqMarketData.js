@@ -87,10 +87,10 @@ ib.connect();
 
 // // Stock
 // ib.reqMktData(11, ib.contract.stock('AAPL'), '', true,true, null);
-// ib.reqMktData(12, ib.contract.stock('AMZN'), '', false,true, null);
-// ib.reqMktData(13, ib.contract.stock('GOOG'), '', false);
-// ib.reqMktData(14, ib.contract.stock('FB'), '', false);
-ib.reqMktData(15, ib.contract.index('SPX', ''), '', false);
+ib.reqMktData(12, ib.contract.stock('AMZN'), '', true,true, null);
+ib.reqMktData(13, ib.contract.stock('GOOG'), '', true,true, null);
+ib.reqMktData(14, ib.contract.stock('FB'), '', true,true, null);
+ib.reqMktData(15, ib.contract.index('SPX', ''), '', true,true, null);
 
 // Option
 // ib.reqMktData(21, ib.contract.option('AAPL', '201712', 200, 'C'), '', false);

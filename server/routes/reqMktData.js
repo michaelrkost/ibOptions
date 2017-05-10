@@ -37,12 +37,24 @@ router.get('/:tickerID/symbol/:symbolID/exchange/:exchangeID', (req, res, next) 
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-  // console.log("reqMktData = Request Host Name: " + req.hostname + ' Path: ' + req.path
-  //   + ' Route: ' + req.route + ' Body: ' + req.body + ' ReqParamtickerID: ' + req.params.tickerID
-  //   + ' ReqParamsSymbol: ' + req.params.symbolID + ' ReqParamExchange: ' + req.params.exchangeID);
 
-  nodeIBServer.reqMktData(parseInt(req.params.tickerID),
-    nodeIBServer.contract.index(req.params.symbolID, ''), '', false);
+// void reqMktData	(	
+//   int 	tickerId,
+//   Contract 	contract,
+//   string 	genericTickList,
+//   bool 	snapshot,
+//   bool 	regulatorySnaphsot,
+//   List< TagValue > 	mktDataOptions 
+//   )	
+
+  nodeIBServer.reqMktData(
+    parseInt(req.params.tickerID),                         // tickerId
+    nodeIBServer.contract.index(req.params.symbolID, ''),  // contract
+    '',                                                    // genericTickList                                    
+    false,                                                 // snapshot
+    true,                                                  // regulatory snapshot
+    null                                                   // mktDataOptions
+    );
 
   res.send("Connected! ID# " + req.params.tickerID);
 
