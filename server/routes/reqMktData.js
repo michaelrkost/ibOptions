@@ -52,7 +52,7 @@ router.get('/:tickerID/symbol/:symbolID/exchange/:exchangeID', (req, res, next) 
     nodeIBServer.contract.index(req.params.symbolID, ''),  // contract
     '',                                                    // genericTickList                                    
     false,                                                 // snapshot
-    true,                                                  // regulatory snapshot
+    false,                                                  // regulatory snapshot
     null                                                   // mktDataOptions
     );
 

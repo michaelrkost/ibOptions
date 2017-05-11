@@ -53,6 +53,13 @@ io.on('connection', function (socket) {
     console.log(data);
   });
 
+// emitter.setMaxListeners(n)
+//  By default EventEmitters will print a warning if more than 10 listeners are added to it. 
+//  This is a useful default which helps finding memory leaks.
+//  Obviously not all Emitters should be limited to 10. 
+//  This function allows that to be increased. Set to zero for unlimited.
+//
+// https://nodejs.org/docs/v0.4.7/api/events.html#emitter.setMaxListeners
 
   nodeIBServer.on('tickPrice', function (tickerId, tickType,
     price, canAutoExecute) {
@@ -61,7 +68,7 @@ io.on('connection', function (socket) {
       tickType: nodeIBServer.util.tickTypeToString(tickType),
       price: price,
       canAutoExecute: canAutoExecute
-    });
+    }).setMaxListeners(0);
     console.log(chalk.bgBlue('ibData:  ') +
       '%s %s%d %s%d %s%s',
       chalk.yellow(util.format('[%s]', nodeIBServer.util.tickTypeToString(tickType))),

@@ -45,7 +45,7 @@ export class StockDetailFormComponent {
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
     this.theSocket = 'Not Connected';
-
+console.log("date:" + this.todayIs);
   }
 
   onSubmit(value: string): void {
