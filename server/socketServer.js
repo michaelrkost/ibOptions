@@ -51,18 +51,28 @@ io.on('connection', function (socket) {
   socket.emit('news', { hello: aString });
   socket.on('message', function (data) {
     console.log('cat' + data);
-  });
+  }),
+    socket.on('ReqMktData', function (data) {
+      nodeIBServer.reqMktData(
+        data.tickerId,                  // tickerId
+        nodeIBServer.contract.index(data.contract, ''),                  // contract
+        data.genericTickList,      // snapshot
+        data.snapshot,                  // genericTickList                                    
+        data.regulatorySnapshot,   // regulatory snapshot
+        data.mktDataOptions         // mktDataOptions
+      );
+      console.log(chalk.bgBlue('ReqMktData: ' + data.contract
+      + '  tickerId = ' + data.tickerId + '               ' ));
+    });
+  //
 
-  socket.on('message', function (data) {
-    console.log('cat' + data);});
-
-// emitter.setMaxListeners(n)
-//  By default EventEmitters will print a warning if more than 10 listeners are added to it. 
-//  This is a useful default which helps finding memory leaks.
-//  Obviously not all Emitters should be limited to 10. 
-//  This function allows that to be increased. Set to zero for unlimited.
-//
-// https://nodejs.org/docs/v0.4.7/api/events.html#emitter.setMaxListeners
+  // emitter.setMaxListeners(n)
+  //  By default EventEmitters will print a warning if more than 10 listeners are added to it. 
+  //  This is a useful default which helps finding memory leaks.
+  //  Obviously not all Emitters should be limited to 10. 
+  //  This function allows that to be increased. Set to zero for unlimited.
+  //
+  // https://nodejs.org/docs/v0.4.7/api/events.html#emitter.setMaxListeners
 
   nodeIBServer.on('tickPrice', function (tickerId, tickType,
     price, canAutoExecute) {
@@ -80,7 +90,5 @@ io.on('connection', function (socket) {
       chalk.bold('canAutoExecute='), canAutoExecute
     );
   });
-
-
 });
 

@@ -37,9 +37,9 @@ export class TickOptionComputation {
     undPrice: number;
 
     constructor() {
-        
+
         this.tickerId = 0;
-        this.tickType ='';
+        this.tickType = '';
         this.impliedVol = 0;;
         this.delta = 0;;
         this.optPrice = 0;
@@ -49,5 +49,23 @@ export class TickOptionComputation {
         this.theta = 0;;
         this.undPrice = 0;;
     }
+}
 
+
+export class ReqMktData {
+    tickerId: number;
+    contract: string;
+    genericTickList: string;
+    snapshot: boolean;
+    regulatorySnapshot: boolean;
+    mktDataOptions: any[];
+
+    constructor() {
+        // this.tickerId = 777777;
+        // this.contract = '';
+        // this.genericTickList = '';
+        // this.snapshot = false;
+        // this.regulatorySnapshot = false;
+        // this.mktDataOptions = null;
+    }
 }

@@ -19,8 +19,8 @@ export class StockDisplayComponent { //implements OnInit {
 
   ngOnInit() {
     console.log('IbNodeObservableService in  StockDisplayComponent ');
-   this.anIbNodeSocketService.sendMessage('cat');
-    console.log('ngOnInit  cat');
+   this.anIbNodeSocketService.setVixMktData();
+    console.log('ngOnInit  after/// this.anIbNodeSocketService.setVixMktData()');
     this.anIbNodeSocketService.getMessage()
     .filter( (vixData) => vixData.tickType == 'BID')
     //   .filter( (vixTickerID) => {

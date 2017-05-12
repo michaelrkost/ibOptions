@@ -47,7 +47,7 @@ export class StockDetailFormComponent {
     this.theSocket = '';
     this.theVIX = '';
 
-    console.log("StockDetailFormComponent Constructor " );
+    console.log(">>> In StockDetailFormComponent Constructor <<<" );
   }
 
   onSubmit(value: string): void {
