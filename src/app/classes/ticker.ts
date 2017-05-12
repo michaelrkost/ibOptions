@@ -1,4 +1,4 @@
-export class tickPrice {
+export class TickPrice {
     tickerId: number;
     tickType: string;
     price: number;
@@ -12,7 +12,7 @@ export class tickPrice {
     }
 }
 
-export class tickGeneric {
+export class TickGeneric {
     tickerId: number;
     tickType: string;
     value: number;
@@ -24,7 +24,7 @@ export class tickGeneric {
     }
 }
 
-export class tickOptionComputation {
+export class TickOptionComputation {
     tickerId: number;
     tickType: string;
     impliedVol: number;

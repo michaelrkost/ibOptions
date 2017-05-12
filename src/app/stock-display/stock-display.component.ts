@@ -10,26 +10,28 @@ import * as io from 'socket.io-client';
   styleUrls: ['./stock-display.component.css']
 })
 export class StockDisplayComponent { //implements OnInit {
-  theSocket: Date;
+
   theData:string = 'theData Init setting';
-  // socket = io('http://localhost:7777');
+  vixPrice: string = 'VIX price!'
+
   constructor(private anIbNodeSocketService: IbNodeSocketService) {
   }
 
   ngOnInit() {
     console.log('IbNodeObservableService in  StockDisplayComponent ');
-   this.anIbNodeSocketService.sendMessage('my other event');
-
+   this.anIbNodeSocketService.sendMessage('cat');
+    console.log('ngOnInit  cat');
     this.anIbNodeSocketService.getMessage()
+    .filter( (vixData) => vixData.tickType == 'BID')
+    //   .filter( (vixTickerID) => {
+    //     if ( vixTickerID.tickType = 'ASK')
+    //       this.vixPrice = vixTickerID.price;
+    //       return vixTickerID.tickerID == 'ASK'
+    //  })
+
       .subscribe(
       data => this.theData = data,
       error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
-
-    // this.socket.on('news', function (data) {
-    //   console.log(data);
-    //  //this.socket.emit('my other event', { my: 'data' });
-    // });
-
   }
 
 }

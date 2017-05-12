@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Contract } from "../classes/contract";
+import { Contract } from '../classes/contract';
+//import { TickPrice } from '../classes/ticker';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 // Services
 import { IbNodeService } from '../services/ib-node.service';
@@ -20,8 +21,7 @@ export class StockDetailFormComponent {
   daysTillExpiry: Number;
   theContractCount: number = 1;
   theSocket: string;
-
-
+  theVIX: string;
 
   // ng-bootstrap - Calendar
   aDate: NgbDateStruct;
@@ -44,8 +44,10 @@ export class StockDetailFormComponent {
     this.todayIs = new Date();
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
-    this.theSocket = 'Not Connected';
-console.log("date:" + this.todayIs);
+    this.theSocket = '';
+    this.theVIX = '';
+
+    console.log("StockDetailFormComponent Constructor " );
   }
 
   onSubmit(value: string): void {
@@ -73,13 +75,11 @@ console.log("date:" + this.todayIs);
     //   + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol,
     //    this.aContract.exchange));
 
-     this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange)
-      .subscribe(
-      data => this.theSocket = data,
-      error => console.log('anIbNodeService.getIBNodereqMktData  error:  ' + error)
-      );   
-
-
+    // this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange)
+    //   .subscribe(
+    //   data => this.theSocket = data,
+    //   error => console.log('anIbNodeService.getIBNodereqMktData  error:  ' + error)
+    //   );
 
   }  //==============   onSubmit  =================================
   // this.expiryDate.setTime(Date.parse(this.aDate.year.toString() + '-'+

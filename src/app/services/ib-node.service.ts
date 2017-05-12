@@ -27,6 +27,21 @@ export class IbNodeService {
       .map((res: Response) => res.text())     //.json())
       //...errors if any
       .catch(error => Observable.throw("IbNodeService Server error in ib-node.ts"));
-
   }
+
+    // Request VIX Market Data from node ib module
+  getIBNodeVIXreqMktData(): Observable<string> {
+    // ...using get request
+    // example http://localhost:3000/reqMktData/ticker/9/symbol/SPX/exchange/CBOE
+    // console.log(ticker + '/' +symbol + '/' +exchange);
+    return this.http.get(this.ibNodereqMktData
+      + '/ticker/' + '7777'
+      + '/symbol/' + 'VIX'
+      + '/exchange/' + 'CBOE')
+      // ...and calling .json() on the response to return data
+      .map((res: Response) => res.text())     //.json())
+      //...errors if any
+      .catch(error => Observable.throw("IbNodeService Server error in ib-node.ts"));
+  }
+
 }

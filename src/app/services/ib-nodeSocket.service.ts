@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tickPrice } from '../classes/ticker'
+import { TickPrice } from '../classes/ticker'
 
 // Socket.IO module for Angular 2
 // Socket.io module for Angular 2 // ng2-socket-io
@@ -23,22 +23,20 @@ export class IbNodeSocketService {
   // when you're done with it. This prevents memory leaks as the event listener 
   // attached will be removed (using socket.removeListener) ONLY and when/if you unsubscribe.
   //
-  atickPrice: tickPrice;
+  atickPrice: TickPrice;
 
   constructor(private socket: Socket) { }
 
   sendMessage(msg: string) {
     this.socket.emit("message", msg);
+    console.log('sendMessage:  ' + msg);
   }
+  
 
   getMessage() {
     return this.socket
-      .fromEvent<any>("ibData")
+      .fromEvent<any>("tickPrice")
       .map(data => data)
-      // .map(function (data) {
-      //  console.log('data ' + data.price);
-      //   return data
-      // })
   }
 
   close() {

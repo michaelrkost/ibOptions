@@ -48,10 +48,13 @@ var io = require('socket.io')(server);
 var aString = '';
 
 io.on('connection', function (socket) {
-  // socket.emit('news', { hello: aString });
-  socket.on('my other event', function (data) {
-    console.log(data);
+  socket.emit('news', { hello: aString });
+  socket.on('message', function (data) {
+    console.log('cat' + data);
   });
+
+  socket.on('message', function (data) {
+    console.log('cat' + data);});
 
 // emitter.setMaxListeners(n)
 //  By default EventEmitters will print a warning if more than 10 listeners are added to it. 
@@ -63,7 +66,7 @@ io.on('connection', function (socket) {
 
   nodeIBServer.on('tickPrice', function (tickerId, tickType,
     price, canAutoExecute) {
-    socket.emit('ibData', {
+    socket.emit('tickPrice', {
       tickerId: tickerId,
       tickType: nodeIBServer.util.tickTypeToString(tickType),
       price: price,

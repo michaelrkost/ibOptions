@@ -33,12 +33,12 @@
         <img src="./app/images/calendar_simple-black.png" style="width: 1rem;
                    height: 1rem; cursor: pointer;" />
       </button>
-          <template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
+          <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
             <span class="custom-day" [class.isThursday]="isThurs(date)" [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth"
               [class.text-muted]="disabled">
               {{ date.day }}
           </span>
-          </template>
+          </ng-template>
         </div>
 
         <button type="submit" class="ui button" style="font-size:12px" [disabled]="!stockDetailForm.valid">Submit</button>
@@ -53,6 +53,7 @@
         <br> ExpiryDate: <b>{{ expiryDate | date }}</b>
         <br> Days Till Experiation: <b>{{ daysTillExpiry }}</b>
         <br>Socket: <b>{{ theSocket }}</b><br>
+        VIX ID: {{ theVIX.tickerId }} Price: {{ theVIX.price }}  TickType: {{ theVIX.tickType }}<br>
       </p>
     </div>
 
@@ -65,6 +66,6 @@
       <pre>ExpiryDate: {{ aDate | json }}</pre>
       <pre>expiry: {{ expiry }}</pre>
     </div>-->
-    
+
   </div>
 </div>
