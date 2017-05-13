@@ -22,7 +22,10 @@ export class StockDisplayComponent { //implements OnInit {
    this.anIbNodeSocketService.setSpxMktData();
     console.log('ngOnInit  after/// this.anIbNodeSocketService.setVixMktData()');
     this.anIbNodeSocketService.getMessage()
+    .map(vixData => vixData)
     .filter( (vixData) => vixData.tickType == 'CLOSE')
+    .do( vixData => {this.vixPrice = vixData.price })
+
     //   .filter( (vixTickerID) => {
     //     if ( vixTickerID.tickType = 'ASK')
     //       this.vixPrice = vixTickerID.price;

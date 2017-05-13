@@ -62,7 +62,7 @@ io.on('connection', function (socket) {
         data.mktDataOptions         // mktDataOptions
       );
       console.log(chalk.bgBlue('ReqMktData: ' + data.contract
-      + '  tickerId = ' + data.tickerId + '               ' ));
+        + '  tickerId = ' + data.tickerId + '               '));
     });
   //
 
