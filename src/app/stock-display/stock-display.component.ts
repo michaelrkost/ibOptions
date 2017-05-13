@@ -11,7 +11,7 @@ import * as io from 'socket.io-client';
 })
 export class StockDisplayComponent { //implements OnInit {
 
-  theData:string = 'theData Init setting';
+  theData: string = 'theData Init setting';
   vixPrice: string = 'VIX price!'
 
   constructor(private anIbNodeSocketService: IbNodeSocketService) {
@@ -19,21 +19,13 @@ export class StockDisplayComponent { //implements OnInit {
 
   ngOnInit() {
     console.log('IbNodeObservableService in  StockDisplayComponent ');
-   this.anIbNodeSocketService.setSpxMktData();
-    console.log('ngOnInit  after/// this.anIbNodeSocketService.setVixMktData()');
-    this.anIbNodeSocketService.getMessage()
-    .map(vixData => vixData)
-    .filter( (vixData) => vixData.tickType == 'CLOSE')
-    .do( vixData => {this.vixPrice = vixData.price })
-
-    //   .filter( (vixTickerID) => {
-    //     if ( vixTickerID.tickType = 'ASK')
-    //       this.vixPrice = vixTickerID.price;
-    //       return vixTickerID.tickerID == 'ASK'
-    //  })
-
-      .subscribe(
-      data => this.theData = data,
+    this.anIbNodeSocketService.setVixMktData();
+    // get VIX data
+    this.anIbNodeSocketService.getTickPrice()
+      .filter(vixData => vixData.tickerId == 7777)
+      .filter(vixData => vixData.tickType == 'CLOSE')
+      .do(vixData => this.vixPrice = vixData.price)
+      .subscribe(data => this.theData = data,
       error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
   }
 

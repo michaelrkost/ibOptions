@@ -29,6 +29,19 @@ export class IbNodeSocketService {
     this.theMktData = new ReqMktData;
    }
 
+setReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '',
+  aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false, 
+  aMktDataOptions: any = null) {
+    this.theMktData.tickerId = aTickerId;
+    this.theMktData.contract = aContract;
+    this.theMktData.genericTickList = aGenericTickList;
+    this.theMktData.snapshot = aSnapshot;
+    this.theMktData.regulatorySnapshot = aRegulatorySnapshot;
+    this.theMktData.mktDataOptions = aMktDataOptions;
+
+    this.socket.emit("ReqMktData", this.theMktData);
+    console.log('ReqMktData:  ' + this.theMktData.contract);
+  }
 
   setVixMktData() {
     this.theMktData.tickerId = 7777;
@@ -39,7 +52,7 @@ export class IbNodeSocketService {
     this.theMktData.mktDataOptions = null;
 
     this.socket.emit("ReqMktData", this.theMktData);
-    console.log('SetVIX:  ' + this.theMktData.contract);
+    console.log('setVixMktData:  ' + this.theMktData.contract);
   }
 
   setSpxMktData() {
@@ -51,7 +64,7 @@ export class IbNodeSocketService {
     this.theMktData.mktDataOptions = null;
 
     this.socket.emit("ReqMktData", this.theMktData);
-    console.log('SetVIX:  ' + this.theMktData.contract);
+    console.log('setSpxMktData:  ' + this.theMktData.contract);
   }
 
 
@@ -61,10 +74,12 @@ export class IbNodeSocketService {
   }
 
 
-  getMessage() {
+  getTickPrice() {
     return this.socket
       .fromEvent<any>("tickPrice")
-      .map(data => data)
+    .map(vixData => vixData)
+    // .filter( vixData => vixData.tickerId == 7777 )
+    // .filter( vixData => vixData.tickType == 'CLOSE')    
   }
 
   close() {
