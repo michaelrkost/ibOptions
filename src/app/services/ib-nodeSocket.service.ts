@@ -42,6 +42,18 @@ export class IbNodeSocketService {
     console.log('SetVIX:  ' + this.theMktData.contract);
   }
 
+  setSpxMktData() {
+    this.theMktData.tickerId = 8888;
+    this.theMktData.contract = 'SPX';
+    this.theMktData.genericTickList = '';
+    this.theMktData.snapshot = false;
+    this.theMktData.regulatorySnapshot = false;
+    this.theMktData.mktDataOptions = null;
+
+    this.socket.emit("ReqMktData", this.theMktData);
+    console.log('SetVIX:  ' + this.theMktData.contract);
+  }
+
 
   sendMessage(msg: string) {
     this.socket.emit("message", msg);
