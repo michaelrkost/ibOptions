@@ -24,35 +24,37 @@ export class IbNodeSocketService {
   // attached will be removed (using socket.removeListener) ONLY and when/if you unsubscribe.
   //
   theMktData: ReqMktData;
-  aTickerId: number;
+  nextContractIDNumber: number;
 
   constructor(private socket: Socket) {
     this.theMktData = new ReqMktData;
-    this.aTickerId = 1; 
+    // manages the Contract IDs 
+    this.nextContractIDNumber = 1; 
   }
 
 
 
-  setReqMktData(aContract: string, aSecType: string, anExchange: string,
+  setReqMktData(aContractID: string, aSecType: string, anExchange: string,
     aGenericTickList: string = '', aSnapshot: boolean = false,
     aRegulatorySnapshot: boolean = false, aMktDataOptions: any = null) {
     if (aSecType == 'IND') {
-      this.setIndReqMktData(this.aTickerId++, aContract, aGenericTickList,
+      this.setIndReqMktData(this.nextContractIDNumber, aContractID, aGenericTickList,
         aSnapshot, aRegulatorySnapshot, aMktDataOptions);
       console.log('Call >> setIndReqMktData:  ' + this.theMktData.contract);
     }
     else {
-      this.setStkReqMktData(this.aTickerId, aContract, aGenericTickList,
+      this.setStkReqMktData(this.nextContractIDNumber, aContractID, aGenericTickList,
         aSnapshot, aRegulatorySnapshot, aMktDataOptions)
       console.log('Call >> setStkReqMktData:  ' + this.theMktData.contract);
     }
+    return this.nextContractIDNumber++ ;
   }
 
-  setStkReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '',
+  setStkReqMktData(nextContractIDNumber: number, aContractID: string, aGenericTickList: string = '',
     aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,
     aMktDataOptions: any = null) {
-    this.theMktData.tickerId = aTickerId;
-    this.theMktData.contract = aContract;
+    this.theMktData.tickerId = nextContractIDNumber;
+    this.theMktData.contract = aContractID;
     this.theMktData.genericTickList = aGenericTickList;
     this.theMktData.snapshot = aSnapshot;
     this.theMktData.regulatorySnapshot = aRegulatorySnapshot;
@@ -63,11 +65,11 @@ export class IbNodeSocketService {
 
   }
 
-  setIndReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '',
+  setIndReqMktData(nextContractIDNumber: number, aContractID: string, aGenericTickList: string = '',
     aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,
     aMktDataOptions: any = null) {
-    this.theMktData.tickerId = aTickerId;
-    this.theMktData.contract = aContract;
+    this.theMktData.tickerId = nextContractIDNumber;
+    this.theMktData.contract = aContractID;
     this.theMktData.genericTickList = aGenericTickList;
     this.theMktData.snapshot = aSnapshot;
     this.theMktData.regulatorySnapshot = aRegulatorySnapshot;

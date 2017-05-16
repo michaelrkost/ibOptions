@@ -22,6 +22,7 @@ export class StockDetailFormComponent {
   theContractCount: number = 1;
   theSocket: string;
   theVIX: string;
+  aNum: number;
 
   // ng-bootstrap - Calendar
   aDate: NgbDateStruct;
@@ -32,7 +33,7 @@ export class StockDetailFormComponent {
 
   constructor(private anIbNodeSocketService: IbNodeSocketService) {
     this.stockDetailForm = new FormGroup({
-      'contract': new FormControl(this.theContractCount),
+      'contract': new FormControl(),
       'symbol': new FormControl('SPX', Validators.required),
       'securityType': new FormControl('IND'),
       'exchange': new FormControl('CBOE'),
@@ -40,7 +41,7 @@ export class StockDetailFormComponent {
       // '' needed for IND
       'expiryDate': new FormControl('')
     });
-    this.aContract = new Contract(this.theContractCount);
+    this.aContract = new Contract();
     this.todayIs = new Date();
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
@@ -75,8 +76,9 @@ export class StockDetailFormComponent {
     //   + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol,
     //    this.aContract.exchange));
 
-    this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
-      this.aContract.secType, this.aContract.exchange)
+this.aNum =  this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
+      this.aContract.secType, this.aContract.exchange);
+      console.log('aNum: ' + this.aNum)
 
   }  //==============   onSubmit  =================================
   // this.expiryDate.setTime(Date.parse(this.aDate.year.toString() + '-'+
