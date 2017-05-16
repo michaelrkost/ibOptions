@@ -24,14 +24,33 @@ export class IbNodeSocketService {
   // attached will be removed (using socket.removeListener) ONLY and when/if you unsubscribe.
   //
   theMktData: ReqMktData;
+  aTickerId: number;
 
   constructor(private socket: Socket) {
     this.theMktData = new ReqMktData;
-   }
+    this.aTickerId = 1; 
+  }
 
-setReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '',
-  aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false, 
-  aMktDataOptions: any = null) {
+
+
+  setReqMktData(aContract: string, aSecType: string, anExchange: string,
+    aGenericTickList: string = '', aSnapshot: boolean = false,
+    aRegulatorySnapshot: boolean = false, aMktDataOptions: any = null) {
+    if (aSecType == 'IND') {
+      this.setIndReqMktData(this.aTickerId++, aContract, aGenericTickList,
+        aSnapshot, aRegulatorySnapshot, aMktDataOptions);
+      console.log('Call >> setIndReqMktData:  ' + this.theMktData.contract);
+    }
+    else {
+      this.setStkReqMktData(this.aTickerId, aContract, aGenericTickList,
+        aSnapshot, aRegulatorySnapshot, aMktDataOptions)
+      console.log('Call >> setStkReqMktData:  ' + this.theMktData.contract);
+    }
+  }
+
+  setStkReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '',
+    aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,
+    aMktDataOptions: any = null) {
     this.theMktData.tickerId = aTickerId;
     this.theMktData.contract = aContract;
     this.theMktData.genericTickList = aGenericTickList;
@@ -39,8 +58,24 @@ setReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '
     this.theMktData.regulatorySnapshot = aRegulatorySnapshot;
     this.theMktData.mktDataOptions = aMktDataOptions;
 
+    console.log('In setStkReqMktData:  ' + this.theMktData.contract);
     this.socket.emit("ReqMktData", this.theMktData);
-    console.log('ReqMktData:  ' + this.theMktData.contract);
+
+  }
+
+  setIndReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '',
+    aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,
+    aMktDataOptions: any = null) {
+    this.theMktData.tickerId = aTickerId;
+    this.theMktData.contract = aContract;
+    this.theMktData.genericTickList = aGenericTickList;
+    this.theMktData.snapshot = aSnapshot;
+    this.theMktData.regulatorySnapshot = aRegulatorySnapshot;
+    this.theMktData.mktDataOptions = aMktDataOptions;
+
+    console.log('In setIndReqMktData:  ' + this.theMktData.contract);
+    this.socket.emit("ReqIndMktData", this.theMktData);
+
   }
 
   setVixMktData() {
@@ -51,7 +86,7 @@ setReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '
     this.theMktData.regulatorySnapshot = false;
     this.theMktData.mktDataOptions = null;
 
-    this.socket.emit("ReqMktData", this.theMktData);
+    this.socket.emit("ReqIndMktData", this.theMktData);
     console.log('setVixMktData:  ' + this.theMktData.contract);
   }
 
@@ -63,7 +98,7 @@ setReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '
     this.theMktData.regulatorySnapshot = false;
     this.theMktData.mktDataOptions = null;
 
-    this.socket.emit("ReqMktData", this.theMktData);
+    this.socket.emit("ReqIndMktData", this.theMktData);
     console.log('setSpxMktData:  ' + this.theMktData.contract);
   }
 
@@ -77,7 +112,7 @@ setReqMktData(aTickerId: number, aContract: string, aGenericTickList: string = '
   getTickPrice() {
     return this.socket
       .fromEvent<any>("tickPrice")
-    .map(vixData => vixData)
+      .map(vixData => vixData)
     // .filter( vixData => vixData.tickerId == 7777 )
     // .filter( vixData => vixData.tickType == 'CLOSE')    
   }

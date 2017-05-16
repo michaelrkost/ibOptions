@@ -105,28 +105,29 @@ ib.reqMktData(15, ib.contract.index('SPX', ''), '', true,true, null);
 setTimeout(function () {
   console.log(chalk.yellow('Cancelling market data subscription...'));
 
-  // Forex
-  ib.cancelMktData(1);
-  ib.cancelMktData(2);
-  ib.cancelMktData(3);
-  ib.cancelMktData(4);
-  ib.cancelMktData(5);
-  ib.cancelMktData(6);
+  // // Forex
+  // ib.cancelMktData(1);
+  // ib.cancelMktData(2);
+  // ib.cancelMktData(3);
+  // ib.cancelMktData(4);
+  // ib.cancelMktData(5);
+  // ib.cancelMktData(6);
 
-  //Stock
-  ib.cancelMktData(11);
+  // //Stock
+  // ib.cancelMktData(11);
   ib.cancelMktData(12);
   ib.cancelMktData(13);
   ib.cancelMktData(14);
+    ib.cancelMktData(15);
 
-  // Option
-  ib.cancelMktData(21);
-  ib.cancelMktData(22);
-  ib.cancelMktData(23);
-  ib.cancelMktData(24);
+  // // Option
+  // ib.cancelMktData(21);
+  // ib.cancelMktData(22);
+  // ib.cancelMktData(23);
+  // ib.cancelMktData(24);
 
   // Future
-  ib.cancelMktData(25);
+  // ib.cancelMktData(25);
 
   ib.disconnect();
 }, 7000);

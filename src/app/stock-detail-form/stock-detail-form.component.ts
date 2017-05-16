@@ -4,7 +4,7 @@ import { Contract } from '../classes/contract';
 //import { TickPrice } from '../classes/ticker';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 // Services
-import { IbNodeService } from '../services/ib-node.service';
+import { IbNodeSocketService } from '../services/ib-nodeSocket.service'
 
 
 
@@ -30,7 +30,7 @@ export class StockDetailFormComponent {
   theExchangeTypes: any[] = ["SMART", "CBOE", "AMEX", "IDEAL", "ISLAND", "NYSE", "PHLX"];
   expiry: string = '';
 
-  constructor(private anIbNodeService: IbNodeService) {
+  constructor(private anIbNodeSocketService: IbNodeSocketService) {
     this.stockDetailForm = new FormGroup({
       'contract': new FormControl(this.theContractCount),
       'symbol': new FormControl('SPX', Validators.required),
@@ -47,7 +47,7 @@ export class StockDetailFormComponent {
     this.theSocket = '';
     this.theVIX = '';
 
-    console.log(">>> In StockDetailFormComponent Constructor <<<" );
+    console.log(">>> In StockDetailFormComponent Constructor <<<");
   }
 
   onSubmit(value: string): void {
@@ -75,11 +75,8 @@ export class StockDetailFormComponent {
     //   + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol,
     //    this.aContract.exchange));
 
-    // this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol, this.aContract.exchange)
-    //   .subscribe(
-    //   data => this.theSocket = data,
-    //   error => console.log('anIbNodeService.getIBNodereqMktData  error:  ' + error)
-    //   );
+    this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
+      this.aContract.secType, this.aContract.exchange)
 
   }  //==============   onSubmit  =================================
   // this.expiryDate.setTime(Date.parse(this.aDate.year.toString() + '-'+

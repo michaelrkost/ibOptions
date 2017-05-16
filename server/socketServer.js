@@ -52,19 +52,35 @@ io.on('connection', function (socket) {
   socket.on('message', function (data) {
     console.log('cat' + data);
   }),
-    socket.on('ReqMktData', function (data) {
+    socket.on('ReqStkMktData', function (data) {
       nodeIBServer.reqMktData(
         data.tickerId,                  // tickerId
-        nodeIBServer.contract.index(data.contract, ''),                  // contract
-        data.genericTickList,      // snapshot
+        nodeIBServer.contract.stock(data.contract),      // Stock
+        data.genericTickList,           // snapshot
         data.snapshot,                  // genericTickList                                    
-        data.regulatorySnapshot,   // regulatory snapshot
-        data.mktDataOptions         // mktDataOptions
+        data.regulatorySnapshot,        // regulatory snapshot
+        data.mktDataOptions             // mktDataOptions
       );
-      console.log(chalk.bgBlue('ReqMktData: ' + data.contract
+      console.log(chalk.bgBlue('ReqStkMktData: ' + data.contract
         + '  tickerId = ' + data.tickerId + '               '));
     });
-  //
+  //ReqIndexMktData
+      socket.on('ReqIndMktData', function (data) {
+        console.log(chalk.bgCyan('ReqIndMktData: ' + data.contract
+        + '  tickerId = ' + data.tickerId + 'genericTickList: '
+        + data.genericTickList + '               '));
+
+      nodeIBServer.reqMktData(
+        data.tickerId,              // tickerId
+        nodeIBServer.contract.index(data.contract, ''), // Index
+        data.genericTickList,      // snapshot
+        data.snapshot,             // genericTickList                                    
+        data.regulatorySnapshot,   // regulatory snapshot
+        data.mktDataOptions        // mktDataOptions
+      );
+      console.log(chalk.bgCyan('ReqIndMktData: ' + data.contract
+        + '  tickerId = ' + data.tickerId + '               '));
+    });
 
   // emitter.setMaxListeners(n)
   //  By default EventEmitters will print a warning if more than 10 listeners are added to it. 
