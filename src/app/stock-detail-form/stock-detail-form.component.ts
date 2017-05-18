@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contract } from '../classes/contract';
 //import { TickPrice } from '../classes/ticker';
@@ -11,7 +11,8 @@ import { IbNodeSocketService } from '../services/ib-nodeSocket.service'
 @Component({
   selector: 'ib-stock-detail-form',
   templateUrl: './stock-detail-form.component.html',
-  styleUrls: ['./stock-detail-form.component.css']
+  styleUrls: ['./stock-detail-form.component.css'],
+  inputs: ['vixPrice']
 })
 export class StockDetailFormComponent {
   stockDetailForm: FormGroup;
@@ -21,8 +22,8 @@ export class StockDetailFormComponent {
   daysTillExpiry: Number;
   theContractCount: number = 1;
   theSocket: string;
-  theVIX: string;
-  aNum: number;
+  theVIXPrice: string;
+
 
   // ng-bootstrap - Calendar
   aDate: NgbDateStruct;
@@ -46,7 +47,7 @@ export class StockDetailFormComponent {
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
     this.theSocket = '';
-    this.theVIX = '';
+    this.theVIXPrice = '';
 
     console.log(">>> In StockDetailFormComponent Constructor <<<");
   }
@@ -76,9 +77,8 @@ export class StockDetailFormComponent {
     //   + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol,
     //    this.aContract.exchange));
 
-this.aNum =  this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
+    this.aContract.contractID = this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
       this.aContract.secType, this.aContract.exchange);
-      console.log('aNum: ' + this.aNum)
 
   }  //==============   onSubmit  =================================
   // this.expiryDate.setTime(Date.parse(this.aDate.year.toString() + '-'+

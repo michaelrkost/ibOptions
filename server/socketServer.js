@@ -56,8 +56,8 @@ io.on('connection', function (socket) {
       nodeIBServer.reqMktData(
         data.tickerId,                  // tickerId
         nodeIBServer.contract.stock(data.contract),      // Stock
-        data.genericTickList,           // snapshot
-        data.snapshot,                  // genericTickList                                    
+        data.genericTickList,           // genericTickList
+        data.snapshot,                  // snapshot                                   
         data.regulatorySnapshot,        // regulatory snapshot
         data.mktDataOptions             // mktDataOptions
       );
@@ -73,8 +73,8 @@ io.on('connection', function (socket) {
       nodeIBServer.reqMktData(
         data.tickerId,              // tickerId
         nodeIBServer.contract.index(data.contract, ''), // Index
-        data.genericTickList,      // snapshot
-        data.snapshot,             // genericTickList                                    
+        data.genericTickList,      // genericTickList
+        data.snapshot,             // snapshot                                    
         data.regulatorySnapshot,   // regulatory snapshot
         data.mktDataOptions        // mktDataOptions
       );

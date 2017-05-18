@@ -32,7 +32,20 @@ export class IbNodeSocketService {
     this.nextContractIDNumber = 1; 
   }
 
-
+//-----------------------setReqMktData------------------------------------------------------
+// tickerId            - the request's identifier - int 
+// ContractID          - the Contract requested  Stock / Index / OPT - 
+//                     - nodeIBServer.contract.stock(contract),
+//                       http://interactivebrokers.github.io/tws-api/classIBApi_1_1Contract.html#gsc.tab=0
+// aSecType            - IND, STK, OPT etc
+// anExchange          - the exchange CBOE / PHX etc
+// genericTickList	   - comma separated ids of the available generic ticks: - string
+// snapshot            - bool - real time market data subscriptions. 
+//                               A true value will return a one-time snapshot,  
+// 							                 while a false value will provide streaming data.
+// regulatory snapshot - bool - snapshot requests NBBO snapshots for users 
+//                               which have "US Securities Snapshot Bundle" 
+// mktDataOptions      - List< TagValue >
 
   setReqMktData(aContractID: string, aSecType: string, anExchange: string,
     aGenericTickList: string = '', aSnapshot: boolean = false,
@@ -50,6 +63,8 @@ export class IbNodeSocketService {
     return this.nextContractIDNumber++ ;
   }
 
+//-----------------------setStkReqMktData------------------------------------------------------
+
   setStkReqMktData(nextContractIDNumber: number, aContractID: string, aGenericTickList: string = '',
     aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,
     aMktDataOptions: any = null) {
@@ -64,6 +79,8 @@ export class IbNodeSocketService {
     this.socket.emit("ReqMktData", this.theMktData);
 
   }
+
+ //-----------------------setIndReqMktData------------------------------------------------------ 
 
   setIndReqMktData(nextContractIDNumber: number, aContractID: string, aGenericTickList: string = '',
     aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,

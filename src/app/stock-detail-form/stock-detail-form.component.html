@@ -52,8 +52,9 @@
         Today is: <b>{{ todayIs | date }}</b>
         <br> ExpiryDate: <b>{{ expiryDate | date }}</b>
         <br> Days Till Experiation: <b>{{ daysTillExpiry }}</b>
-        <br>Socket: <b>{{ theSocket }}</b><br>
-        VIX ID: {{ theVIX.tickerId }} Price: {{ theVIX.price }}  TickType: {{ theVIX.tickType }}<br>
+        <br>TickerID: <b>{{ aContract.contractID }}</b><br>
+        <br>Symbol: <b>{{ aContract.symbol }}</b><br> 
+        <br>VIX Price: {{ vixPrice }} <br>
       </p>
     </div>
 
