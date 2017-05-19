@@ -27,6 +27,8 @@ export class StockDetailFormComponent {
   theSocket: string;
   theVIXPrice: string;
   theVixData: string;
+  theTickType: string;
+  theContractPrice: number;
 
 
   // ng-bootstrap - Calendar
@@ -58,6 +60,7 @@ export class StockDetailFormComponent {
     this.theSocket = '';
     this.theVIXPrice = '';
     this.theVixData = 'theData Init setting';
+    this.theContractPrice = 0;
 
     // ============ Set up Vix Socket Event
     this.anIbNodeSocketService.setVixMktData();
@@ -78,6 +81,7 @@ export class StockDetailFormComponent {
     this.aContract.symbol = value['symbol'];
     this.aContract.secType = value['securityType'];
     this.aContract.exchange = value['exchange'];
+    this.theTickType = value['tickType'];
     // The expiration date. Use the format YYYYMM.
     if (this.aDate.month <= 9)
       this.expiry = this.aDate.year + '0' + this.aDate.month;
@@ -99,6 +103,13 @@ export class StockDetailFormComponent {
 
     this.aContract.contractID = this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
       this.aContract.secType, this.aContract.exchange);
+
+    // get contract data
+    this.anIbNodeSocketService.getTickPrice(this.theTickType)
+      .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
+      .do(theContractData => this.theContractPrice = theContractData.price)
+      .subscribe(theContractData =>  theContractData,
+      error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
 
   }
   //==============   onSubmit  =================================

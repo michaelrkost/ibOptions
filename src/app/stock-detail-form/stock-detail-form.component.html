@@ -40,8 +40,8 @@
           </span>
           </ng-template>
         </div>
-  
-  
+
+
         <div class="field">
           <label for="tickType" class="formLable">Tick Type:</label>
           <select formControlName="tickType" class="formFonts">
@@ -62,21 +62,21 @@
         Today is: <b>{{ todayIs | date }}</b>
         <br> ExpiryDate: <b>{{ expiryDate | date }}</b>
         <br> Days Till Experiation: <b>{{ daysTillExpiry }}</b>
+        <br>VIX Price: <b>{{ vixPrice }}</b> <br>
         <br>TickerID: <b>{{ aContract.contractID }}</b>
         <br>Symbol: <b>{{ aContract.symbol }}</b>
-        <br>VIX Price: <b>{{ vixPrice }}</b> <br>
+        <br>Price: <b>{{ theContractPrice }}</b>
+        <br>Security Type: <b>{{ aContract.secType }}</b>
+        <br>Exchange: <b>{{ aContract.exchange }}</b>
+        <br>Tick Type: <b>{{ theTickType }}</b>
+
       </p>
     </div>
 
-
-    <!--<div class="col-md-4">
-      <pre>ContractID: {{aContract.contractID}}</pre>
-      <pre>Symbol: {{ aContract.symbol }}</pre>
-      <pre>SecurityType: {{ aContract.secType }}</pre>
-      <pre>Exchange: {{ aContract.exchange }}</pre>
-      <pre>ExpiryDate: {{ aDate | json }}</pre>
-      <pre>expiry: {{ expiry }}</pre>
-    </div>-->
-
   </div>
 </div>
+
+<br>
+<hr style="width: 98%; height: 3px; display: block; margin: 0 auto; 
+border: none; background-color: #8abce6" />
+<br>
