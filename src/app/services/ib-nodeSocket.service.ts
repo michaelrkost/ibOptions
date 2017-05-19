@@ -128,12 +128,11 @@ export class IbNodeSocketService {
   }
 
 
-  getTickPrice() {
+  getTickPrice(msg: string) {
     return this.socket
       .fromEvent<any>("tickPrice")
-      .map(vixData => vixData)
-    // .filter( vixData => vixData.tickerId == 7777 )
-    // .filter( vixData => vixData.tickType == 'CLOSE')    
+      .map(data => data)
+      .filter( vixData => vixData.tickType == msg)    
   }
 
   close() {

@@ -26,6 +26,7 @@ export class StockDetailFormComponent {
   theContractCount: number = 1;
   theSocket: string;
   theVIXPrice: string;
+  theVixData: string;
 
 
   // ng-bootstrap - Calendar
@@ -33,10 +34,12 @@ export class StockDetailFormComponent {
   // Form Dropdown Data
   theSecurityTypes: any[] = ["STK", "IND", "OPT", "FUT", "FOP", "CASH", "BAG", "NEWS"];
   theExchangeTypes: any[] = ["SMART", "CBOE", "AMEX", "IDEAL", "ISLAND", "NYSE", "PHLX"];
-  theTickTypes:     any[] = ["LAST", "CLOSE", "BID", "ASK", "LOW", "HIGH"];
+  theTickTypes: any[] = ["LAST", "CLOSE", "BID", "ASK", "LOW", "HIGH"];
   expiry: string = '';
 
   constructor(private anIbNodeSocketService: IbNodeSocketService) {
+
+    // ============= Stock Entry Form
     this.stockDetailForm = new FormGroup({
       'contract': new FormControl(),
       'symbol': new FormControl('SPX', Validators.required),
@@ -47,16 +50,28 @@ export class StockDetailFormComponent {
       // '' needed for IND
       'expiryDate': new FormControl('')
     });
+    // ============ some vars
     this.aContract = new Contract();
     this.todayIs = new Date();
     this.expiryDate = new Date();
     this.daysTillExpiry = 0;
     this.theSocket = '';
     this.theVIXPrice = '';
+    this.theVixData = 'theData Init setting';
+
+    // ============ Set up Vix Socket Event
+    this.anIbNodeSocketService.setVixMktData();
+    // get VIX data
+    this.anIbNodeSocketService.getTickPrice('LAST')
+      .filter(vixData => vixData.tickerId == 7777)
+      .do(vixData => this.vixPrice = vixData.price)
+      .subscribe(vixData => this.theVixData = vixData,
+      error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
 
     console.log(">>> In StockDetailFormComponent Constructor <<<");
   }
 
+  //======================onSubmit==================================
   onSubmit(value: string): void {
     console.log('you submitted: ', value);
     this.aContract.contractID = this.theContractCount++;
@@ -85,7 +100,9 @@ export class StockDetailFormComponent {
     this.aContract.contractID = this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
       this.aContract.secType, this.aContract.exchange);
 
-  }  //==============   onSubmit  =================================
+  }
+  //==============   onSubmit  =================================
+
   // this.expiryDate.setTime(Date.parse(this.aDate.year.toString() + '-'+
   //                                    this.aDate.month.toString() + '-'+
   //                                    this.aDate.day.toString()));
