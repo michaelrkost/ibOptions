@@ -1,8 +1,14 @@
 <div class="container-fluid">
-  <br/>
-  <p>
-    <br><b> stock-display works!  </b><br> 
-    VIX Price: {{ vixPrice }} <br> 
-    ID: {{ theData.tickerId }} Price: {{ theData.price }} TickType: {{ theData.tickType }}
-  </p>
+
+  <b> stock-display works!  </b><br> VIX Price: {{ vixPrice }}
+  <br> ID: {{ theData.tickerId }} Price: {{ theData.price }}
+  TickType: {{ theData.tickType }}
+
 </div>
+<br>
+<hr style="width: 98%; height: 3px; display: block; margin: 0 auto; 
+border: none; background-color: #8abce6" />
+<br>
+
+<ib-stock-detail-form [vixPrice] =  "vixPrice"  ></ib-stock-detail-form>
+<br>

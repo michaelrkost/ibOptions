@@ -4,7 +4,7 @@ var _ = require('lodash');
 var chalk = require('chalk');
 
 var ib = new (require('ib'))({
-  clientId: 0,
+  clientId: 7777,
  // host: '127.0.0.1',
   port: 4002
 }).on('error', function (err) {
@@ -87,10 +87,10 @@ ib.connect();
 
 // // Stock
 // ib.reqMktData(11, ib.contract.stock('AAPL'), '', true,true, null);
-ib.reqMktData(12, ib.contract.stock('AMZN'), '', true,true, null);
-ib.reqMktData(13, ib.contract.stock('GOOG'), '', true,true, null);
-ib.reqMktData(14, ib.contract.stock('FB'), '', true,true, null);
-ib.reqMktData(15, ib.contract.index('SPX', ''), '', true,true, null);
+// ib.reqMktData(12, ib.contract.stock('AMZN'), '', true,true, null);
+// ib.reqMktData(13, ib.contract.stock('GOOG'), '', true,true, null);
+// ib.reqMktData(14, ib.contract.stock('FB'), '', true,true, null);
+ib.reqMktData(15, ib.contract.index('SPX', ''), '100, 101', true,true, null);
 
 // Option
 // ib.reqMktData(21, ib.contract.option('AAPL', '201712', 200, 'C'), '', false);
@@ -115,10 +115,10 @@ setTimeout(function () {
 
   // //Stock
   // ib.cancelMktData(11);
-  ib.cancelMktData(12);
-  ib.cancelMktData(13);
-  ib.cancelMktData(14);
-    ib.cancelMktData(15);
+  // ib.cancelMktData(12);
+  // ib.cancelMktData(13);
+  // ib.cancelMktData(14);
+  //   ib.cancelMktData(15);
 
   // // Option
   // ib.cancelMktData(21);
@@ -130,4 +130,4 @@ setTimeout(function () {
   // ib.cancelMktData(25);
 
   ib.disconnect();
-}, 7000);
+}, 700000);

@@ -1,10 +1,13 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contract } from '../classes/contract';
 //import { TickPrice } from '../classes/ticker';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 // Services
-import { IbNodeSocketService } from '../services/ib-nodeSocket.service'
+import { IbNodeSocketService } from '../services/ib-nodeSocket.service';
+
+// parent input/output
+import { StockDisplayComponent } from '../stock-display/stock-display.component';
 
 
 
@@ -12,9 +15,9 @@ import { IbNodeSocketService } from '../services/ib-nodeSocket.service'
   selector: 'ib-stock-detail-form',
   templateUrl: './stock-detail-form.component.html',
   styleUrls: ['./stock-detail-form.component.css'],
-  inputs: ['vixPrice']
 })
 export class StockDetailFormComponent {
+  @Input() vixPrice: string;
   stockDetailForm: FormGroup;
   aContract: Contract;
   todayIs: Date;
