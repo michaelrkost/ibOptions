@@ -33,6 +33,7 @@ export class StockDetailFormComponent {
   // Form Dropdown Data
   theSecurityTypes: any[] = ["STK", "IND", "OPT", "FUT", "FOP", "CASH", "BAG", "NEWS"];
   theExchangeTypes: any[] = ["SMART", "CBOE", "AMEX", "IDEAL", "ISLAND", "NYSE", "PHLX"];
+  theTickTypes:     any[] = ["LAST", "CLOSE", "BID", "ASK", "LOW", "HIGH"];
   expiry: string = '';
 
   constructor(private anIbNodeSocketService: IbNodeSocketService) {
@@ -42,6 +43,7 @@ export class StockDetailFormComponent {
       'securityType': new FormControl('IND'),
       'exchange': new FormControl('CBOE'),
       'currency': new FormControl('USD', Validators.required),
+      'tickType': new FormControl('LAST'),
       // '' needed for IND
       'expiryDate': new FormControl('')
     });

@@ -40,6 +40,16 @@
           </span>
           </ng-template>
         </div>
+  
+  
+        <div class="field">
+          <label for="tickType" class="formLable">Tick Type:</label>
+          <select formControlName="tickType" class="formFonts">
+         <option *ngFor="let aTickType of theTickTypes"
+             [ngValue]="aTickType">{{aTickType}}</option>
+      </select>
+        </div>
+
 
         <button type="submit" class="ui button" style="font-size:12px" [disabled]="!stockDetailForm.valid">Submit</button>
 
@@ -53,7 +63,7 @@
         <br> ExpiryDate: <b>{{ expiryDate | date }}</b>
         <br> Days Till Experiation: <b>{{ daysTillExpiry }}</b>
         <br>TickerID: <b>{{ aContract.contractID }}</b><br>
-        <br>Symbol: <b>{{ aContract.symbol }}</b><br> 
+        <br>Symbol: <b>{{ aContract.symbol }}</b><br>
         <br>VIX Price: {{ vixPrice }} <br>
       </p>
     </div>
