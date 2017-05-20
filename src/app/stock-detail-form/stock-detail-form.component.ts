@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contract } from '../classes/contract';
-//import { TickPrice } from '../classes/ticker';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 // Services
 import { IbNodeSocketService } from '../services/ib-nodeSocket.service';
@@ -22,6 +21,7 @@ export class StockDetailFormComponent {
   aContract: Contract;
   todayIs: Date;
   expiryDate: Date;
+  tradeExecuted: Date;
   daysTillExpiry: Number;
   theContractCount: number = 1;
   theSocket: string;
@@ -32,12 +32,14 @@ export class StockDetailFormComponent {
 
 
   // ng-bootstrap - Calendar
+  tradeDate: NgbDateStruct;
   aDate: NgbDateStruct;
+
   // Form Dropdown Data
   theSecurityTypes: any[] = ["STK", "IND", "OPT", "FUT", "FOP", "CASH", "BAG", "NEWS"];
   theExchangeTypes: any[] = ["SMART", "CBOE", "AMEX", "IDEAL", "ISLAND", "NYSE", "PHLX"];
   theTickTypes: any[] = ["LAST", "CLOSE", "BID", "ASK", "LOW", "HIGH"];
-  expiry: string = '';
+  // expiry: string = '';
 
   constructor(private anIbNodeSocketService: IbNodeSocketService) {
 
@@ -49,13 +51,14 @@ export class StockDetailFormComponent {
       'exchange': new FormControl('CBOE'),
       'currency': new FormControl('USD', Validators.required),
       'tickType': new FormControl('LAST'),
-      // '' needed for IND
-      'expiryDate': new FormControl('')
+      'expiryDate': new FormControl(''),
+      'tradeExecuted': new FormControl('')
     });
     // ============ some vars
     this.aContract = new Contract();
     this.todayIs = new Date();
     this.expiryDate = new Date();
+    this.tradeExecuted = new Date();
     this.daysTillExpiry = 0;
     this.theSocket = '';
     this.theVIXPrice = '';
@@ -82,24 +85,22 @@ export class StockDetailFormComponent {
     this.aContract.secType = value['securityType'];
     this.aContract.exchange = value['exchange'];
     this.theTickType = value['tickType'];
+    // this.tradeExecuted = value['tradeExecuted'];
+    // tradeDate
     // The expiration date. Use the format YYYYMM.
-    if (this.aDate.month <= 9)
-      this.expiry = this.aDate.year + '0' + this.aDate.month;
-    else
-      this.expiry = this.aDate.year.toString()
-        + this.aDate.month.toString();
+    // if (this.aDate.month <= 9)
+    //   this.expiry = this.aDate.year + '0' + this.aDate.month;
+    // else
+    //   this.expiry = this.aDate.year.toString()
+    //     + this.aDate.month.toString();
+    this.tradeExecuted = new Date(this.tradeDate.year
+      + '-' + this.tradeDate.month + '-' + this.tradeDate.day);
 
     this.expiryDate = new Date(this.aDate.year
       + '-' + this.aDate.month + '-' + this.aDate.day);
 
-    this.daysTillExpiry = Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime()) / (1000 * 60 * 60 * 24));
-
-    // console.log('Today is: ' + this.expiryDate + moment(this.todayIs);
-    // console.log('Today is: ' + (this.todayIs.getTime() + '  Expiry is: ' + this.expiryDate.getTime()));
-    // console.log('Operation took ' + Math.ceil((this.expiryDate.getTime() - this.todayIs.getTime()) / (1000 * 60 * 60 * 24)));
-    // console.log(' onSubmit // anIbNodeService:  '
-    //   + this.anIbNodeService.getIBNodereqMktData(this.aContract.contractID, this.aContract.symbol,
-    //    this.aContract.exchange));
+    this.daysTillExpiry = Math.ceil((this.expiryDate.getTime()
+      - this.todayIs.getTime()) / (1000 * 60 * 60 * 24));
 
     this.aContract.contractID = this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
       this.aContract.secType, this.aContract.exchange);
@@ -108,7 +109,7 @@ export class StockDetailFormComponent {
     this.anIbNodeSocketService.getTickPrice(this.theTickType)
       .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
       .do(theContractData => this.theContractPrice = theContractData.price)
-      .subscribe(theContractData =>  theContractData,
+      .subscribe(theContractData => theContractData,
       error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
 
   }
@@ -167,5 +168,6 @@ export class StockDetailFormComponent {
   isDisabled(date: NgbDateStruct, current: { month: number }) {
     return date.month !== current.month;
   }
+
   // --------- ng-bootstrap - Calendar ---------------
 }

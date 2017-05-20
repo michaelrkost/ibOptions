@@ -25,11 +25,12 @@
       </select>
         </div>
 
+
         <div class="field">
           <label for="expiryDate" class="formLable">Option Expiry:</label>
-          <input class="formFonts" placeholder="yyyy-mm-dd" formControlName="expiryDate" [(ngModel)]="aDate" ngbDatepicker [dayTemplate]="customDay"
-            [markDisabled]="isWeekend" #d="ngbDatepicker">
-          <button type="button" class="btn btn-info btn-sm" style="width: 10pix" (click)="d.toggle()">
+          <input class="formFonts" placeholder="yyyy-mm-dd" formControlName="expiryDate" [(ngModel)]="aDate" ngbDatepicker #d2="ngbDatepicker"
+            [dayTemplate]="customDay" [markDisabled]="isWeekend">
+          <button type="button" class="btn btn-info btn-sm" style="width: 10pix" (click)="d2.toggle()">
         <img src="./app/images/calendar_simple-black.png" style="width: 1rem;
                    height: 1rem; cursor: pointer;" />
       </button>
@@ -41,6 +42,21 @@
           </ng-template>
         </div>
 
+        <div class="field">
+          <label for="tradeExecuted" class="formLable">Trade Executed:</label>
+          <input class="formFonts" placeholder="yyyy-mm-dd" formControlName="tradeExecuted" [(ngModel)]="tradeDate" ngbDatepicker #d1="ngbDatepicker"
+            [dayTemplate]="customDay" [markDisabled]="isWeekend">
+          <button type="button" class="btn btn-info btn-sm" style="width: 10pix" (click)="d1.toggle()">
+        <img src="./app/images/calendar_simple-black.png" style="width: 1rem;
+                   height: 1rem; cursor: pointer;" />
+      </button>
+          <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
+            <span class="custom-day" [class.isThursday]="isThurs(date)" [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth"
+              [class.text-muted]="disabled">
+              {{ date.day }}
+          </span>
+          </ng-template>
+        </div>
 
         <div class="field">
           <label for="tickType" class="formLable">Tick Type:</label>
@@ -49,7 +65,6 @@
              [ngValue]="aTickType">{{aTickType}}</option>
       </select>
         </div>
-
 
         <button type="submit" class="ui button" style="font-size:12px" [disabled]="!stockDetailForm.valid">Submit</button>
 
@@ -62,6 +77,7 @@
         Today is: <b>{{ todayIs | date }}</b>
         <br> ExpiryDate: <b>{{ expiryDate | date }}</b>
         <br> Days Till Experiation: <b>{{ daysTillExpiry }}</b>
+        <br> Trade Executed: <b>{{ tradeExecuted | date }}</b>
         <br>VIX Price: <b>{{ vixPrice }}</b> <br>
         <br>TickerID: <b>{{ aContract.contractID }}</b>
         <br>Symbol: <b>{{ aContract.symbol }}</b>
