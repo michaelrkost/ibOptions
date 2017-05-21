@@ -68,7 +68,7 @@ export class StockDetailFormComponent {
     // ============ Set up Vix Socket Event
     this.anIbNodeSocketService.setVixMktData();
     // get VIX data
-    this.anIbNodeSocketService.getTickPrice('LAST')
+    this.anIbNodeSocketService.getTickPrice('CLOSE')
       .filter(vixData => vixData.tickerId == 7777)
       .do(vixData => this.vixPrice = vixData.price)
       .subscribe(vixData => this.theVixData = vixData,

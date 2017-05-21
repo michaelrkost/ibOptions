@@ -48,3 +48,21 @@
   font-size: 12px;
   width: 75px;
 }
+.isIBForm{
+  color: rosybrown;
+  background-color: #d6e7e8;
+  padding: 20px;
+  width: 275px;
+  border-radius: 1rem;
+  border-style: solid;
+  border-color: #1d84bc;
+}
+.isIableIBInfo{
+  color: rosybrown;
+  background-color: #d6e7e8;
+  padding: 20px;
+  width: 275px;
+  border-radius: 1rem;
+  border-style: solid;
+  border-color: #1d84bc;
+}
