@@ -1,13 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contract } from '../classes/contract';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 // Services
 import { IbNodeSocketService } from '../services/ib-nodeSocket.service';
-
-// parent input/output
-import { StockDisplayComponent } from '../stock-display/stock-display.component';
-
 
 
 @Component({
@@ -16,7 +12,6 @@ import { StockDisplayComponent } from '../stock-display/stock-display.component'
   styleUrls: ['./stock-detail-form.component.css'],
 })
 export class StockDetailFormComponent {
-  @Input() vixPrice: string;
   stockDetailForm: FormGroup;
   aContract: Contract;
   todayIs: Date;
@@ -25,7 +20,7 @@ export class StockDetailFormComponent {
   daysTillExpiry: Number;
   theContractCount: number = 1;
   theSocket: string;
-  theVIXPrice: string;
+  theVIXPrice: number;
   theVixData: string;
   theTickType: string;
   theContractPrice: number;
@@ -61,7 +56,7 @@ export class StockDetailFormComponent {
     this.tradeExecuted = new Date();
     this.daysTillExpiry = 0;
     this.theSocket = '';
-    this.theVIXPrice = '';
+    this.theVIXPrice = 0;
     this.theVixData = 'theData Init setting';
     this.theContractPrice = 0;
 
@@ -70,7 +65,7 @@ export class StockDetailFormComponent {
     // get VIX data
     this.anIbNodeSocketService.getTickPrice('CLOSE')
       .filter(vixData => vixData.tickerId == 7777)
-      .do(vixData => this.vixPrice = vixData.price)
+      .do(vixData => this.theVIXPrice = vixData.price)
       .subscribe(vixData => this.theVixData = vixData,
       error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
 

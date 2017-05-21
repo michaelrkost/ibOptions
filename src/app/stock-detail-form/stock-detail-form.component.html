@@ -66,14 +66,12 @@
              [ngValue]="aTickType">{{aTickType}}</option>
       </select>
           </div>
-
           <button type="submit" class="ui button" style="font-size:12px" [disabled]="!stockDetailForm.valid">Submit</button>
-
         </form>
       </div>
     </div>
-    <div class="col-md-4">
 
+    <div class="col-md-4">
       <table class="table-striped isUnderlyingTableFonts">
         <thead>
           <th>
@@ -86,8 +84,8 @@
             <td> <b>{{ todayIs | date }}</b></td>
           </tr>
           <tr>
-            <td> VIX Price:
-              <b>{{ vixPrice }}</b></td>
+            <td> VIX Price:</td>
+            <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
           </tr>
           <tr>
             <td>ExpiryDate: </td>
@@ -96,7 +94,7 @@
           </tr>
           <tr>
             <td>Days 2 Experiation: </td>
-            <td> <b>{{ daysTillExpiry }}</b> </td>
+            <td align="right"> <b>{{ daysTillExpiry }}</b> </td>
           </tr>
           <tr>
             <td>Trade Executed: </td>
@@ -104,27 +102,27 @@
           </tr>
           <tr>
             <td>TickerID:</td>
-            <td> <b>{{ aContract.contractID }}</b></td>
+            <td align="right"> <b>{{ aContract.contractID }}</b></td>
           </tr>
           <tr>
             <td>Symbol:</td>
-            <td> <b>{{ aContract.symbol }}</b></td>
+            <td align="right"> <b>{{ aContract.symbol }}</b></td>
           </tr>
           <tr>
             <td>Price:</td>
-            <td> <b>{{ theContractPrice }}</b></td>
+            <td align="right"> <b>{{ theContractPrice }}</b></td>
           </tr>
           <tr>
             <td>Security Type:</td>
-            <td> <b>{{ aContract.secType }}</b></td>
+            <td align="right"> <b>{{ aContract.secType }}</b></td>
           </tr>
           <tr>
             <td>Exchange:</td>
-            <td> <b>{{ aContract.exchange }}</b></td>
+            <td align="right"> <b>{{ aContract.exchange }}</b></td>
           </tr>
           <tr>
             <td>Tick Type:</td>
-            <td> <b>{{ theTickType }}</b></td>
+            <td align="right"> <b>{{ theTickType }}</b></td>
           </tr>
 
         </tbody>
@@ -134,8 +132,3 @@
 
   </div>
 </div>
-
-<br>
-<hr style="width: 98%; height: 3px; display: block; margin: 0 auto; 
-border: none; background-color: #8abce6" />
-<br>

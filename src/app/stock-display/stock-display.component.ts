@@ -8,7 +8,7 @@ import * as io from 'socket.io-client';
   selector: 'ib-stock-display',
   templateUrl: './stock-display.component.html',
   styleUrls: ['./stock-display.component.css'],
-  outputs: ['vixPrice']
+  //outputs: ['vixPrice']
 })
 export class StockDisplayComponent { //implements OnInit {
 
