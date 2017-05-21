@@ -74,10 +74,10 @@
     </div>
     <div class="col-md-4">
 
-      <table class="table-striped">
+      <table class="table-striped isUnderlyingTableFonts">
         <thead>
           <th>
-            Header
+            Underlying Info
           </th>
         </thead>
         <tbody>
@@ -94,25 +94,38 @@
             <td><b>{{ expiryDate | date }}</b>
             </td>
           </tr>
-          <tr><td>Days 2 Experiation: </td>
+          <tr>
+            <td>Days 2 Experiation: </td>
             <td> <b>{{ daysTillExpiry }}</b> </td>
           </tr>
           <tr>
-            <td>Trade Executed: </td><td> <b>{{ tradeExecuted | date }}</b></td></tr>
-        </tbody>
-
-      </table>
-    </div>
-
-    <div class="col-md-4">
-      <table class="table-striped">
-        <thead> <th>Contract </th></thead>         
-         <tr><td>TickerID:</td><td> <b>{{ aContract.contractID }}</b></td></tr>
-         <tr><td>Symbol:</td><td> <b>{{ aContract.symbol }}</b></td></tr>
-         <tr><td>Price:</td><td> <b>{{ theContractPrice }}</b></td></tr>
-         <tr><td>Security Type:</td><td> <b>{{ aContract.secType }}</b></td></tr>
-         <tr><td>Exchange:</td><td> <b>{{ aContract.exchange }}</b></td></tr>
-         <tr><td>Tick Type:</td><td> <b>{{ theTickType }}</b></td></tr>
+            <td>Trade Executed: </td>
+            <td> <b>{{ tradeExecuted | date }}</b></td>
+          </tr>
+          <tr>
+            <td>TickerID:</td>
+            <td> <b>{{ aContract.contractID }}</b></td>
+          </tr>
+          <tr>
+            <td>Symbol:</td>
+            <td> <b>{{ aContract.symbol }}</b></td>
+          </tr>
+          <tr>
+            <td>Price:</td>
+            <td> <b>{{ theContractPrice }}</b></td>
+          </tr>
+          <tr>
+            <td>Security Type:</td>
+            <td> <b>{{ aContract.secType }}</b></td>
+          </tr>
+          <tr>
+            <td>Exchange:</td>
+            <td> <b>{{ aContract.exchange }}</b></td>
+          </tr>
+          <tr>
+            <td>Tick Type:</td>
+            <td> <b>{{ theTickType }}</b></td>
+          </tr>
 
         </tbody>
 

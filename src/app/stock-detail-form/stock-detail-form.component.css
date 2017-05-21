@@ -66,3 +66,9 @@
   border-style: solid;
   border-color: #1d84bc;
 }
+.isUnderlyingTableFonts {
+  text-align: left;
+  font-family: Arial;
+  color: black;
+  font-size: 14px;
+}
