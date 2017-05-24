@@ -29,41 +29,42 @@ export class IbNodeSocketService {
   constructor(private socket: Socket) {
     this.theMktData = new ReqMktData;
     // manages the Contract IDs 
-    this.nextContractIDNumber = 1; 
+    this.nextContractIDNumber = 1;
   }
 
-//-----------------------setReqMktData------------------------------------------------------
-// tickerId            - the request's identifier - int 
-// ContractID          - the Contract requested  Stock / Index / OPT - 
-//                     - nodeIBServer.contract.stock(contract),
-//                       http://interactivebrokers.github.io/tws-api/classIBApi_1_1Contract.html#gsc.tab=0
-// aSecType            - IND, STK, OPT etc
-// anExchange          - the exchange CBOE / PHX etc
-// genericTickList	   - comma separated ids of the available generic ticks: - string
-// snapshot            - bool - real time market data subscriptions. 
-//                               A true value will return a one-time snapshot,  
-// 							                 while a false value will provide streaming data.
-// regulatory snapshot - bool - snapshot requests NBBO snapshots for users 
-//                               which have "US Securities Snapshot Bundle" 
-// mktDataOptions      - List< TagValue >
+  //-----------------------setReqMktData------------------------------------------------------
+  // tickerId            - the request's identifier - int 
+  // ContractID          - the Contract requested  Stock / Index / OPT - 
+  //                     - nodeIBServer.contract.stock(contract),
+  //                       http://interactivebrokers.github.io/tws-api/classIBApi_1_1Contract.html#gsc.tab=0
+  // aSecType            - IND, STK, OPT etc
+  // anExchange          - the exchange CBOE / PHX etc
+  // genericTickList	   - comma separated ids of the available generic ticks: - string
+  // snapshot            - bool - real time market data subscriptions. 
+  //                               A true value will return a one-time snapshot,  
+  // 							                 while a false value will provide streaming data.
+  // regulatory snapshot - bool - snapshot requests NBBO snapshots for users 
+  //                               which have "US Securities Snapshot Bundle" 
+  // mktDataOptions      - List< TagValue >
 
   setReqMktData(aContractID: string, aSecType: string, anExchange: string,
     aGenericTickList: string = '', aSnapshot: boolean = false,
     aRegulatorySnapshot: boolean = false, aMktDataOptions: any = null) {
     if (aSecType == 'IND') {
+      console.log('Call >> setIndReqMktData:  ' + this.theMktData.contract);
       this.setIndReqMktData(this.nextContractIDNumber, aContractID, aGenericTickList,
         aSnapshot, aRegulatorySnapshot, aMktDataOptions);
-      console.log('Call >> setIndReqMktData:  ' + this.theMktData.contract);
     }
-    else {
+    else if (aSecType == 'STK') {
+      console.log('Call >> setStkReqMktData:  ' + this.theMktData.contract);
       this.setStkReqMktData(this.nextContractIDNumber, aContractID, aGenericTickList,
         aSnapshot, aRegulatorySnapshot, aMktDataOptions)
-      console.log('Call >> setStkReqMktData:  ' + this.theMktData.contract);
     }
-    return this.nextContractIDNumber++ ;
+    else { console.log('setReqMktData SecType Invalid: ' + aSecType) }
+    return this.nextContractIDNumber++;
   }
 
-//-----------------------setStkReqMktData------------------------------------------------------
+  //-----------------------setStkReqMktData------------------------------------------------------
 
   setStkReqMktData(nextContractIDNumber: number, aContractID: string, aGenericTickList: string = '',
     aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,
@@ -76,11 +77,11 @@ export class IbNodeSocketService {
     this.theMktData.mktDataOptions = aMktDataOptions;
 
     console.log('In setStkReqMktData:  ' + this.theMktData.contract);
-    this.socket.emit("ReqMktData", this.theMktData);
+    this.socket.emit("ReqStkMktData", this.theMktData);
 
   }
 
- //-----------------------setIndReqMktData------------------------------------------------------ 
+  //-----------------------setIndReqMktData------------------------------------------------------ 
 
   setIndReqMktData(nextContractIDNumber: number, aContractID: string, aGenericTickList: string = '',
     aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,
@@ -132,7 +133,7 @@ export class IbNodeSocketService {
     return this.socket
       .fromEvent<any>("tickPrice")
       .map(data => data)
-      .filter( vixData => vixData.tickType == msg)    
+      .filter(vixData => vixData.tickType == msg)
   }
 
   close() {

@@ -61,7 +61,7 @@ io.on('connection', function (socket) {
         data.regulatorySnapshot,        // regulatory snapshot
         data.mktDataOptions             // mktDataOptions
       );
-      console.log(chalk.bgBlue('ReqStkMktData: ' + data.contract
+      console.log(chalk.bgGreen('ReqStkMktData: ' + data.contract
         + '  tickerId = ' + data.tickerId + '               '));
     });
   //ReqIndexMktData
