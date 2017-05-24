@@ -102,7 +102,7 @@ export class StockDetailFormComponent {
 
     // get contract data
     this.anIbNodeSocketService.getTickPrice(this.theTickType)
-     // .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
+     .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
       .do(theContractData => this.theContractPrice = theContractData.price)
       .subscribe(theContractData => theContractData,
       error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));

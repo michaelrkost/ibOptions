@@ -110,7 +110,7 @@
           </tr>
           <tr>
             <td>Price:</td>
-            <td align="right"> <b>{{ theContractPrice }}</b></td>
+            <td align="right"> <b>{{ theContractPrice | currency:'USD':true:'1.2-2' }}</b></td>
           </tr>
           <tr>
             <td>Security Type:</td>
@@ -122,6 +122,65 @@
           </tr>
           <tr>
             <td>Tick Type:</td>
+            <td align="right"> <b>{{ theTickType }}</b></td>
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <table class="table-striped isUnderlyingTableFonts">
+        <thead>
+          <th>
+            Underlying Details
+          </th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Symbol Last: </td>
+            <td> <b>{{ todayIs | date }}</b></td>
+          </tr>
+          <tr>
+            <td> Symbol Close: </td>
+            <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
+          </tr>
+          <tr>
+            <td>Implied Vol: </td>
+            <td><b>{{ expiryDate | date }}</b>
+            </td>
+          </tr>
+          <tr>
+            <td>Historic Vol: </td>
+            <td align="right"> <b>{{ daysTillExpiry }}</b> </td>
+          </tr>
+          <tr>
+            <td>Option Call Open Interest: </td>
+            <td> <b>{{ tradeExecuted | date }}</b></td>
+          </tr>
+          <tr>
+            <td>Option Put Open Interest: </td>
+            <td align="right"> <b>{{ aContract.contractID }}</b></td>
+          </tr>
+          <tr>
+            <td>Total Interest:</td>
+            <td align="right"> <b>{{ aContract.symbol }}</b></td>
+          </tr>
+          <tr>
+            <td>Option Call Volume:</td>
+            <td align="right"> <b>{{ theContractPrice }}</b></td>
+          </tr>
+          <tr>
+            <td>Option Put Volume:</td>
+            <td align="right"> <b>{{ aContract.secType }}</b></td>
+          </tr>
+          <tr>
+            <td>Option Total Volume:</td>
+            <td align="right"> <b>{{ aContract.exchange }}</b></td>
+          </tr>
+          <tr>
+            <td>XXX:</td>
             <td align="right"> <b>{{ theTickType }}</b></td>
           </tr>
 
