@@ -43,7 +43,7 @@ console.log('app.mountpath: ' + app.mountpath);
 console.log('__dirname  ' + __dirname);
 console.log("app.path():  " + app.path()); // ''
 
-// Socket.io
+// Socket.io  ===========================
 var io = require('socket.io')(server);
 var aString = '';
 
@@ -64,7 +64,7 @@ io.on('connection', function (socket) {
       console.log(chalk.bgGreen('ReqStkMktData: ' + data.contract
         + '  tickerId = ' + data.tickerId + '               '));
     });
-  //ReqIndexMktData
+  //ReqIndexMktData ======================================
       socket.on('ReqIndMktData', function (data) {
         console.log(chalk.bgCyan('ReqIndMktData: ' + data.contract
         + '  tickerId = ' + data.tickerId + 'genericTickList: '

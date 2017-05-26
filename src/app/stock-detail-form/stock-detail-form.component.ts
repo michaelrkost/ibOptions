@@ -25,6 +25,9 @@ export class StockDetailFormComponent {
   theTickType: string;
   theContractPrice: number;
 
+  // list of TickerIDs / Symbols
+  tickerIDList: Array<Contract>;
+
 
   // ng-bootstrap - Calendar
   tradeDate: NgbDateStruct;
@@ -59,6 +62,7 @@ export class StockDetailFormComponent {
     this.theVIXPrice = 0;
     this.theVixData = 'theData Init setting';
     this.theContractPrice = 0;
+    this.tickerIDList = [];
 
     // ============ Set up Vix Socket Event
     this.anIbNodeSocketService.setVixMktData();
@@ -102,10 +106,21 @@ export class StockDetailFormComponent {
 
     // get contract data
     this.anIbNodeSocketService.getTickPrice(this.theTickType)
-     .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
+      .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
       .do(theContractData => this.theContractPrice = theContractData.price)
       .subscribe(theContractData => theContractData,
       error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
+
+    // Save the Trade Data from the form
+    this.tickerIDList[this.aContract.contractID] = this .aContract;
+    // this.tickerIDList[this.aContract.contractID].tickerID = this.aContract.contractID;
+    // this.tickerIDList[this.aContract.contractID].symbol = this.aContract.symbol;
+    // this.tickerIDList[this.aContract.contractID].secType = this.aContract.secType;
+    // this.tickerIDList[this.aContract.contractID].exchange = this.aContract.exchange;
+    // this.tickerIDList[this.aContract.contractID].optionExpriy = this.expiryDate;
+    // this.tickerIDList[this.aContract.contractID].tradeExecuted = this.tradeExecuted;
+    console.log('tickerIDList:  ' + this.tickerIDList[this.aContract.contractID].contractID);
+        console.log('tickerIDList:  ' + this.tickerIDList[this.aContract.contractID].symbol);
 
   }
   //==============   onSubmit  =================================

@@ -1,5 +1,5 @@
 export class Contract {
-    contractID: number;       // The unique contract identifier
+    contractID: number;       // The unique contract identifier //tickerId
     currency: string;         // Specifies the currency.
     exchange: string;         // The order destination, such as Smart, CBOE etc.
     expiry: string;           // The expiration date. Use the format YYYYMM.
