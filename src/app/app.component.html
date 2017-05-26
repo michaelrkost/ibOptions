@@ -2,15 +2,6 @@
   <h4>
     {{title}}
   </h4>
-  <ngb-accordion #acc="ngbAccordion">
-    <ngb-panel id="toggle-1" title="Trade Data">
-      <ng-template ngbPanelContent>
-        <ib-stock-detail-form></ib-stock-detail-form>
-      </ng-template>
-    </ngb-panel>
-  </ngb-accordion>
 
-  <p>
-  <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-1')">Toggle Trade Data</button>
-  <!--<button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-2')">Toggle second</button>-->
-</p>
+        <ib-stock-detail-form></ib-stock-detail-form>
+</div>

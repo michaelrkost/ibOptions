@@ -1,193 +1,207 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="isIBForm">
+<div class="container-fluid">
 
-        <form [formGroup]="stockDetailForm" (ngSubmit)="onSubmit(stockDetailForm.value)" class="ui form">
-          <div class="field">
-            <label for="exchange" class="formLable">Symbol:</label>
-            <input type="text" id="symbolInput" placeholder="symbol" [formControl]="stockDetailForm.controls['symbol']" class="formFonts"
-            />
-          </div>
+  <ngb-accordion #acc="ngbAccordion">
+    <ngb-panel id="toggle-1" title="Trade Data">
+      <ng-template ngbPanelContent>
 
-          <div class="field">
-            <label for="securityType" class="formLable">Security Type:</label>
-            <select formControlName="securityType" class="formFonts">
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="isIBForm">
+
+              <form [formGroup]="stockDetailForm" (ngSubmit)="onSubmit(stockDetailForm.value)" class="ui form">
+                <div class="field">
+                  <label for="exchange" class="formLable">Symbol:</label>
+                  <input type="text" id="symbolInput" placeholder="symbol" [formControl]="stockDetailForm.controls['symbol']" class="formFonts"
+                  />
+                </div>
+
+                <div class="field">
+                  <label for="securityType" class="formLable">Security Type:</label>
+                  <select formControlName="securityType" class="formFonts">
          <option *ngFor="let aSecurityType of theSecurityTypes"
              [ngValue]="aSecurityType">{{aSecurityType}}</option>
       </select>
-          </div>
+                </div>
 
-          <div class="field">
-            <label for="exchange" class="formLable">Exchange:</label>
-            <select formControlName="exchange" class="formFonts">
+                <div class="field">
+                  <label for="exchange" class="formLable">Exchange:</label>
+                  <select formControlName="exchange" class="formFonts">
          <option *ngFor="let anExchange of theExchangeTypes"
              [ngValue]="anExchange">{{anExchange}}</option>
       </select>
-          </div>
+                </div>
 
 
-          <div class="field">
-            <label for="expiryDate" class="formLable">Option Expiry:</label>
-            <input class="formFonts" placeholder="yyyy-mm-dd" formControlName="expiryDate" [(ngModel)]="aDate" ngbDatepicker #d2="ngbDatepicker"
-              [dayTemplate]="customDay" [markDisabled]="isWeekend">
-            <button type="button" class="btn btn-info btn-sm" style="width: 10pix" (click)="d2.toggle()">
+                <div class="field">
+                  <label for="expiryDate" class="formLable">Option Expiry:</label>
+                  <input class="formFonts" placeholder="yyyy-mm-dd" formControlName="expiryDate" [(ngModel)]="aDate" ngbDatepicker #d2="ngbDatepicker"
+                    [dayTemplate]="customDay" [markDisabled]="isWeekend">
+                  <button type="button" class="btn btn-info btn-sm" style="width: 10pix" (click)="d2.toggle()">
         <img src="./app/images/calendar_simple-black.png" style="width: 1rem;
                    height: 1rem; cursor: pointer;" />
       </button>
-            <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
-              <span class="custom-day" [class.isThursday]="isThurs(date)" [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth"
-                [class.text-muted]="disabled">
+                  <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
+                    <span class="custom-day" [class.isThursday]="isThurs(date)" [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth"
+                      [class.text-muted]="disabled">
               {{ date.day }}
           </span>
-            </ng-template>
-          </div>
+                  </ng-template>
+                </div>
 
-          <div class="field">
-            <label for="tradeExecuted" class="formLable">Trade Executed:</label>
-            <input class="formFonts" placeholder="yyyy-mm-dd" formControlName="tradeExecuted" [(ngModel)]="tradeDate" ngbDatepicker #d1="ngbDatepicker"
-              [dayTemplate]="customDay" [markDisabled]="isWeekend">
-            <button type="button" class="btn btn-info btn-sm" style="width: 10pix" (click)="d1.toggle()">
+                <div class="field">
+                  <label for="tradeExecuted" class="formLable">Trade Executed:</label>
+                  <input class="formFonts" placeholder="yyyy-mm-dd" formControlName="tradeExecuted" [(ngModel)]="tradeDate" ngbDatepicker #d1="ngbDatepicker"
+                    [dayTemplate]="customDay" [markDisabled]="isWeekend">
+                  <button type="button" class="btn btn-info btn-sm" style="width: 10pix" (click)="d1.toggle()">
         <img src="./app/images/calendar_simple-black.png" style="width: 1rem;
                    height: 1rem; cursor: pointer;" />
       </button>
-            <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
-              <span class="custom-day" [class.isThursday]="isThurs(date)" [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth"
-                [class.text-muted]="disabled">
+                  <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
+                    <span class="custom-day" [class.isThursday]="isThurs(date)" [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth"
+                      [class.text-muted]="disabled">
               {{ date.day }}
           </span>
-            </ng-template>
-          </div>
+                  </ng-template>
+                </div>
 
-          <div class="field">
-            <label for="tickType" class="formLable">Tick Type:</label>
-            <select formControlName="tickType" class="formFonts">
+                <div class="field">
+                  <label for="tickType" class="formLable">Tick Type:</label>
+                  <select formControlName="tickType" class="formFonts">
          <option *ngFor="let aTickType of theTickTypes"
              [ngValue]="aTickType">{{aTickType}}</option>
       </select>
+                </div>
+                <button type="submit" class="ui button" style="font-size:12px" [disabled]="!stockDetailForm.valid">Submit</button>
+              </form>
+            </div>
           </div>
-          <button type="submit" class="ui button" style="font-size:12px" [disabled]="!stockDetailForm.valid">Submit</button>
-        </form>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <table class="table-striped isUnderlyingTableFonts">
-        <thead>
-          <th>
-            Underlying Info
-          </th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Today is: </td>
-            <td> <b>{{ todayIs | date }}</b></td>
-          </tr>
-          <tr>
-            <td> VIX Price:</td>
-            <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
-          </tr>
-          <tr>
-            <td>ExpiryDate: </td>
-            <td><b>{{ expiryDate | date }}</b>
-            </td>
-          </tr>
-          <tr>
-            <td>Days 2 Experiation: </td>
-            <td align="right"> <b>{{ daysTillExpiry }}</b> </td>
-          </tr>
-          <tr>
-            <td>Trade Executed: </td>
-            <td> <b>{{ tradeExecuted | date }}</b></td>
-          </tr>
-          <tr>
-            <td>TickerID:</td>
-            <td align="right"> <b>{{ aContract.contractID }}</b></td>
-          </tr>
-          <tr>
-            <td>Symbol:</td>
-            <td align="right"> <b>{{ aContract.symbol }}</b></td>
-          </tr>
-          <tr>
-            <td>Price:</td>
-            <td align="right"> <b>{{ theContractPrice | currency:'USD':true:'1.2-2' }}</b></td>
-          </tr>
-          <tr>
-            <td>Security Type:</td>
-            <td align="right"> <b>{{ aContract.secType }}</b></td>
-          </tr>
-          <tr>
-            <td>Exchange:</td>
-            <td align="right"> <b>{{ aContract.exchange }}</b></td>
-          </tr>
-          <tr>
-            <td>Tick Type:</td>
-            <td align="right"> <b>{{ theTickType }}</b></td>
-          </tr>
+          <div class="col-md-4">
+            <table class="table-striped isUnderlyingTableFonts">
+              <thead>
+                <th>
+                  Underlying Info
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Today is: </td>
+                  <td> <b>{{ todayIs | date }}</b></td>
+                </tr>
+                <tr>
+                  <td> VIX Price:</td>
+                  <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td>ExpiryDate: </td>
+                  <td><b>{{ expiryDate | date }}</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Days 2 Experiation: </td>
+                  <td align="right"> <b>{{ daysTillExpiry }}</b> </td>
+                </tr>
+                <tr>
+                  <td>Trade Executed: </td>
+                  <td> <b>{{ tradeExecuted | date }}</b></td>
+                </tr>
+                <tr>
+                  <td>TickerID:</td>
+                  <td align="right"> <b>{{ aContract.contractID }}</b></td>
+                </tr>
+                <tr>
+                  <td>Symbol:</td>
+                  <td align="right"> <b>{{ aContract.symbol }}</b></td>
+                </tr>
+                <tr>
+                  <td>Price:</td>
+                  <td align="right"> <b>{{ theContractPrice | currency:'USD':true:'1.2-2' }}</b></td>
+                </tr>
+                <tr>
+                  <td>Security Type:</td>
+                  <td align="right"> <b>{{ aContract.secType }}</b></td>
+                </tr>
+                <tr>
+                  <td>Exchange:</td>
+                  <td align="right"> <b>{{ aContract.exchange }}</b></td>
+                </tr>
+                <tr>
+                  <td>Tick Type:</td>
+                  <td align="right"> <b>{{ theTickType }}</b></td>
+                </tr>
 
-        </tbody>
+              </tbody>
 
-      </table>
-    </div>
+            </table>
+          </div>
 
-    <div class="col-md-4">
-      <table class="table-striped isUnderlyingTableFonts">
-        <thead>
-          <th>
-            Underlying Details
-          </th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Symbol Last: </td>
-            <td> <b>{{ todayIs | date }}</b></td>
-          </tr>
-          <tr>
-            <td> Symbol Close: </td>
-            <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
-          </tr>
-          <tr>
-            <td>Implied Vol: </td>
-            <td><b>{{ expiryDate | date }}</b>
-            </td>
-          </tr>
-          <tr>
-            <td>Historic Vol: </td>
-            <td align="right"> <b>{{ daysTillExpiry }}</b> </td>
-          </tr>
-          <tr>
-            <td>Option Call Open Interest: </td>
-            <td> <b>{{ tradeExecuted | date }}</b></td>
-          </tr>
-          <tr>
-            <td>Option Put Open Interest: </td>
-            <td align="right"> <b>{{ aContract.contractID }}</b></td>
-          </tr>
-          <tr>
-            <td>Total Interest:</td>
-            <td align="right"> <b>{{ aContract.symbol }}</b></td>
-          </tr>
-          <tr>
-            <td>Option Call Volume:</td>
-            <td align="right"> <b>{{ theContractPrice }}</b></td>
-          </tr>
-          <tr>
-            <td>Option Put Volume:</td>
-            <td align="right"> <b>{{ aContract.secType }}</b></td>
-          </tr>
-          <tr>
-            <td>Option Total Volume:</td>
-            <td align="right"> <b>{{ aContract.exchange }}</b></td>
-          </tr>
-          <tr>
-            <td>XXX:</td>
-            <td align="right"> <b>{{ theTickType }}</b></td>
-          </tr>
+          <div class="col-md-4">
+            <table class="table-striped isUnderlyingTableFonts">
+              <thead>
+                <th>
+                  Underlying Details
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Symbol Last: </td>
+                  <td> <b>{{ todayIs | date }}</b></td>
+                </tr>
+                <tr>
+                  <td> Symbol Close: </td>
+                  <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td>Implied Vol: </td>
+                  <td><b>{{ expiryDate | date }}</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Historic Vol: </td>
+                  <td align="right"> <b>{{ daysTillExpiry }}</b> </td>
+                </tr>
+                <tr>
+                  <td>Option Call Open Interest: </td>
+                  <td> <b>{{ tradeExecuted | date }}</b></td>
+                </tr>
+                <tr>
+                  <td>Option Put Open Interest: </td>
+                  <td align="right"> <b>{{ aContract.contractID }}</b></td>
+                </tr>
+                <tr>
+                  <td>Total Interest:</td>
+                  <td align="right"> <b>{{ aContract.symbol }}</b></td>
+                </tr>
+                <tr>
+                  <td>Option Call Volume:</td>
+                  <td align="right"> <b>{{ theContractPrice }}</b></td>
+                </tr>
+                <tr>
+                  <td>Option Put Volume:</td>
+                  <td align="right"> <b>{{ aContract.secType }}</b></td>
+                </tr>
+                <tr>
+                  <td>Option Total Volume:</td>
+                  <td align="right"> <b>{{ aContract.exchange }}</b></td>
+                </tr>
+                <tr>
+                  <td>XXX:</td>
+                  <td align="right"> <b>{{ theTickType }}</b></td>
+                </tr>
 
-        </tbody>
+              </tbody>
 
-      </table>
-    </div>
+            </table>
+          </div>
 
-  </div>
-</div>
+        </div>
+
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+
+  <p>
+    <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-1')">Toggle Trade Data</button>
+    <!--<button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-2')">Toggle second</button>-->
+  </p>
