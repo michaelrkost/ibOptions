@@ -72,7 +72,7 @@ var ib = new (require('ib'))({
     '%s %s%d %s%d',
     chalk.cyan(util.format('[%s]', ib.util.tickTypeToString(sizeTickType))),
     'tickerId:', tickerId,
-    'size:', size
+    'sizeZZZ:', size
   );
 }).on('tickString', function (tickerId, tickType, value) {
   console.log(

@@ -25,11 +25,13 @@ export class IbNodeSocketService {
   //
   theMktData: ReqMktData;
   nextContractIDNumber: number;
+  theGenericTickTypes: string;
 
   constructor(private socket: Socket) {
     this.theMktData = new ReqMktData;
     // manages the Contract IDs 
     this.nextContractIDNumber = 1;
+    this.theGenericTickTypes = '100, 101, 104, 106';
   }
 
   //-----------------------setReqMktData------------------------------------------------------
@@ -66,7 +68,8 @@ export class IbNodeSocketService {
 
   //-----------------------setStkReqMktData------------------------------------------------------
 
-  setStkReqMktData(nextContractIDNumber: number, aContractID: string, aGenericTickList: string = '',
+  setStkReqMktData(nextContractIDNumber: number, aContractID: string,
+    aGenericTickList: string = this.theGenericTickTypes,
     aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,
     aMktDataOptions: any = null) {
     this.theMktData.tickerId = nextContractIDNumber;
@@ -83,7 +86,8 @@ export class IbNodeSocketService {
 
   //-----------------------setIndReqMktData------------------------------------------------------ 
 
-  setIndReqMktData(nextContractIDNumber: number, aContractID: string, aGenericTickList: string = '',
+  setIndReqMktData(nextContractIDNumber: number, aContractID: string,
+    aGenericTickList: string = this.theGenericTickTypes,
     aSnapshot: boolean = false, aRegulatorySnapshot: boolean = false,
     aMktDataOptions: any = null) {
     this.theMktData.tickerId = nextContractIDNumber;
@@ -128,8 +132,26 @@ export class IbNodeSocketService {
     console.log('sendMessage:  ' + msg);
   }
 
+  getTickGeneric() {
+    return this.socket
+      .fromEvent<any>("tickGeneric")
+      .map(data => data)
+  }
 
-  getTickPrice(msg: string) {
+  getTickSize() {
+    return this.socket
+      .fromEvent<any>("tickSize")
+      .map(data => data)
+  }
+
+    getTickPrice() {
+    return this.socket
+      .fromEvent<any>("tickPrice")
+      .map(data => data)
+  }
+
+
+  getTickPriceFilter(msg: string) {
     return this.socket
       .fromEvent<any>("tickPrice")
       .map(data => data)

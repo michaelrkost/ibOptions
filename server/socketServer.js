@@ -98,7 +98,7 @@ io.on('connection', function (socket) {
       price: price,
       canAutoExecute: canAutoExecute
     }).setMaxListeners(0);
-    console.log(chalk.bgBlue('ibData:  ') +
+    console.log(chalk.bgBlue('ibData: tickPrice: ') +
       '%s %s%d %s%d %s%s',
       chalk.yellow(util.format('[%s]', nodeIBServer.util.tickTypeToString(tickType))),
       chalk.bold('tickerId='), tickerId,
@@ -106,5 +106,35 @@ io.on('connection', function (socket) {
       chalk.bold('canAutoExecute='), canAutoExecute
     );
   });
+
+    nodeIBServer.on('tickGeneric', function (tickerId, tickType, value){
+    socket.emit('tickGeneric', {
+      tickerId: tickerId,
+      tickType: nodeIBServer.util.tickTypeToString(tickType),
+      value: value
+    }).setMaxListeners(0);
+    console.log(chalk.bgWhite('ibData: tickGeneric: ') +
+    '%s %s%d %s%d',
+    chalk.cyan(util.format('[%s]', nodeIBServer.util.tickTypeToString(tickType))),
+    chalk.bold('tickerId='), tickerId,
+    chalk.bold('value='), value
+  );
+});
+
+    nodeIBServer.on('tickSize', function (tickerId, sizeTickType, size){
+    socket.emit('tickSize', {
+      tickerId: tickerId,
+      sizeTickType: nodeIBServer.util.tickTypeToString(sizeTickType),
+      size: size
+    }).setMaxListeners(0);
+    console.log(chalk.bgWhite('ibData: tickSize: ') +
+    '%s %s%d %s%d',
+    chalk.cyan(util.format('[%s]', nodeIBServer.util.tickTypeToString(sizeTickType))),
+    chalk.bold('tickerId='), tickerId,
+    chalk.bold('size=xx'), size
+  );
+});
+
+
 });
 

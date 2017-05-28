@@ -39,6 +39,9 @@ export class StockDetailFormComponent {
   theTickTypes: any[] = ["LAST", "CLOSE", "BID", "ASK", "LOW", "HIGH"];
   // expiry: string = '';
 
+
+  // IbNodeSocketService takes an event name 
+  // and returns an Observable that you can subscribe to.
   constructor(private anIbNodeSocketService: IbNodeSocketService) {
 
     // ============= Stock Entry Form
@@ -67,11 +70,11 @@ export class StockDetailFormComponent {
     // ============ Set up Vix Socket Event
     this.anIbNodeSocketService.setVixMktData();
     // get VIX data
-    this.anIbNodeSocketService.getTickPrice('CLOSE')
+    this.anIbNodeSocketService.getTickPriceFilter('CLOSE')
       .filter(vixData => vixData.tickerId == 7777)
       .do(vixData => this.theVIXPrice = vixData.price)
-      .subscribe(vixData => this.theVixData = vixData,
-      error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
+      .subscribe(vixData => this.theVixData = vixData)
+      error => console.log('anIbNodeSocketService.getMessage() error:  ' + error);
 
     console.log(">>> In StockDetailFormComponent Constructor <<<");
   }
@@ -104,8 +107,8 @@ export class StockDetailFormComponent {
     this.aContract.contractID = this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
       this.aContract.secType, this.aContract.exchange);
 
-    // get contract data
-    this.anIbNodeSocketService.getTickPrice(this.theTickType)
+    // get contract data from Observable
+    this.anIbNodeSocketService.getTickPriceFilter(this.theTickType)
       .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
       .do(theContractData => this.theContractPrice = theContractData.price)
       .subscribe(theContractData => theContractData,
@@ -119,8 +122,8 @@ export class StockDetailFormComponent {
     // this.tickerIDList[this.aContract.contractID].exchange = this.aContract.exchange;
     // this.tickerIDList[this.aContract.contractID].optionExpriy = this.expiryDate;
     // this.tickerIDList[this.aContract.contractID].tradeExecuted = this.tradeExecuted;
-    console.log('tickerIDList:  ' + this.tickerIDList[this.aContract.contractID].contractID);
-        console.log('tickerIDList:  ' + this.tickerIDList[this.aContract.contractID].symbol);
+    // console.log('tickerIDList:  ' + this.tickerIDList[this.aContract.contractID].contractID);
+    //     console.log('tickerIDList:  ' + this.tickerIDList[this.aContract.contractID].symbol);
 
   }
   //==============   onSubmit  =================================

@@ -19,7 +19,7 @@ export class StockDisplayComponent { //implements OnInit {
      console.log('IbNodeObservableService in  StockDisplayComponent ');
     this.anIbNodeSocketService.setVixMktData();
     // get VIX data
-    this.anIbNodeSocketService.getTickPrice('LAST')
+    this.anIbNodeSocketService.getTickPriceFilter('LAST')
       .filter(vixData => vixData.tickerId == 7777)
     //  .filter(vixData => vixData.tickType == 'CLOSE')
       .do(vixData => this.vixPrice = vixData.price)
