@@ -61,13 +61,13 @@ io.on('connection', function (socket) {
         data.regulatorySnapshot,        // regulatory snapshot
         data.mktDataOptions             // mktDataOptions
       );
-      console.log(chalk.bgGreen('ReqStkMktData: ' + data.contract
+      console.log(chalk.bgWhite('ReqStkMktData: ' + data.contract
         + '  tickerId = ' + data.tickerId + '               '));
     });
   //ReqIndexMktData ======================================
       socket.on('ReqIndMktData', function (data) {
         console.log(chalk.bgCyan('ReqIndMktData: ' + data.contract
-        + '  tickerId = ' + data.tickerId + 'genericTickList: '
+        + '  tickerId = ' + data.tickerId + '   genericTickList: '
         + data.genericTickList + '               '));
 
       nodeIBServer.reqMktData(
@@ -98,7 +98,7 @@ io.on('connection', function (socket) {
       price: price,
       canAutoExecute: canAutoExecute
     }).setMaxListeners(0);
-    console.log(chalk.bgBlue('ibData: tickPrice: ') +
+    console.log(chalk.bgBlue('nodeIBServer: tickPrice: ') +
       '%s %s%d %s%d %s%s',
       chalk.yellow(util.format('[%s]', nodeIBServer.util.tickTypeToString(tickType))),
       chalk.bold('tickerId='), tickerId,
@@ -113,7 +113,7 @@ io.on('connection', function (socket) {
       tickType: nodeIBServer.util.tickTypeToString(tickType),
       value: value
     }).setMaxListeners(0);
-    console.log(chalk.bgWhite('ibData: tickGeneric: ') +
+    console.log(chalk.bgYellow( chalk.cyan('nodeIBServer: tickGeneric: ')) +
     '%s %s%d %s%d',
     chalk.cyan(util.format('[%s]', nodeIBServer.util.tickTypeToString(tickType))),
     chalk.bold('tickerId='), tickerId,
@@ -127,11 +127,11 @@ io.on('connection', function (socket) {
       sizeTickType: nodeIBServer.util.tickTypeToString(sizeTickType),
       size: size
     }).setMaxListeners(0);
-    console.log(chalk.bgWhite('ibData: tickSize: ') +
+    console.log(chalk.bgMagenta('nodeIBServer: tickSize: ') +
     '%s %s%d %s%d',
     chalk.cyan(util.format('[%s]', nodeIBServer.util.tickTypeToString(sizeTickType))),
     chalk.bold('tickerId='), tickerId,
-    chalk.bold('size=xx'), size
+    chalk.bold('size='), size
   );
 });
 

@@ -50,7 +50,7 @@ export class IbNodeSocketService {
   // mktDataOptions      - List< TagValue >
 
   setReqMktData(aContractID: string, aSecType: string, anExchange: string,
-    aGenericTickList: string = '', aSnapshot: boolean = false,
+    aGenericTickList: string = this.theGenericTickTypes, aSnapshot: boolean = false,
     aRegulatorySnapshot: boolean = false, aMktDataOptions: any = null) {
     if (aSecType == 'IND') {
       console.log('Call >> setIndReqMktData:  ' + this.theMktData.contract);
@@ -74,7 +74,7 @@ export class IbNodeSocketService {
     aMktDataOptions: any = null) {
     this.theMktData.tickerId = nextContractIDNumber;
     this.theMktData.contract = aContractID;
-    this.theMktData.genericTickList = aGenericTickList;
+    this.theMktData.genericTickList = this.theGenericTickTypes;
     this.theMktData.snapshot = aSnapshot;
     this.theMktData.regulatorySnapshot = aRegulatorySnapshot;
     this.theMktData.mktDataOptions = aMktDataOptions;
@@ -92,12 +92,12 @@ export class IbNodeSocketService {
     aMktDataOptions: any = null) {
     this.theMktData.tickerId = nextContractIDNumber;
     this.theMktData.contract = aContractID;
-    this.theMktData.genericTickList = aGenericTickList;
-    this.theMktData.snapshot = aSnapshot;
+    this.theMktData.genericTickList = this.theGenericTickTypes;
+    this.theMktData.snapshot =  aSnapshot;
     this.theMktData.regulatorySnapshot = aRegulatorySnapshot;
     this.theMktData.mktDataOptions = aMktDataOptions;
 
-    console.log('In setIndReqMktData:  ' + this.theMktData.contract);
+    console.log('In setStkReqMktData GenericTick:  ' + this.theMktData.genericTickList);
     this.socket.emit("ReqIndMktData", this.theMktData);
 
   }
@@ -105,7 +105,7 @@ export class IbNodeSocketService {
   setVixMktData() {
     this.theMktData.tickerId = 7777;
     this.theMktData.contract = 'VIX';
-    this.theMktData.genericTickList = '';
+    this.theMktData.genericTickList = this.theGenericTickTypes;
     this.theMktData.snapshot = false;
     this.theMktData.regulatorySnapshot = false;
     this.theMktData.mktDataOptions = null;
@@ -144,7 +144,7 @@ export class IbNodeSocketService {
       .map(data => data)
   }
 
-    getTickPrice() {
+  getTickPrice() {
     return this.socket
       .fromEvent<any>("tickPrice")
       .map(data => data)

@@ -24,6 +24,8 @@ export class StockDetailFormComponent {
   theVixData: string;
   theTickType: string;
   theContractPrice: number;
+  theLastContractPrice: number;
+  theCloseContractPrice: number;
 
   // list of TickerIDs / Symbols
   tickerIDList: Array<Contract>;
@@ -65,6 +67,9 @@ export class StockDetailFormComponent {
     this.theVIXPrice = 0;
     this.theVixData = 'theData Init setting';
     this.theContractPrice = 0;
+    this.theLastContractPrice = 0;
+    this.theCloseContractPrice = 0;
+
     this.tickerIDList = [];
 
     // ============ Set up Vix Socket Event
@@ -74,7 +79,7 @@ export class StockDetailFormComponent {
       .filter(vixData => vixData.tickerId == 7777)
       .do(vixData => this.theVIXPrice = vixData.price)
       .subscribe(vixData => this.theVixData = vixData)
-      error => console.log('anIbNodeSocketService.getMessage() error:  ' + error);
+    error => console.log('anIbNodeSocketService.getMessage() error:  ' + error);
 
     console.log(">>> In StockDetailFormComponent Constructor <<<");
   }
@@ -108,14 +113,20 @@ export class StockDetailFormComponent {
       this.aContract.secType, this.aContract.exchange);
 
     // get contract data from Observable
-    this.anIbNodeSocketService.getTickPriceFilter(this.theTickType)
-      .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
-      .do(theContractData => this.theContractPrice = theContractData.price)
+    this.anIbNodeSocketService.getTickPrice()
+      .map(theContractData => {
+        switch (theContractData.tickType) {
+          case 'CLOSE': this.theCloseContractPrice = theContractData.price; break;
+          case 'BID': this.theLastContractPrice = theContractData.price; break;
+          // case 'LAST': this.theCloseContractPrice = theContractData.price;break;
+          default: this.theLastContractPrice = .01;
+        }
+      })
       .subscribe(theContractData => theContractData,
-      error => console.log('anIbNodeSocketService.getMessage() error:  ' + error));
+      error => console.log('anIbNodeSocketService.getTickPrice() error:  ' + error));
 
     // Save the Trade Data from the form
-    this.tickerIDList[this.aContract.contractID] = this .aContract;
+    this.tickerIDList[this.aContract.contractID] = this.aContract;
     // this.tickerIDList[this.aContract.contractID].tickerID = this.aContract.contractID;
     // this.tickerIDList[this.aContract.contractID].symbol = this.aContract.symbol;
     // this.tickerIDList[this.aContract.contractID].secType = this.aContract.secType;
