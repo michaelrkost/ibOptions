@@ -158,12 +158,12 @@
                 </tr>
                 <tr>
                   <td>Implied Vol: </td>
-                  <td><b>{{ theOptionImpliedVol }}</b>
+                  <td align="right"><b>{{ theOptionImpliedVol | percent:'1.2-2'}}</b>
                   </td>
                 </tr>
                 <tr>
                   <td>Historic Vol: </td>
-                  <td align="right"> <b>{{ theOptionHistoricalVol }}</b> </td>
+                  <td align="right"> <b>{{ theOptionHistoricalVol | percent:'1.2-2' }}</b> </td>
                 </tr>
                 <tr>
                   <td>Option Call Open Interest: </td>

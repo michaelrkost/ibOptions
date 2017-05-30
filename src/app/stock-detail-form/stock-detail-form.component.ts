@@ -131,8 +131,8 @@ export class StockDetailFormComponent {
       .map(theContractData => {
         switch (theContractData.tickType) {
           case 'CLOSE': this.theCloseContractPrice = theContractData.price; break;
-          case 'BID': this.theLastContractPrice = theContractData.price; break;
-          // case 'LAST': this.theCloseContractPrice = theContractData.price;break;
+          // case 'BID': this.theLastContractPrice = theContractData.price; break;
+          case 'LAST': this.theCloseContractPrice = theContractData.price;break;
           // default: this.theLastContractPrice = .01;
         }
         console.log('infilter: id: ' + this.aContract.contractID)
