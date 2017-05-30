@@ -6,7 +6,7 @@
 
 
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="isIBForm">
 
               <form [formGroup]="stockDetailForm" (ngSubmit)="onSubmit(stockDetailForm.value)" class="ui form">
@@ -77,7 +77,7 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-3">
             <table class="table-striped isUnderlyingTableFonts">
               <thead>
                 <th>
@@ -136,7 +136,7 @@
             </table>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-3">
             <table class="table-striped isUnderlyingTableFonts">
               <thead>
                 <th>
@@ -144,6 +144,10 @@
                 </th>
               </thead>
               <tbody>
+                <tr>
+                  <td>Symbol:</td>
+                  <td align="right"> <b>{{ aContract.symbol }}</b></td>
+                </tr>
                 <tr>
                   <td>Symbol Last: </td>
                   <td align="right"> <b>{{ theLastContractPrice | currency:'USD':true:'1.2-2' }}</b></td>
@@ -154,40 +158,36 @@
                 </tr>
                 <tr>
                   <td>Implied Vol: </td>
-                  <td><b>{{ expiryDate | date }}</b>
+                  <td><b>{{ theOptionImpliedVol }}</b>
                   </td>
                 </tr>
                 <tr>
                   <td>Historic Vol: </td>
-                  <td align="right"> <b>{{ daysTillExpiry }}</b> </td>
+                  <td align="right"> <b>{{ theOptionHistoricalVol }}</b> </td>
                 </tr>
                 <tr>
                   <td>Option Call Open Interest: </td>
-                  <td> <b>{{ tradeExecuted | date }}</b></td>
+                  <td align="right"> <b>{{ theOptionCallOpenInterest }}</b></td>
                 </tr>
                 <tr>
                   <td>Option Put Open Interest: </td>
-                  <td align="right"> <b>{{ aContract.contractID }}</b></td>
+                  <td align="right"> <b>{{ theOptionPutOpenInterest }}</b></td>
                 </tr>
                 <tr>
                   <td>Total Interest:</td>
-                  <td align="right"> <b>{{ aContract.symbol }}</b></td>
+                  <td align="right"> <b>{{ theOptionCallOpenInterest + theOptionPutOpenInterest }}</b></td>
                 </tr>
                 <tr>
                   <td>Option Call Volume:</td>
-                  <td align="right"> <b>{{ theContractPrice }}</b></td>
+                  <td align="right"> <b>{{ theOptionCallVolume }}</b></td>
                 </tr>
                 <tr>
                   <td>Option Put Volume:</td>
-                  <td align="right"> <b>{{ aContract.secType }}</b></td>
+                  <td align="right"> <b>{{ theOptionPutVolume }}</b></td>
                 </tr>
                 <tr>
                   <td>Option Total Volume:</td>
-                  <td align="right"> <b>{{ aContract.exchange }}</b></td>
-                </tr>
-                <tr>
-                  <td>XXX:</td>
-                  <td align="right"> <b>{{ theTickType }}</b></td>
+                  <td align="right"> <b>{{ theOptionCallVolume +  theOptionPutVolume}}</b></td>
                 </tr>
 
               </tbody>

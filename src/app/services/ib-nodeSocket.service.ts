@@ -93,7 +93,7 @@ export class IbNodeSocketService {
     this.theMktData.tickerId = nextContractIDNumber;
     this.theMktData.contract = aContractID;
     this.theMktData.genericTickList = this.theGenericTickTypes;
-    this.theMktData.snapshot =  aSnapshot;
+    this.theMktData.snapshot = aSnapshot;
     this.theMktData.regulatorySnapshot = aRegulatorySnapshot;
     this.theMktData.mktDataOptions = aMktDataOptions;
 
@@ -135,7 +135,7 @@ export class IbNodeSocketService {
   getTickGeneric() {
     return this.socket
       .fromEvent<any>("tickGeneric")
-      .map(data => data)
+            .map(data => data)
   }
 
   getTickSize() {

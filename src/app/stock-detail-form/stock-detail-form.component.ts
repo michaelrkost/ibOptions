@@ -26,6 +26,13 @@ export class StockDetailFormComponent {
   theContractPrice: number;
   theLastContractPrice: number;
   theCloseContractPrice: number;
+  theOptionHistoricalVol: number;
+  theOptionImpliedVol: number;
+  theOptionCallOpenInterest: number;
+  theOptionPutOpenInterest: number;
+  theOptionCallVolume: number;
+  theOptionPutVolume: number;
+
 
   // list of TickerIDs / Symbols
   tickerIDList: Array<Contract>;
@@ -69,6 +76,12 @@ export class StockDetailFormComponent {
     this.theContractPrice = 0;
     this.theLastContractPrice = 0;
     this.theCloseContractPrice = 0;
+    this.theOptionHistoricalVol = 0;
+    this.theOptionImpliedVol = 0;
+    this.theOptionCallOpenInterest = 0;
+    this.theOptionPutOpenInterest = 0;
+    this.theOptionCallVolume = 0;
+    this.theOptionPutVolume = 0;
 
     this.tickerIDList = [];
 
@@ -112,29 +125,50 @@ export class StockDetailFormComponent {
     this.aContract.contractID = this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
       this.aContract.secType, this.aContract.exchange);
 
-    // get contract data from Observable
+    // get contract Price data from Observable
     this.anIbNodeSocketService.getTickPrice()
+      // .filter(theContractData => theContractData === this.aContract.contractID)
       .map(theContractData => {
         switch (theContractData.tickType) {
           case 'CLOSE': this.theCloseContractPrice = theContractData.price; break;
           case 'BID': this.theLastContractPrice = theContractData.price; break;
           // case 'LAST': this.theCloseContractPrice = theContractData.price;break;
-          default: this.theLastContractPrice = .01;
+          // default: this.theLastContractPrice = .01;
+        }
+        console.log('infilter: id: ' + this.aContract.contractID)
+      })
+      .subscribe(theContractData => theContractData,
+      error => console.log('anIbNodeSocketService.getTickPrice() error:  ' + error));
+
+    // get contract Generic data from Observable
+    this.anIbNodeSocketService.getTickGeneric()
+      // .filter(theContractData => theContractData == this.aContract.contractID)
+      .map(theContractData => {
+        switch (theContractData.tickType) {
+          case 'OPTION_HISTORICAL_VOL': this.theOptionHistoricalVol = theContractData.value; break;
+          case 'OPTION_IMPLIED_VOL': this.theOptionImpliedVol = theContractData.value;
         }
       })
       .subscribe(theContractData => theContractData,
       error => console.log('anIbNodeSocketService.getTickPrice() error:  ' + error));
 
+    // get contract Size data from Observable
+    this.anIbNodeSocketService.getTickSize()
+      .filter(theContractData => theContractData == this.aContract.contractID)
+      .map(theContractData => {
+        switch (theContractData.tickType) {
+          case 'OPTION_CALL_OPEN_INTEREST': this.theOptionCallOpenInterest = theContractData.size; break;
+          case 'OPTION_PUT_OPEN_INTEREST': this.theOptionPutOpenInterest = theContractData.size; break;
+          case 'OPTION_CALL_VOLUME': this.theOptionCallVolume = theContractData.size; break;
+          case 'OPTION_PUT_VOLUME': this.theOptionPutVolume = theContractData.size;
+        }
+      })
+      .subscribe(theContractData => theContractData,
+      error => console.log('anIbNodeSocketService.getTickPrice() error:  ' + error));
+
+
     // Save the Trade Data from the form
     this.tickerIDList[this.aContract.contractID] = this.aContract;
-    // this.tickerIDList[this.aContract.contractID].tickerID = this.aContract.contractID;
-    // this.tickerIDList[this.aContract.contractID].symbol = this.aContract.symbol;
-    // this.tickerIDList[this.aContract.contractID].secType = this.aContract.secType;
-    // this.tickerIDList[this.aContract.contractID].exchange = this.aContract.exchange;
-    // this.tickerIDList[this.aContract.contractID].optionExpriy = this.expiryDate;
-    // this.tickerIDList[this.aContract.contractID].tradeExecuted = this.tradeExecuted;
-    // console.log('tickerIDList:  ' + this.tickerIDList[this.aContract.contractID].contractID);
-    //     console.log('tickerIDList:  ' + this.tickerIDList[this.aContract.contractID].symbol);
 
   }
   //==============   onSubmit  =================================
