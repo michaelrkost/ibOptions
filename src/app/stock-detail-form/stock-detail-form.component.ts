@@ -127,7 +127,9 @@ export class StockDetailFormComponent {
 
     // get contract Price data from Observable
     this.anIbNodeSocketService.getTickPrice()
-      // .filter(theContractData => theContractData === this.aContract.contractID)
+      .filter(theContractData => {
+        console.log( 'tickerID: ' + theContractData.symbol + ' Count: ' + this.theContractCount);
+      return theContractData})//this.aContract.contractID)
       .map(theContractData => {
         switch (theContractData.tickType) {
           case 'CLOSE': this.theCloseContractPrice = theContractData.price; break;
@@ -142,7 +144,7 @@ export class StockDetailFormComponent {
 
     // get contract Generic data from Observable
     this.anIbNodeSocketService.getTickGeneric()
-      // .filter(theContractData => theContractData == this.aContract.contractID)
+      .filter(theContractData => theContractData.tickerID == this.aContract.contractID)
       .map(theContractData => {
         switch (theContractData.tickType) {
           case 'OPTION_HISTORICAL_VOL': this.theOptionHistoricalVol = theContractData.value; break;
@@ -154,7 +156,7 @@ export class StockDetailFormComponent {
 
     // get contract Size data from Observable
     this.anIbNodeSocketService.getTickSize()
-      .filter(theContractData => theContractData == this.aContract.contractID)
+      .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
       .map(theContractData => {
         switch (theContractData.tickType) {
           case 'OPTION_CALL_OPEN_INTEREST': this.theOptionCallOpenInterest = theContractData.size; break;

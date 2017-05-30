@@ -135,7 +135,7 @@ export class IbNodeSocketService {
   getTickGeneric() {
     return this.socket
       .fromEvent<any>("tickGeneric")
-            .map(data => data)
+      .map(data => data)
   }
 
   getTickSize() {
