@@ -125,34 +125,34 @@ export class StockDetailFormComponent {
     this.aContract.contractID = this.anIbNodeSocketService.setReqMktData(this.aContract.symbol,
       this.aContract.secType, this.aContract.exchange);
 
+    //Zero out Variables
+    this.clearVars();
+
     // get contract Price data from Observable
     this.anIbNodeSocketService.getTickPrice()
-      .filter(theContractData => {
-        console.log( 'tickerID: ' + theContractData.symbol + ' Count: ' + this.theContractCount);
-      return theContractData})//this.aContract.contractID)
-      .map(theContractData => {
+      .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
+      .do(theContractData => {
         switch (theContractData.tickType) {
           case 'CLOSE': this.theCloseContractPrice = theContractData.price; break;
-          // case 'BID': this.theLastContractPrice = theContractData.price; break;
-          case 'LAST': this.theCloseContractPrice = theContractData.price;break;
-          // default: this.theLastContractPrice = .01;
+          case 'LAST': this.theLastContractPrice = theContractData.price; break;
+          case 'BID': this.theLastContractPrice = theContractData.price; break;
         }
-        console.log('infilter: id: ' + this.aContract.contractID)
+        console.log('getTickPrice(): id: ' + this.aContract.contractID)
       })
       .subscribe(theContractData => theContractData,
       error => console.log('anIbNodeSocketService.getTickPrice() error:  ' + error));
 
     // get contract Generic data from Observable
     this.anIbNodeSocketService.getTickGeneric()
-      .filter(theContractData => theContractData.tickerID == this.aContract.contractID)
-      .map(theContractData => {
+      .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
+      .do(theContractData => {
         switch (theContractData.tickType) {
           case 'OPTION_HISTORICAL_VOL': this.theOptionHistoricalVol = theContractData.value; break;
           case 'OPTION_IMPLIED_VOL': this.theOptionImpliedVol = theContractData.value;
         }
       })
-      .subscribe(theContractData => theContractData,
-      error => console.log('anIbNodeSocketService.getTickPrice() error:  ' + error));
+      .subscribe(theContractData => console.log('getTickGEneric' + theContractData),
+      error => console.log('anIbNodeSocketService.getTickGeneric() error:  ' + error));
 
     // get contract Size data from Observable
     this.anIbNodeSocketService.getTickSize()
@@ -230,4 +230,15 @@ export class StockDetailFormComponent {
   }
 
   // --------- ng-bootstrap - Calendar ---------------
+
+  clearVars() {
+    this.theLastContractPrice = 0;
+    this.theCloseContractPrice = 0;
+    this.theOptionHistoricalVol = 0;
+    this.theOptionImpliedVol = 0;
+    this.theOptionCallOpenInterest = 0;
+    this.theOptionPutOpenInterest = 0;
+    this.theOptionCallVolume = 0;
+    this.theOptionPutVolume = 0;
+  }
 }

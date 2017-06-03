@@ -115,10 +115,6 @@
                   <td align="right"> <b>{{ aContract.symbol }}</b></td>
                 </tr>
                 <tr>
-                  <td>Price:</td>
-                  <td align="right"> <b>{{ theContractPrice | currency:'USD':true:'1.2-2' }}</b></td>
-                </tr>
-                <tr>
                   <td>Security Type:</td>
                   <td align="right"> <b>{{ aContract.secType }}</b></td>
                 </tr>
@@ -167,27 +163,27 @@
                 </tr>
                 <tr>
                   <td>Option Call Open Interest: </td>
-                  <td align="right"> <b>{{ theOptionCallOpenInterest }}</b></td>
+                  <td align="right"> <b>{{ theOptionCallOpenInterest | number }}</b></td>
                 </tr>
                 <tr>
                   <td>Option Put Open Interest: </td>
-                  <td align="right"> <b>{{ theOptionPutOpenInterest }}</b></td>
+                  <td align="right"> <b>{{ theOptionPutOpenInterest  | number }}</b></td>
                 </tr>
                 <tr>
                   <td>Total Interest:</td>
-                  <td align="right"> <b>{{ theOptionCallOpenInterest + theOptionPutOpenInterest }}</b></td>
+                  <td align="right"> <b>{{ theOptionCallOpenInterest + theOptionPutOpenInterest  | number }}</b></td>
                 </tr>
                 <tr>
                   <td>Option Call Volume:</td>
-                  <td align="right"> <b>{{ theOptionCallVolume }}</b></td>
+                  <td align="right"> <b>{{ theOptionCallVolume  | number }}</b></td>
                 </tr>
                 <tr>
                   <td>Option Put Volume:</td>
-                  <td align="right"> <b>{{ theOptionPutVolume }}</b></td>
+                  <td align="right"> <b>{{ theOptionPutVolume  | number }}</b></td>
                 </tr>
                 <tr>
                   <td>Option Total Volume:</td>
-                  <td align="right"> <b>{{ theOptionCallVolume +  theOptionPutVolume}}</b></td>
+                  <td align="right"> <b>{{ theOptionCallVolume +  theOptionPutVolume  | number }}</b></td>
                 </tr>
 
               </tbody>
