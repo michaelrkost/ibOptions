@@ -11,6 +11,7 @@ import { Socket } from 'ng2-socket-io';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class IbNodeSocketService {

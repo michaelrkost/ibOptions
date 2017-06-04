@@ -90,7 +90,7 @@ export class StockDetailFormComponent {
     // get VIX data
     this.anIbNodeSocketService.getTickPriceFilter('CLOSE')
       .filter(vixData => vixData.tickerId == 7777)
-      .do(vixData => this.theVIXPrice = vixData.price)
+      .map(vixData => this.theVIXPrice = vixData.price)
       .subscribe(vixData => this.theVixData = vixData)
     error => console.log('anIbNodeSocketService.getMessage() error:  ' + error);
 
