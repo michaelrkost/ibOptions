@@ -41,7 +41,6 @@ const ROUTES = [
   // }
 ]
 //services
-import { IbNodeService } from './services/ib-node.service';
 import { StockDetailFormComponent } from './stock-detail-form/stock-detail-form.component';
 import { IbNodeObservableService } from './services/ib-nodeObservable.service';
 import { IbNodeSocketService } from './services/ib-nodeSocket.service';
