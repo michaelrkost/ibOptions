@@ -66,7 +66,7 @@ import { IbNodeSocketService } from './services/ib-nodeSocket.service';
   ],
   // Make sure all the Services are here otherwise will get the error:
   // "Cannot set property stack of [object Object] which has only a getter"
-  providers: [IbNodeService, IbNodeObservableService, IbNodeSocketService],
+  providers: [ IbNodeObservableService, IbNodeSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
