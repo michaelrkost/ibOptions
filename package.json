@@ -6,8 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "buildRunServer": "ng build && node ./server/server.js",
-    "nodemonServer": "nodemon ./server/server.js localhost 3000",
+    "nodemonServer": "nodemon ./server/socketServer.js localhost 3000",
     "testIB": "node ./server/node-ib-test/reqMarketData.js",
     "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check && tslint \"e2e/**/*.ts\" --project e2e/tsconfig.json --type-check",
     "test": "ng test",
