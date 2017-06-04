@@ -44,15 +44,13 @@ const ROUTES = [
 import { IbNodeService } from './services/ib-node.service';
 import { StockDetailFormComponent } from './stock-detail-form/stock-detail-form.component';
 import { IbNodeObservableService } from './services/ib-nodeObservable.service';
-import { StockDisplayComponent } from './stock-display/stock-display.component';
 import { IbNodeSocketService } from './services/ib-nodeSocket.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    StockDetailFormComponent,
-    StockDisplayComponent
+    StockDetailFormComponent
   ],
   imports: [
     BrowserModule,
