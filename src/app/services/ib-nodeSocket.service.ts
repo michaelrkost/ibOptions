@@ -54,12 +54,10 @@ export class IbNodeSocketService {
     aGenericTickList: string = this.theGenericTickTypes, aSnapshot: boolean = false,
     aRegulatorySnapshot: boolean = false, aMktDataOptions: any = null) {
     if (aSecType == 'IND') {
-      console.log('Call >> setIndReqMktData:  ' + this.theMktData.contract);
       this.setIndReqMktData(this.nextContractIDNumber, aContractID, aGenericTickList,
         aSnapshot, aRegulatorySnapshot, aMktDataOptions);
     }
     else if (aSecType == 'STK') {
-      console.log('Call >> setStkReqMktData:  ' + this.theMktData.contract);
       this.setStkReqMktData(this.nextContractIDNumber, aContractID, aGenericTickList,
         aSnapshot, aRegulatorySnapshot, aMktDataOptions)
     }
@@ -79,8 +77,6 @@ export class IbNodeSocketService {
     this.theMktData.snapshot = aSnapshot;
     this.theMktData.regulatorySnapshot = aRegulatorySnapshot;
     this.theMktData.mktDataOptions = aMktDataOptions;
-
-    console.log('In setStkReqMktData:  ' + this.theMktData.contract);
     this.socket.emit("ReqStkMktData", this.theMktData);
 
   }
@@ -97,8 +93,6 @@ export class IbNodeSocketService {
     this.theMktData.snapshot = aSnapshot;
     this.theMktData.regulatorySnapshot = aRegulatorySnapshot;
     this.theMktData.mktDataOptions = aMktDataOptions;
-
-    console.log('In setStkReqMktData GenericTick:  ' + this.theMktData.genericTickList);
     this.socket.emit("ReqIndMktData", this.theMktData);
 
   }
@@ -110,9 +104,7 @@ export class IbNodeSocketService {
     this.theMktData.snapshot = false;
     this.theMktData.regulatorySnapshot = false;
     this.theMktData.mktDataOptions = null;
-
     this.socket.emit("ReqIndMktData", this.theMktData);
-    console.log('setVixMktData:  ' + this.theMktData.contract);
   }
 
   setSpxMktData() {
@@ -122,9 +114,7 @@ export class IbNodeSocketService {
     this.theMktData.snapshot = false;
     this.theMktData.regulatorySnapshot = false;
     this.theMktData.mktDataOptions = null;
-
     this.socket.emit("ReqIndMktData", this.theMktData);
-    console.log('setSpxMktData:  ' + this.theMktData.contract);
   }
 
 

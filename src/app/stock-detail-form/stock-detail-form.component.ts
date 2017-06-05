@@ -117,7 +117,7 @@ export class StockDetailFormComponent {
           case 'OPTION_IMPLIED_VOL': this.theVixOptionImpliedVol = vixData.value;
         }
       })
-      .subscribe(vixData => console.log('VIX getTickGeneric: ' + vixData),
+      .subscribe(vixData => vixData => vixData,
       error => console.log('anIbNodeSocketService.getTickGeneric() vixData error:  ' + error));
 
     // get contract Size data from Observable
@@ -137,20 +137,12 @@ export class StockDetailFormComponent {
 
   //======================onSubmit==================================
   onSubmit(value: string): void {
-    console.log('you submitted: ', value);
     this.aContract.contractID = this.theContractCount++;
     this.aContract.symbol = value['symbol'];
     this.aContract.secType = value['securityType'];
     this.aContract.exchange = value['exchange'];
     this.theTickType = value['tickType'];
-    // this.tradeExecuted = value['tradeExecuted'];
-    // tradeDate
-    // The expiration date. Use the format YYYYMM.
-    // if (this.aDate.month <= 9)
-    //   this.expiry = this.aDate.year + '0' + this.aDate.month;
-    // else
-    //   this.expiry = this.aDate.year.toString()
-    //     + this.aDate.month.toString();
+
     this.tradeExecuted = new Date(this.tradeDate.year
       + '-' + this.tradeDate.month + '-' + this.tradeDate.day);
 
@@ -197,7 +189,7 @@ export class StockDetailFormComponent {
         this.projectedRangeUpUSD45Days = this.theLastContractPrice * (1 + (this.projectedVol45Days / 2));
         this.projectedRangeDownUSD45Days = this.theLastContractPrice * (1 - (this.projectedVol45Days / 2));
       })
-      // .subscribe(theContractData => console.log('getTickGeneric: ' + theContractData),
+
       .subscribe(theContractData => theContractData,
       error => console.log('anIbNodeSocketService.getTickGeneric() error:  ' + error));
 
@@ -205,15 +197,15 @@ export class StockDetailFormComponent {
     this.anIbNodeSocketService.getTickSize()
       .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
       .map(theContractData => {
-        switch (theContractData.tickType) {
+        switch (theContractData.sizeTickType) {
           case 'OPTION_CALL_OPEN_INTEREST': this.theOptionCallOpenInterest = theContractData.size; break;
           case 'OPTION_PUT_OPEN_INTEREST': this.theOptionPutOpenInterest = theContractData.size; break;
           case 'OPTION_CALL_VOLUME': this.theOptionCallVolume = theContractData.size; break;
           case 'OPTION_PUT_VOLUME': this.theOptionPutVolume = theContractData.size;
-        }
+        };
       })
       .subscribe(theContractData => theContractData,
-      error => console.log('anIbNodeSocketService.getTickPrice() error:  ' + error));
+      error => console.log('OPTION_CALL_OPEN_INTEREST:  ' + error));
 
 
     // Save the Trade Data from the form
