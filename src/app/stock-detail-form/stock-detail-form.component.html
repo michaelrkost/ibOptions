@@ -111,10 +111,6 @@
                   <td align="right"> <b>{{ aContract.contractID }}</b></td>
                 </tr>
                 <tr>
-                  <td>Symbol:</td>
-                  <td align="right"> <b>{{ aContract.symbol }}</b></td>
-                </tr>
-                <tr>
                   <td>Security Type:</td>
                   <td align="right"> <b>{{ aContract.secType }}</b></td>
                 </tr>
@@ -192,12 +188,54 @@
           </div>
 
         </div>
+      </ng-template>
+    </ngb-panel>
+
+
+
+    <ngb-panel id="toggle-2" title="Projected Volatility" type="warning">
+      <ng-template ngbPanelContent>
+        <div class="col-md-4">
+          <table class="table-striped isUnderlyingTableFonts">
+            <thead>
+              <th>
+                Volatility
+              </th>
+            </thead>
+            <tbody>
+              <tr>
+                <td> VIX Price:</td>
+                <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
+              </tr>
+              <tr>
+                <td> VIX Historical Volatility:</td>
+                <td align="right"> <b>{{ theVixOptionHistoricalVol | percent:'1.2-2'}}</b></td>
+              </tr>
+              <tr>
+                <td> VIX Closing implied Volatility:</td>
+                <td align="right"> <b>{{ theVixOptionImpliedVol | percent:'1.2-2'}}</b></td>
+              </tr>
+              <tr>
+                <td> <b>{{ aContract.symbol }}</b>
+                Historical Volatility Close:</td>
+                <td align="right"> <b>{{ theOptionHistoricalVol | percent:'1.2-2'}}</b></td>
+              </tr>
+              <tr>
+                <td> <b>{{ aContract.symbol }}</b>
+                Closing Implied Volatility :</td>
+                <td align="right"> <b>{{ theOptionImpliedVol | percent:'1.2-2'}}</b></td>
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
 
       </ng-template>
     </ngb-panel>
   </ngb-accordion>
 
   <p>
-    <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-1')">Toggle Trade Data</button>
-    <!--<button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-2')">Toggle second</button>-->
+    <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-1')">Trade Data</button>
+    <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-2')">Projected Volatility</button>
   </p>

@@ -22,6 +22,12 @@ export class StockDetailFormComponent {
   theSocket: string;
   theVIXPrice: number;
   theVixData: string;
+  theVixOptionHistoricalVol: number;
+  theVixOptionImpliedVol: number;
+  theVixOptionCallOpenInterest: number;
+  theVixOptionPutOpenInterest: number;
+  theVixOptionCallVolume: number;
+  theVixOptionPutVolume: number;
   theTickType: string;
   theContractPrice: number;
   theLastContractPrice: number;
@@ -73,6 +79,12 @@ export class StockDetailFormComponent {
     this.theSocket = '';
     this.theVIXPrice = 0;
     this.theVixData = 'theData Init setting';
+    this.theVixOptionHistoricalVol = 0;
+    this.theVixOptionImpliedVol = 0;
+    this.theVixOptionCallOpenInterest = 0;
+    this.theVixOptionPutOpenInterest = 0;
+    this.theVixOptionCallVolume = 0;
+    this.theVixOptionPutVolume = 0;
     this.theContractPrice = 0;
     this.theLastContractPrice = 0;
     this.theCloseContractPrice = 0;
@@ -92,7 +104,33 @@ export class StockDetailFormComponent {
       .filter(vixData => vixData.tickerId == 7777)
       .map(vixData => this.theVIXPrice = vixData.price)
       .subscribe(vixData => this.theVixData = vixData)
-    error => console.log('anIbNodeSocketService.getMessage() error:  ' + error);
+    error => console.log('anIbNodeSocketService.getMessage() vixData error:  ' + error);
+
+    // get contract Generic data from Observable
+    this.anIbNodeSocketService.getTickGeneric()
+      .filter(vixData => vixData.tickerId == 7777)
+      .map(vixData => {
+        switch (vixData.tickType) {
+          case 'OPTION_HISTORICAL_VOL': this.theVixOptionHistoricalVol = vixData.value; break;
+          case 'OPTION_IMPLIED_VOL': this.theVixOptionImpliedVol = vixData.value;
+        }
+      })
+      .subscribe(vixData => console.log('getTickGEneric' + vixData),
+      error => console.log('anIbNodeSocketService.getTickGeneric() vixData error:  ' + error));
+
+    // get contract Size data from Observable
+    this.anIbNodeSocketService.getTickSize()
+      .filter(vixData => vixData.tickerId == 7777)
+      .map(vixData => {
+        switch (vixData.tickType) {
+          case 'OPTION_CALL_OPEN_INTEREST': this.theVixOptionCallOpenInterest = vixData.size; break;
+          case 'OPTION_PUT_OPEN_INTEREST': this.theVixOptionPutOpenInterest = vixData.size; break;
+          case 'OPTION_CALL_VOLUME': this.theVixOptionCallVolume = vixData.size; break;
+          case 'OPTION_PUT_VOLUME': this.theVixOptionPutVolume = vixData.size;
+        }
+      })
+      .subscribe(vixData => vixData,
+      error => console.log('anIbNodeSocketService.getTickPrice() vixData error:  ' + error));
 
     console.log(">>> In StockDetailFormComponent Constructor <<<");
   }
