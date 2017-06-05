@@ -195,40 +195,72 @@
 
     <ngb-panel id="toggle-2" title="Projected Volatility" type="warning">
       <ng-template ngbPanelContent>
-        <div class="col-md-4">
-          <table class="table-striped isUnderlyingTableFonts">
-            <thead>
-              <th>
-                Volatility
-              </th>
-            </thead>
-            <tbody>
-              <tr>
-                <td> VIX Price:</td>
-                <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
-              </tr>
-              <tr>
-                <td> VIX Historical Volatility:</td>
-                <td align="right"> <b>{{ theVixOptionHistoricalVol | percent:'1.2-2'}}</b></td>
-              </tr>
-              <tr>
-                <td> VIX Closing implied Volatility:</td>
-                <td align="right"> <b>{{ theVixOptionImpliedVol | percent:'1.2-2'}}</b></td>
-              </tr>
-              <tr>
-                <td> <b>{{ aContract.symbol }}</b>
-                Historical Volatility Close:</td>
-                <td align="right"> <b>{{ theOptionHistoricalVol | percent:'1.2-2'}}</b></td>
-              </tr>
-              <tr>
-                <td> <b>{{ aContract.symbol }}</b>
-                Closing Implied Volatility :</td>
-                <td align="right"> <b>{{ theOptionImpliedVol | percent:'1.2-2'}}</b></td>
-              </tr>
+        <div class="row">
+          <div class="col-md-3">
+            <table class="table-striped isUnderlyingTableFonts">
+              <thead>
+                <th>
+                  Volatility
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> VIX Price:</td>
+                  <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> VIX Historical Volatility:</td>
+                  <td align="right"> <b>{{ theVixOptionHistoricalVol | percent:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> VIX Closing implied Volatility:</td>
+                  <td align="right"> <b>{{ theVixOptionImpliedVol | percent:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> <b>{{ aContract.symbol }}</b> Historical Volatility Close:</td>
+                  <td align="right"> <b>{{ theOptionHistoricalVol | percent:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> <b>{{ aContract.symbol }}</b> Closing Implied Volatility :</td>
+                  <td align="right"> <b>{{ theOptionImpliedVol | percent:'1.2-2'}}</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col-md-3">
+            <table class="table-striped isUnderlyingTableFonts">
+              <thead>
+                <th>
+                  Volatility Projections
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> VIX Price:</td>
+                  <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> VIX Historical Volatility:</td>
+                  <td align="right"> <b>{{ theVixOptionHistoricalVol | percent:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> VIX Closing implied Volatility:</td>
+                  <td align="right"> <b>{{ theVixOptionImpliedVol | percent:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> <b>{{ aContract.symbol }}</b> Historical Volatility Close:</td>
+                  <td align="right"> <b>{{ theOptionHistoricalVol | percent:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> <b>{{ aContract.symbol }}</b> Closing Implied Volatility :</td>
+                  <td align="right"> <b>{{ theOptionImpliedVol | percent:'1.2-2'}}</b></td>
+                </tr>
 
 
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
 
       </ng-template>
