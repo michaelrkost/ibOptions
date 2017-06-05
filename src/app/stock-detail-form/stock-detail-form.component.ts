@@ -39,6 +39,15 @@ export class StockDetailFormComponent {
   theOptionCallVolume: number;
   theOptionPutVolume: number;
 
+  projectedVol30Days: number;
+  volatilityTotalUSD30Days: number;
+  projectedRangeUpUSD30Days: number;
+  projectedRangeDownUSD30Days: number;
+
+  projectedVol45Days: number;
+  volatilityTotalUSD45Days: number;
+  projectedRangeUpUSD45Days: number;
+  projectedRangeDownUSD45Days: number;
 
   // list of TickerIDs / Symbols
   tickerIDList: Array<Contract>;
@@ -86,14 +95,7 @@ export class StockDetailFormComponent {
     this.theVixOptionCallVolume = 0;
     this.theVixOptionPutVolume = 0;
     this.theContractPrice = 0;
-    this.theLastContractPrice = 0;
-    this.theCloseContractPrice = 0;
-    this.theOptionHistoricalVol = 0;
-    this.theOptionImpliedVol = 0;
-    this.theOptionCallOpenInterest = 0;
-    this.theOptionPutOpenInterest = 0;
-    this.theOptionCallVolume = 0;
-    this.theOptionPutVolume = 0;
+    this.clearPriceData();
 
     this.tickerIDList = [];
 
@@ -164,7 +166,7 @@ export class StockDetailFormComponent {
       this.aContract.secType, this.aContract.exchange);
 
     //Zero out Variables
-    this.clearVars();
+    this.clearPriceData();
 
     // get contract Price data from Observable
     this.anIbNodeSocketService.getTickPrice()
@@ -192,6 +194,10 @@ export class StockDetailFormComponent {
       .subscribe(theContractData => console.log('getTickGEneric' + theContractData),
       error => console.log('anIbNodeSocketService.getTickGeneric() error:  ' + error));
 
+
+        console.log('this.theOptionImpliedVol :  ' + this.theOptionImpliedVol );
+
+
     // get contract Size data from Observable
     this.anIbNodeSocketService.getTickSize()
       .filter(theContractData => theContractData.tickerId == this.aContract.contractID)
@@ -209,6 +215,18 @@ export class StockDetailFormComponent {
 
     // Save the Trade Data from the form
     this.tickerIDList[this.aContract.contractID] = this.aContract;
+
+    this.projectedVol30Days = (this.theOptionImpliedVol / 16) * Math.sqrt(30);
+        console.log('this.theOptionImpliedVol :  ' + this.theOptionImpliedVol );
+    console.log('this.projectedVol30Days :  ' + this.projectedVol30Days );
+    this.volatilityTotalUSD30Days = this.projectedVol30Days * this.theLastContractPrice;
+    this.projectedRangeUpUSD30Days = this.theLastContractPrice * (1 + (this.projectedVol30Days / 2));
+    this.projectedRangeDownUSD30Days = this.theLastContractPrice * (1 - (this.projectedVol30Days / 2));
+
+    this.projectedVol45Days = (this.theOptionImpliedVol / 16) * Math.sqrt(45);
+    this.volatilityTotalUSD45Days = this.projectedVol45Days * this.theLastContractPrice;
+    this.projectedRangeUpUSD45Days = this.theLastContractPrice * (1 + (this.projectedVol45Days / 2));
+    this.projectedRangeDownUSD45Days = this.theLastContractPrice * (1 - (this.projectedVol45Days / 2));
 
   }
   //==============   onSubmit  =================================
@@ -269,7 +287,7 @@ export class StockDetailFormComponent {
 
   // --------- ng-bootstrap - Calendar ---------------
 
-  clearVars() {
+  clearPriceData() {
     this.theLastContractPrice = 0;
     this.theCloseContractPrice = 0;
     this.theOptionHistoricalVol = 0;
@@ -278,5 +296,18 @@ export class StockDetailFormComponent {
     this.theOptionPutOpenInterest = 0;
     this.theOptionCallVolume = 0;
     this.theOptionPutVolume = 0;
-  }
+    this.projectedVol30Days = 0;
+
+    this.volatilityTotalUSD30Days = 0;
+    this.projectedRangeUpUSD30Days = 0;
+    this.projectedRangeDownUSD30Days = 0;
+    this.projectedVol45Days
+    this.volatilityTotalUSD45Days = 0;
+    this.projectedRangeUpUSD45Days = 0;
+    this.projectedRangeDownUSD45Days = 0;
+  };
+
+
+
+
 }

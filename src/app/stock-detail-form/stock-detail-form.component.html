@@ -209,7 +209,7 @@
                   <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
                 <tr>
-                  <td> VIX Historical Volatility:</td>
+                  <td> VIX Historical Volatility Close:</td>
                   <td align="right"> <b>{{ theVixOptionHistoricalVol | percent:'1.2-2'}}</b></td>
                 </tr>
                 <tr>
@@ -232,30 +232,28 @@
             <table class="table-striped isUnderlyingTableFonts">
               <thead>
                 <th>
-                  Volatility Projections
+                  Projected Volatility for 30 Days
                 </th>
               </thead>
               <tbody>
                 <tr>
-                  <td> VIX Price:</td>
-                  <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
+                  <td> Projected Volatility 30 Days:</td>
+                  <td align="right"> <b>{{ projectedVol30Days | currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
                 <tr>
-                  <td> VIX Historical Volatility:</td>
-                  <td align="right"> <b>{{ theVixOptionHistoricalVol | percent:'1.2-2'}}</b></td>
+                  <td> Volatility in USD:</td>
+                  <td align="right"> <b>{{ volatilityTotalUSD30Days | currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
                 <tr>
-                  <td> VIX Closing implied Volatility:</td>
-                  <td align="right"> <b>{{ theVixOptionImpliedVol | percent:'1.2-2'}}</b></td>
+                  <td> Projected Range up {{ projectedVol30Days / 2 | currency:'USD':true:'1.2-2'}} add {{ volatilityTotalUSD30Days / 2 | currency:'USD':true:'1.2-2'}}</td>
+                  <td align="right"> <b>{{ projectedRangeUpUSD30Days | currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
                 <tr>
-                  <td> <b>{{ aContract.symbol }}</b> Historical Volatility Close:</td>
-                  <td align="right"> <b>{{ theOptionHistoricalVol | percent:'1.2-2'}}</b></td>
+                  <td> Projected Range down {{ projectedVol30Days / 2 | currency:'USD':true:'1.2-2'}} add {{ volatilityTotalUSD30Days / 2 | currency:'USD':true:'1.2-2'}}</td>
+                  <td align="right"> <b>{{ projectedRangeDownUSD30Days| currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
                 <tr>
-                  <td> <b>{{ aContract.symbol }}</b> Closing Implied Volatility :</td>
-                  <td align="right"> <b>{{ theOptionImpliedVol | percent:'1.2-2'}}</b></td>
-                </tr>
+
 
 
               </tbody>
