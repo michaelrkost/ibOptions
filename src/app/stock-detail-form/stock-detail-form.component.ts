@@ -117,7 +117,7 @@ export class StockDetailFormComponent {
           case 'OPTION_IMPLIED_VOL': this.theVixOptionImpliedVol = vixData.value;
         }
       })
-      .subscribe(vixData => console.log('getTickGEneric' + vixData),
+      .subscribe(vixData => console.log('VIX getTickGeneric: ' + vixData),
       error => console.log('anIbNodeSocketService.getTickGeneric() vixData error:  ' + error));
 
     // get contract Size data from Observable
@@ -133,8 +133,6 @@ export class StockDetailFormComponent {
       })
       .subscribe(vixData => vixData,
       error => console.log('anIbNodeSocketService.getTickPrice() vixData error:  ' + error));
-
-    console.log(">>> In StockDetailFormComponent Constructor <<<");
   }
 
   //======================onSubmit==================================
@@ -177,7 +175,6 @@ export class StockDetailFormComponent {
           case 'LAST': this.theLastContractPrice = theContractData.price; break;
           case 'BID': this.theLastContractPrice = theContractData.price; break;
         }
-        console.log('getTickPrice(): id: ' + this.aContract.contractID)
       })
       .subscribe(theContractData => theContractData,
       error => console.log('anIbNodeSocketService.getTickPrice() error:  ' + error));
@@ -189,14 +186,20 @@ export class StockDetailFormComponent {
         switch (theContractData.tickType) {
           case 'OPTION_HISTORICAL_VOL': this.theOptionHistoricalVol = theContractData.value; break;
           case 'OPTION_IMPLIED_VOL': this.theOptionImpliedVol = theContractData.value;
-        }
+        };
+        this.projectedVol30Days = (this.theOptionImpliedVol / 16) * Math.sqrt(30);
+        this.volatilityTotalUSD30Days = this.projectedVol30Days * this.theLastContractPrice;
+        this.projectedRangeUpUSD30Days = this.theLastContractPrice * (1 + (this.projectedVol30Days / 2));
+        this.projectedRangeDownUSD30Days = this.theLastContractPrice * (1 - (this.projectedVol30Days / 2));
+
+        this.projectedVol45Days = (this.theOptionImpliedVol / 16) * Math.sqrt(45);
+        this.volatilityTotalUSD45Days = this.projectedVol45Days * this.theLastContractPrice;
+        this.projectedRangeUpUSD45Days = this.theLastContractPrice * (1 + (this.projectedVol45Days / 2));
+        this.projectedRangeDownUSD45Days = this.theLastContractPrice * (1 - (this.projectedVol45Days / 2));
       })
-      .subscribe(theContractData => console.log('getTickGEneric' + theContractData),
+      // .subscribe(theContractData => console.log('getTickGeneric: ' + theContractData),
+      .subscribe(theContractData => theContractData,
       error => console.log('anIbNodeSocketService.getTickGeneric() error:  ' + error));
-
-
-        console.log('this.theOptionImpliedVol :  ' + this.theOptionImpliedVol );
-
 
     // get contract Size data from Observable
     this.anIbNodeSocketService.getTickSize()
@@ -215,18 +218,6 @@ export class StockDetailFormComponent {
 
     // Save the Trade Data from the form
     this.tickerIDList[this.aContract.contractID] = this.aContract;
-
-    this.projectedVol30Days = (this.theOptionImpliedVol / 16) * Math.sqrt(30);
-        console.log('this.theOptionImpliedVol :  ' + this.theOptionImpliedVol );
-    console.log('this.projectedVol30Days :  ' + this.projectedVol30Days );
-    this.volatilityTotalUSD30Days = this.projectedVol30Days * this.theLastContractPrice;
-    this.projectedRangeUpUSD30Days = this.theLastContractPrice * (1 + (this.projectedVol30Days / 2));
-    this.projectedRangeDownUSD30Days = this.theLastContractPrice * (1 - (this.projectedVol30Days / 2));
-
-    this.projectedVol45Days = (this.theOptionImpliedVol / 16) * Math.sqrt(45);
-    this.volatilityTotalUSD45Days = this.projectedVol45Days * this.theLastContractPrice;
-    this.projectedRangeUpUSD45Days = this.theLastContractPrice * (1 + (this.projectedVol45Days / 2));
-    this.projectedRangeDownUSD45Days = this.theLastContractPrice * (1 - (this.projectedVol45Days / 2));
 
   }
   //==============   onSubmit  =================================
