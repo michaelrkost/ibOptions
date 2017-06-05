@@ -230,7 +230,7 @@
 
           <div class="col-md-3">
             <table class="table-striped isUnderlyingTableFonts">
-              <thead>
+              <thead align="center">
                 <th>
                   Projected Volatility for 30 Days
                 </th>
@@ -250,15 +250,40 @@
                 </tr>
                 <tr>
                   <td> Projected Range up {{ projectedVol30Days / 2 | percent:'1.2-2'}} add {{ volatilityTotalUSD30Days / 2 |
-                    currency:'USD':true:'1.2-2'}}</td>
+                    currency:'USD':true:'1.2-2'}}
+                  </td>
                   <td align="right"> <b>{{ projectedRangeUpUSD30Days | currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
                 <tr>
-                  <td> Projected Range down {{ projectedVol30Days / 2 | percent:'1.2-2'}} add {{ volatilityTotalUSD30Days / 2
+                  <td> Projected Range down {{ projectedVol30Days / 2 | percent:'1.2-2'}} subtract  {{ volatilityTotalUSD30Days / 2
                     | currency:'USD':true:'1.2-2'}}</td>
                   <td align="right"> <b>{{ projectedRangeDownUSD30Days| currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
+  <tr> <td>&nbsp; </td></tr>
+
                 <tr>
+                  <td align="center"> <b>Projected Volatility for 45 Days </b></td>
+                </tr>
+
+                <tr>
+                  <td> Projected Volatility 45 Days:</td>
+                  <td align="right"> <b>{{ projectedVol45Days | percent:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> Volatility in USD:</td>
+                  <td align="right"> <b>{{ volatilityTotalUSD45Days | currency:'USD':true:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> Projected Range up {{ projectedVol45Days / 2 | percent:'1.2-2'}} add {{ volatilityTotalUSD30Days / 2 |
+                    currency:'USD':true:'1.2-2'}}
+                  </td>
+                  <td align="right"> <b>{{ projectedRangeUpUSD45Days | currency:'USD':true:'1.2-2'}}</b></td>
+                </tr>
+                <tr>
+                  <td> Projected Range down {{ projectedVol45Days / 2 | percent:'1.2-2'}} subtract  {{ volatilityTotalUSD30Days / 2
+                    | currency:'USD':true:'1.2-2'}}</td>
+                  <td align="right"> <b>{{ projectedRangeDownUSD45Days| currency:'USD':true:'1.2-2'}}</b></td>
+                </tr>
 
 
 
