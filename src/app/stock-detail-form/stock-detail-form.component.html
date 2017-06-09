@@ -6,7 +6,7 @@
 
 
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-2">
             <div class="isIBForm">
 
               <form [formGroup]="stockDetailForm" (ngSubmit)="onSubmit(stockDetailForm.value)" class="ui form">
@@ -77,54 +77,54 @@
             </div>
           </div>
 
-            <table class="table-striped isUnderlyingTableFonts">
-              <thead>
-                <th>
-                  Underlying Info
-                </th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Today is: </td>
-                  <td> <b>{{ todayIs | date }}</b></td>
-                </tr>
-                <tr>
-                  <td> VIX Price:</td>
-                  <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
-                </tr>
-                <tr>
-                  <td>ExpiryDate: </td>
-                  <td><b>{{ expiryDate | date }}</b>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Days 2 Experiation: </td>
-                  <td align="right"> <b>{{ daysTillExpiry }}</b> </td>
-                </tr>
-                <tr>
-                  <td>Trade Executed: </td>
-                  <td> <b>{{ tradeExecuted | date }}</b></td>
-                </tr>
-                <tr>
-                  <td>TickerID:</td>
-                  <td align="right"> <b>{{ aContract.contractID }}</b></td>
-                </tr>
-                <tr>
-                  <td>Security Type:</td>
-                  <td align="right"> <b>{{ aContract.secType }}</b></td>
-                </tr>
-                <tr>
-                  <td>Exchange:</td>
-                  <td align="right"> <b>{{ aContract.exchange }}</b></td>
-                </tr>
-                <tr>
-                  <td>Tick Type:</td>
-                  <td align="right"> <b>{{ theTickType }}</b></td>
-                </tr>
+          <table class="table-striped isUnderlyingTableFonts">
+            <thead>
+              <th>
+                Underlying Info
+              </th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Today is: </td>
+                <td> <b>{{ todayIs | date }}</b></td>
+              </tr>
+              <tr>
+                <td> VIX Price:</td>
+                <td align="right"> <b>{{ theVIXPrice | currency:'USD':true:'1.2-2'}}</b></td>
+              </tr>
+              <tr>
+                <td>ExpiryDate: </td>
+                <td><b>{{ expiryDate | date }}</b>
+                </td>
+              </tr>
+              <tr>
+                <td>Days 2 Experiation: </td>
+                <td align="right"> <b>{{ daysTillExpiry }}</b> </td>
+              </tr>
+              <tr>
+                <td>Trade Executed: </td>
+                <td> <b>{{ tradeExecuted | date }}</b></td>
+              </tr>
+              <tr>
+                <td>TickerID:</td>
+                <td align="right"> <b>{{ aContract.contractID }}</b></td>
+              </tr>
+              <tr>
+                <td>Security Type:</td>
+                <td align="right"> <b>{{ aContract.secType }}</b></td>
+              </tr>
+              <tr>
+                <td>Exchange:</td>
+                <td align="right"> <b>{{ aContract.exchange }}</b></td>
+              </tr>
+              <tr>
+                <td>Tick Type:</td>
+                <td align="right"> <b>{{ theTickType }}</b></td>
+              </tr>
 
-              </tbody>
+            </tbody>
 
-            </table>
+          </table>
 
 
           <div class="col-md-3">
@@ -228,24 +228,30 @@
           </div>
 
           <div class="col-md-3">
-            <table class="table-striped isUnderlyingTableFonts">
+            <table class="table table-bordered table-sm" cellpadding="6">
               <tbody>
-                <thead>
-                  <th>
-                     Projected Stock Volatility for: &nbsp;{{ aContract.symbol }} &nbsp;|&nbsp; {{ theLastContractPrice | currency:'USD':true:'1.2-2' }}
-<!--
-                      &nbsp;&nbsp; 
-                       &nbsp;|&nbsp;30 Days
-                      &nbsp;|&nbsp;45 Days &nbsp;| -->
 
-                  </th>
-                </thead>
-
+                  <tr>
+                    <th>
+                      Projected Stock Volatility for:
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>  <b>{{ aContract.symbol }} &nbsp; &nbsp; | &nbsp; &nbsp;   {{ theLastContractPrice | currency:'USD':true:'1.2-2' }}</b></td> 
+                    <th>30 Days</th>
+                    <th> 45 Days </th>
+                  </tr>
 
                 <tr>
                   <td> Projected Volatility</td>
                   <td align="right"> <b>{{ projectedVol30Days | percent:'1.2-2'}}</b></td>
                   <td align="right"> <b>{{ projectedVol45Days | percent:'1.2-2'}}</b></td>
+                </tr>
+
+                <tr>
+                  <td> Projected Range +/- % </td>
+                  <td align="right"> <b>  {{ projectedVol30Days / 2 | percent:'1.2-2'}}</b> </td>
+                  <td align="right"> <b>  {{ projectedVol45Days / 2 | percent:'1.2-2'}}</b> </td>
                 </tr>
 
                 <tr>
@@ -258,12 +264,6 @@
                   <td>Projected Range +/- $USD </td>
                   <td align="right"> <b>   {{ volatilityTotalUSD30Days / 2 | currency:'USD':true:'1.2-2'}}</b></td>
                   <td align="right"> <b>   {{ volatilityTotalUSD45Days / 2 | currency:'USD':true:'1.2-2'}}</b></td>
-                </tr>
-
-                <tr>
-                  <td> Projected Range +/- % </td>
-                  <td align="right"> <b>  {{ projectedVol30Days / 2 | percent:'1.2-2'}}</b> </td>
-                  <td align="right"> <b>  {{ projectedVol45Days / 2 | percent:'1.2-2'}}</b> </td>
                 </tr>
 
                 <tr>
