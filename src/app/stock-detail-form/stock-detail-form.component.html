@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="field">
-                  <label for="tickType" class="formLable">Tick Type:</label>
+                  <label for="tickType" class="formLable">Calc Tick Type:</label>
                   <select formControlName="tickType" class="formFonts">
          <option *ngFor="let aTickType of theTickTypes"
              [ngValue]="aTickType">{{aTickType}}</option>
@@ -77,7 +77,6 @@
             </div>
           </div>
 
-          <div class="col-md-3">
             <table class="table-striped isUnderlyingTableFonts">
               <thead>
                 <th>
@@ -126,7 +125,7 @@
               </tbody>
 
             </table>
-          </div>
+
 
           <div class="col-md-3">
             <table class="table-striped isUnderlyingTableFonts">
@@ -230,62 +229,54 @@
 
           <div class="col-md-3">
             <table class="table-striped isUnderlyingTableFonts">
-              <thead align="center">
-                <th>
-                  Projected Volatility for 30 Days
-                </th>
-              </thead>
               <tbody>
+                <thead>
+                  <th>
+                     Projected Stock Volatility for: &nbsp;{{ aContract.symbol }} &nbsp;|&nbsp; {{ theLastContractPrice | currency:'USD':true:'1.2-2' }}
+<!--
+                      &nbsp;&nbsp; 
+                       &nbsp;|&nbsp;30 Days
+                      &nbsp;|&nbsp;45 Days &nbsp;| -->
+
+                  </th>
+                </thead>
+
+
                 <tr>
-                  <td>Symbol Last: </td>
-                  <td align="right"> <b>{{ theLastContractPrice | currency:'USD':true:'1.2-2' }}</b></td>
-                </tr>
-                <tr>
-                  <td> Projected Volatility 30 Days:</td>
+                  <td> Projected Volatility</td>
                   <td align="right"> <b>{{ projectedVol30Days | percent:'1.2-2'}}</b></td>
-                </tr>
-                <tr>
-                  <td> Volatility in USD:</td>
-                  <td align="right"> <b>{{ volatilityTotalUSD30Days | currency:'USD':true:'1.2-2'}}</b></td>
-                </tr>
-                <tr>
-                  <td> Projected Range up {{ projectedVol30Days / 2 | percent:'1.2-2'}} add {{ volatilityTotalUSD30Days / 2 |
-                    currency:'USD':true:'1.2-2'}}
-                  </td>
-                  <td align="right"> <b>{{ projectedRangeUpUSD30Days | currency:'USD':true:'1.2-2'}}</b></td>
-                </tr>
-                <tr>
-                  <td> Projected Range down {{ projectedVol30Days / 2 | percent:'1.2-2'}} subtract  {{ volatilityTotalUSD30Days / 2
-                    | currency:'USD':true:'1.2-2'}}</td>
-                  <td align="right"> <b>{{ projectedRangeDownUSD30Days| currency:'USD':true:'1.2-2'}}</b></td>
-                </tr>
-  <tr> <td>&nbsp; </td></tr>
-
-                <tr>
-                  <td align="center"> <b>Projected Volatility for 45 Days </b></td>
-                </tr>
-
-                <tr>
-                  <td> Projected Volatility 45 Days:</td>
                   <td align="right"> <b>{{ projectedVol45Days | percent:'1.2-2'}}</b></td>
                 </tr>
+
                 <tr>
-                  <td> Volatility in USD:</td>
+                  <td> Volatility in USD</td>
+                  <td align="right"> <b>{{ volatilityTotalUSD30Days | currency:'USD':true:'1.2-2'}}</b></td>
                   <td align="right"> <b>{{ volatilityTotalUSD45Days | currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
+
                 <tr>
-                  <td> Projected Range up {{ projectedVol45Days / 2 | percent:'1.2-2'}} add {{ volatilityTotalUSD30Days / 2 |
-                    currency:'USD':true:'1.2-2'}}
-                  </td>
-                  <td align="right"> <b>{{ projectedRangeUpUSD45Days | currency:'USD':true:'1.2-2'}}</b></td>
+                  <td>Projected Range +/- $USD </td>
+                  <td align="right"> <b>   {{ volatilityTotalUSD30Days / 2 | currency:'USD':true:'1.2-2'}}</b></td>
+                  <td align="right"> <b>   {{ volatilityTotalUSD45Days / 2 | currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
+
                 <tr>
-                  <td> Projected Range down {{ projectedVol45Days / 2 | percent:'1.2-2'}} subtract  {{ volatilityTotalUSD30Days / 2
-                    | currency:'USD':true:'1.2-2'}}</td>
+                  <td> Projected Range +/- % </td>
+                  <td align="right"> <b>  {{ projectedVol30Days / 2 | percent:'1.2-2'}}</b> </td>
+                  <td align="right"> <b>  {{ projectedVol45Days / 2 | percent:'1.2-2'}}</b> </td>
+                </tr>
+
+                <tr>
+                  <td> $ Range (+) up </td>
+                  <td align="right"> <b>{{ projectedRangeUpUSD30Days| currency:'USD':true:'1.2-2'}}</b></td>
+                  <td align="right"> <b>{{ projectedRangeUpUSD45Days| currency:'USD':true:'1.2-2'}}</b></td>
+                </tr>
+
+                <tr>
+                  <td> $ Range (-) down </td>
+                  <td align="right"> <b>{{ projectedRangeDownUSD30Days| currency:'USD':true:'1.2-2'}}</b></td>
                   <td align="right"> <b>{{ projectedRangeDownUSD45Days| currency:'USD':true:'1.2-2'}}</b></td>
                 </tr>
-
-
 
               </tbody>
             </table>
@@ -294,9 +285,22 @@
 
       </ng-template>
     </ngb-panel>
-  </ngb-accordion>
 
+
+
+    <ngb-panel id="toggle-3" title="Options">
+      <ng-template ngbPanelContent>
+        <div class="row">
+          <div class="col-md-3">
+            nnnnnnnnnnnnnnnnnnnnnnnn
+          </div>
+        </div>
+
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
   <p>
     <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-1')">Trade Data</button>
     <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-2')">Projected Volatility</button>
+    <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-3')">Options</button>
   </p>

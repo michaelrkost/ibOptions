@@ -284,7 +284,7 @@ export class StockDetailFormComponent {
     this.volatilityTotalUSD30Days = 0;
     this.projectedRangeUpUSD30Days = 0;
     this.projectedRangeDownUSD30Days = 0;
-    this.projectedVol45Days
+    this.projectedVol45Days = 0;
     this.volatilityTotalUSD45Days = 0;
     this.projectedRangeUpUSD45Days = 0;
     this.projectedRangeDownUSD45Days = 0;
